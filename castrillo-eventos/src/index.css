@@ -1,4 +1,33 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+.btn-default-bgRosa {
+  background-color: #C54477;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+.btn-default-bgTransparent {
+  background-color: transparent;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  color: #FFB6C1;
+  border: 2px solid #FFB6C1;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: #00000000; 
+}
+
+.swiper-pagination-bullet-active{
+    background: none;
+    background: #fff;
+
 }

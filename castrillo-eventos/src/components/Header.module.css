@@ -1,0 +1,36 @@
+.header {
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    top: 0;   
+    padding: 5px 0;
+    background: rgb(54,70,82);
+    background: linear-gradient(90deg, rgba(54,70,82,1) 0%, rgba(78,98,114,1) 80%, rgba(64,81,95,1) 100%);
+}
+.container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.imgLogo {
+    width: 147px;
+}
+.nav_links {
+    display: flex;
+    gap: 20px;
+}
+.nav_links li {
+    color: #fff;
+    list-style: none;
+}
+.container_buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.active {
+    font-weight: bold;
+    border-bottom: 2px solid #C54477;
+}
