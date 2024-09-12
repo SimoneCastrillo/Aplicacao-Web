@@ -2,14 +2,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
 a {
   text-decoration: none;
   color: #fff;
 }
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
 .btn-default-bgRosa {
   background-color: #C54477;
-  padding: 10px 20px;
+  padding: 11.6px 20px;
   border-radius: 50px;
   font-weight: bold;
 }
@@ -23,11 +29,27 @@ a {
 }
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: #00000000; 
+  color: #ffffff; 
+  font-size: 30px !important;
 }
 
 .swiper-pagination-bullet-active{
-    background: none;
-    background: #fff;
+  background-color: #fff !important;
+}
+.arrow {
+  border-radius: 12px;
+}
 
+.full-width {
+  width: 100%;
+  display: flex;
+  text-align: center;
+}
+.titulo-principal {
+    font-size: 40px;
+    color: #FFB6C1;
+    margin: 20px 0 10px;
+}
+.descricao {
+  color: #fff;
 }

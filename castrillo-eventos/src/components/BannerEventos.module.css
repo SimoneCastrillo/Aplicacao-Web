@@ -1,0 +1,34 @@
+.container-carrosel {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    margin: 0 auto;
+    display: flex;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner {
+    display: flex;
+    /* gap: 20px; */
+}
+
+.item {
+    width: 400px; 
+    height: 500px; 
+    /* padding: 14px; */
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    pointer-events: none;
+}
+
+.carrossel {
+    cursor: grab;
+    overflow: hidden;
+}
+

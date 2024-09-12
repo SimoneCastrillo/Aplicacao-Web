@@ -1,27 +1,193 @@
-import imgLogo from '../assets/CastrilloEventos.png'
-import styles from './Header.module.css'
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import imgLogo from '../assets/CastrilloEventos.png';
+import { motion, AnimatePresence } from 'framer-motion';
+import styles from './Header.module.css';
+import { Link, useLocation } from 'react-router-dom';
+import { BsList } from 'react-icons/bs';
+
 const Header = () => {
-  return (
-    <div className={styles.header}>
-        <div className={styles.container}>
-            <img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" />
-            <nav>
-                <ul className={styles.nav_links}>
-                    <li><NavLink className={({isActive})=> (isActive ? styles.active : '')} to="/">Home</NavLink></li>
-                    <li><Link className={({isActive})=> (isActive ? styles.active : '')} to="#eventos">Eventos</Link></li>
-                    <li><Link className={({isActive})=> (isActive ? styles.active : '')} to="#reservas">Reservas</Link></li>
-                    <li><Link className={({isActive})=> (isActive ? styles.active : '')} to="#avaliacoes">Avaliações</Link></li>
-                    <li><Link className={({isActive})=> (isActive ? styles.active : '')} to="#contato">Contato</Link></li>
-                </ul>
-            </nav>
-            <div className={styles.container_buttons}>
-                <NavLink to="" className='btn-default-bgRosa'>Solicitar Orçamento</NavLink>
-                <NavLink to="" className='btn-default-bgTransparent'>Login</NavLink>
+    const location = useLocation();
+    const [secaoAtiva, setSecaoAtiva] = useState('');
+    const [menuAtivo, setMenuAtivo] = useState(false);
+
+    const handleOpenMenu = () => {
+        if(menuAtivo){
+            setMenuAtivo(false);
+        }else{
+            setMenuAtivo(true);
+        }
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'contato'];
+            let secaoEncontrada = '';
+
+            secoes.forEach((secaoId) => {
+                const elemento = document.getElementById(secaoId);
+                if (elemento) {
+                    const rect = elemento.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        secaoEncontrada = secaoId;
+                    }
+                }
+            });
+
+            setSecaoAtiva(secaoEncontrada ? `#${secaoEncontrada}` : '');
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        handleScroll();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (location.hash) {
+            const elemento = document.getElementById(location.hash.substring(1));
+            if (elemento) {
+                elemento.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [location]);
+
+    const obterClasseAtiva = (hash) => {
+        return secaoAtiva === hash ? styles.active : '';
+    };
+
+    return (
+        <div className={styles.header}>
+            <div className={styles.container}>
+                <img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" />
+                <nav className={styles.desktop}>
+                    <ul className={styles.nav_links}>
+                        <li>
+                            <Link 
+                                className={obterClasseAtiva('#bannerId')} 
+                                to="#bannerId"
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link 
+                                className={obterClasseAtiva('#eventos')} 
+                                to="#eventos"
+                            >
+                                Eventos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link 
+                                className={obterClasseAtiva('#reservas')} 
+                                to="#reservas"
+                            >
+                                Reservas
+                            </Link>
+                        </li>
+                        <li>
+                            <Link 
+                                className={obterClasseAtiva('#avaliacoes')} 
+                                to="#avaliacoes"
+                            >
+                                Avaliações
+                            </Link>
+                        </li>
+                        <li>
+                            <Link 
+                                className={obterClasseAtiva('#contato')} 
+                                to="#contato"
+                            >
+                                Contato
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+                <div className={`${styles.container_buttons} ${styles.desktop}`} >
+                    <Link to="" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
+                    <Link to="" className='btn-default-bgTransparent'>Login</Link>
+                </div>
+                <div className={styles.mobile}>
+                    <button onClick={handleOpenMenu}><BsList size={35} color='#fff'/></button>
+                    <AnimatePresence>
+                    {menuAtivo && (
+                        <motion.div 
+                            initial={{ x: 100 }}
+                            animate={{ x: 10 }}
+                            exit={{ x: 300 }}
+                        className={styles.menu_container}>
+                            <nav className={styles.mobile_nav}>
+                                <ul className={styles.nav_links_mobile}>
+                                    <li>
+                                        <Link 
+                                            className={obterClasseAtiva('#bannerId')} 
+                                            to="#bannerId"
+                                        >
+                                            Home
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            className={obterClasseAtiva('#eventos')} 
+                                            to="#eventos"
+                                        >
+                                            Eventos
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            className={obterClasseAtiva('#reservas')} 
+                                            to="#reservas"
+                                        >
+                                            Reservas
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            className={obterClasseAtiva('#avaliacoes')} 
+                                            to="#avaliacoes"
+                                        >
+                                            Avaliações
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link 
+                                            className={obterClasseAtiva('#contato')} 
+                                            to="#contato"
+                                        >
+                                            Contato
+                                        </Link>
+                                    </li>
+                                    
+                                    <li>
+                                        <Link 
+                                        className='btn-default-bgRosa'
+                                            to="/solicitar-orcamento"
+                                        >
+                                            Solicitar Orçamento
+                                        </Link>
+                                    </li>
+                                    <li className='full-width'>
+                                        <Link 
+                                        style={{width: '100%'}}
+                                        className='btn-default-bgTransparent  '
+                                            to="/login"
+                                        >
+                                            Login
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </motion.div>
+                    )}
+                    </AnimatePresence>
+                </div>
             </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Header
+export default Header;
