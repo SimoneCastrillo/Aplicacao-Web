@@ -24,9 +24,9 @@ const Eventos = () => {
       <AnimatePresence>
         <div className={styles.colTituloButton}>
           <motion.div
-            initial={{ x: 300, opacity: 0 }}
+            initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            exit={{ x: 300 }}
+            exit={{ x: 100 }}
             transition={{ duration: 1 }}
           >
             <h2 className='titulo-principal'>EVENTOS POPULARES</h2>
@@ -36,7 +36,7 @@ const Eventos = () => {
           <motion.div 
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            exit={{ x: -300 }}
+            exit={{ x: -100 }}
             transition={{ duration: 1 }}
             className={styles.containerButtons}
           >
@@ -49,9 +49,9 @@ const Eventos = () => {
           </motion.div>
         </div>
         <motion.div
-          initial={{ x: -300, opacity: 0 }}
+          initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
-          exit={{ x: 300 }}
+          exit={{ x: 100 }}
           transition={{ duration: 1 }}
         >
           <BannerEventos ref={bannerRef} />
