@@ -58,7 +58,7 @@ const BannerEventos = forwardRef((props, ref) => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((image, index) => (
-            <motion.div className={styles.item} key={index} style={{ minWidth: width }}>
+            <motion.div className={styles.item} key={`carrossel-img-${index}`} style={{ minWidth: width }}>
               <img src={image} alt={`carrossel-img-${index}`} />
             </motion.div>
           ))}

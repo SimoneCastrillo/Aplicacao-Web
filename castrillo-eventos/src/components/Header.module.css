@@ -52,8 +52,8 @@
     position: absolute;
     padding: 20px 40px 40px;
     right: 0;
-    
-    background: linear-gradient(90deg, #2F425B 0%, #1D2736 100%);
+    background: rgb(54,70,82);
+    background: linear-gradient(90deg, #243245 0%, #2F425B 62%, #1D2736 100%);
 }
 
 @media (max-width: 1000px) {

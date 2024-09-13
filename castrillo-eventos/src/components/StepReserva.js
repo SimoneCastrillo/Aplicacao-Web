@@ -6,7 +6,7 @@ const StepReserva = () => {
   const [passoAtivo, setPassoAtivo] = useState(1);
 
   const mensagens = [
-    (<p>Para iniciar o atendimento, clique em <Link to='/solicitar-orcamento' className='destaque-texto-step'>Solicitar Orçamento</Link> <br /> Você será levado <span className='destaque-texto-step'>automaticamente</span> à página de Reservas</p>),
+    (<p key='mensagem1'>Para iniciar o atendimento, clique em <Link to='/solicitar-orcamento' className='destaque-texto-step'>Solicitar Orçamento</Link> <br /> Você será levado <span className='destaque-texto-step'>automaticamente</span> à página de Reservas</p>),
     "Escolha a data do evento",
     "Selecione o horário",
     "Informe o número de pessoas",

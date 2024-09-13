@@ -24,6 +24,7 @@ const Eventos = () => {
       <AnimatePresence>
         <div className={styles.colTituloButton}>
           <motion.div
+            key='titulo eventos 1'
             initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             exit={{ x: 100 }}
@@ -34,6 +35,7 @@ const Eventos = () => {
             <p className='descricao'>Eventos únicos para se divertir e conectar com quem você ama!</p>
           </motion.div>
           <motion.div 
+            key='botoes eventos 1'
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             exit={{ x: -100 }}
@@ -49,6 +51,7 @@ const Eventos = () => {
           </motion.div>
         </div>
         <motion.div
+            key='botoes eventos 1'
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           exit={{ x: 100 }}
