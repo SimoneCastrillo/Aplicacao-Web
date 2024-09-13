@@ -12,7 +12,7 @@ const ComoReservar = () => {
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           exit={{ x: 100 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <h1 className={`titulo-principal ${styles.ajuste_titulo}`}>COMO RESERVAR?</h1>
           <div className={styles.hr}></div>
@@ -23,7 +23,7 @@ const ComoReservar = () => {
           initial={{ y: 100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           exit={{ y: -100 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <StepReserva />
         </motion.div>

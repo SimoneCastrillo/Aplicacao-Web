@@ -1,13 +1,13 @@
 import { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import img1 from '../assets/imgDecoracaoBanner.jpg';
-import img2 from '../assets/imgDecoracaoBanner2.jpg';
-import img3 from '../assets/teste.jpeg';
-import img4 from '../assets/teste.jpeg';
-import img5 from '../assets/teste.jpeg';
-import img6 from '../assets/teste.jpeg';
-import img7 from '../assets/imgDecoracaoBanner2.jpg';
-import img8 from '../assets/imgDecoracaoBanner2.jpg';
+import img1 from '../../assets/imgDecoracaoBanner.jpg';
+import img2 from '../../assets/imgDecoracaoBanner2.jpg';
+import img3 from '../../assets/teste.jpeg';
+import img4 from '../../assets/teste.jpeg';
+import img5 from '../../assets/teste.jpeg';
+import img6 from '../../assets/teste.jpeg';
+import img7 from '../../assets/imgDecoracaoBanner2.jpg';
+import img8 from '../../assets/imgDecoracaoBanner2.jpg';
 
 import styles from './BannerEventos.module.css';
 

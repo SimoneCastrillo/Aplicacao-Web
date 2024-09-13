@@ -28,7 +28,7 @@ const Eventos = () => {
             initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             exit={{ x: 100 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.5 }}
           >
             <h2 className='titulo-principal'>EVENTOS POPULARES</h2>
             <div className={styles.hr}></div>
@@ -39,7 +39,7 @@ const Eventos = () => {
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             exit={{ x: -100 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.5 }}
             className={styles.containerButtons}
           >
             <button className='btn-default-bgTransparent arrow' onClick={handlePrev}> 
@@ -55,7 +55,7 @@ const Eventos = () => {
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           exit={{ x: 100 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <BannerEventos ref={bannerRef} />
         </motion.div>

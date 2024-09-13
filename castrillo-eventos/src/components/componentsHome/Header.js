@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import imgLogo from '../assets/CastrilloEventos.png';
+import imgLogo from '../../assets/Matriz (1).png';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Header.module.css';
 import { Link, useLocation } from 'react-router-dom';

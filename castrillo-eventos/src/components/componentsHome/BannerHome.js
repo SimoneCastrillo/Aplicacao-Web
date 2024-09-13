@@ -1,5 +1,5 @@
 import styles from './BannerHome.module.css';
-import imgLogo from '../assets/Matriz (1).png';
+import imgLogo from '../../assets/Matriz (1).png';
 import { BsChevronDown } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
