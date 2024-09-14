@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import imgLogo from '../../assets/Matriz (1).png';
+import imgLogo from '../../assets/CastrilloEventos.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Header.module.css';
 import { Link, useLocation } from 'react-router-dom';
@@ -57,7 +57,7 @@ const Header = () => {
     return (
         <div className={styles.header}>
             <div className={styles.container}>
-                <img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" />
+                <Link to='/'><img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" /></Link>
                 <nav className={styles.desktop}>
                     <ul className={styles.nav_links}>
                         <li key="bannerId">
@@ -95,9 +95,9 @@ const Header = () => {
                         <li key="contato">
                             <Link 
                                 className={obterClasseAtiva('#contato')} 
-                                to="#contato"
+                                to="#duvidas"
                             >
-                                Contato
+                                Dúvidas
                             </Link>
                         </li>
                     </ul>

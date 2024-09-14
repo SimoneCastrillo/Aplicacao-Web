@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Duvidas = () => {
   return (
-    <div className={styles.container}>
+    <div id='duvidas' className={styles.container}>
       <AnimatePresence>
         <motion.h1 
         initial={{ x: 100, opacity: 0 }}
@@ -13,7 +13,7 @@ const Duvidas = () => {
         exit={{ x: 100 }}
         transition={{ duration: 0.5 }}
         key={`${Math.random()}`}
-        style={{textAlign: 'center'}} className='titulo-principal'>DUVIDAS FREQUENTES</motion.h1>
+        style={{textAlign: 'center'}} className='titulo-principal'>DÚVIDAS FREQUENTES</motion.h1>
         <motion.div
         initial={{ x: 50, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
@@ -34,11 +34,13 @@ const Duvidas = () => {
         transition={{ duration: 0.5 }}
         key={`${Math.random()}`}
         >
-            <Perguntas key={`${Math.random()}`} titulo='aaaaaa' resposta='resposta'/>
+          <div className={styles.perguntas}>
+          <Perguntas key={`${Math.random()}`}  titulo='aaaaaa' resposta='resposta'/>
             <Perguntas key={`${Math.random()}`} titulo='bbbbbb' resposta='resposta'/>
             <Perguntas key={`${Math.random()}`} titulo='cccc' resposta='resposta'/>
             <Perguntas key={`${Math.random()}`} titulo='ddddd' resposta='resposta'/>
             <Perguntas key={`${Math.random()}`} titulo='eeeee' resposta='resposta'/>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
