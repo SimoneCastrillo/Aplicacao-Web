@@ -8,6 +8,7 @@ import imgPiscina from '../../assets/piscina.jpg';
 import { Link } from 'react-router-dom';
 
 import styles from './BannerEventos.module.css';
+import useWindowWidth from '../../customHooks/useWindowWidth';
 
 const images = [{img: imgInfantil, tipoEvento: 'Infantil', descricao: 'Prepare-se para um dia cheio de diversão, alegria e muitas brincadeiras no nosso evento especial para as crianças!'}, 
   {img: imgDebutante, tipoEvento: 'Debutante', descricao: 'Uma festa de debutante inesquecível, com muito glamour, sofisticação e momentos emocionantes. Decoração encantadora, música vibrante e uma pista de dança animada fazem dessa celebração uma experiência mágica e cheia de surpresas.'}, 
@@ -20,10 +21,11 @@ const BannerEventos = forwardRef((props, ref) => {
   const carrossel = useRef();
   const [width, setWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const larguraTelaDoUsuario = useWindowWidth()
 
   useEffect(() => {
     const updateWidth = () => {
-      // setWidth(carrossel.current?.offsetWidth);
+     
     setWidth(280)
     };
 
@@ -38,7 +40,7 @@ const BannerEventos = forwardRef((props, ref) => {
 
   const nextImage = () => {
     setCurrentIndex((prevIndex) => {
-      if (prevIndex < images.length - 1) {
+      if (prevIndex < images.length - (larguraTelaDoUsuario / 280) + 1) {
         return prevIndex + 1;
       }
       return prevIndex; 
@@ -70,7 +72,7 @@ const BannerEventos = forwardRef((props, ref) => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((image, index) => (
-            <Link to='/a'>
+            <Link to={`/evento/${(image.tipoEvento || '').toLowerCase()}`}>
             
             <motion.div className={styles.item} key={image.tipoEvento} style={{ minWidth: width }}>
             <img src={image.img} alt={image.tipoEvento} />
