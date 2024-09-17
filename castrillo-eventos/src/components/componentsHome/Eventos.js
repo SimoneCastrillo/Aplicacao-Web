@@ -30,7 +30,7 @@ const Eventos = () => {
             exit={{ x: 100 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className='titulo-principal'>EVENTOS POPULARES</h2>
+            <h2 className='titulo-principal'>EVENTOS</h2>
             <div className={styles.hr}></div>
             <p className='descricao'>Eventos únicos para se divertir e conectar com quem você ama!</p>
           </motion.div>

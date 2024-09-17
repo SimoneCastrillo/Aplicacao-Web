@@ -4,6 +4,7 @@ import img1 from '../../assets/imgDecoracaoBanner.jpg';
 import img2 from '../../assets/imgDecoracaoBanner2.jpg';
 import img3 from '../../assets/teste.jpeg';
 import styles from './BannerEventos.module.css';
+import styles2 from './BannerAvaliacoes.module.css';
 
 const images = [img1, img2, img3];
 
@@ -52,7 +53,7 @@ const BannerAvaliacoes = forwardRef((props, ref) => {
   }), []);
 
   return (
-    <div className={styles.container_carrossel}>
+    <div className={styles2.container}>
       <motion.div ref={carrossel} className={styles.carrossel}>
         <motion.div
           className={styles.inner}
