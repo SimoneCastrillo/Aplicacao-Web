@@ -2,12 +2,12 @@ import { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 're
 import { motion } from 'framer-motion';
 import img1 from '../../assets/decoração.jpg';
 import img2 from '../../assets/decoração2.jpg';
-import img3 from '../../assets/decoracao4.jpg';
+import imgInfantil from '../../assets/decoracao4.jpg';
 import { Link } from 'react-router-dom';
 
 import styles from './BannerEventos.module.css';
 
-const images = [img1, img2, img3];
+const images = [{img: imgInfantil, tipoEvento: 'Infantil', descricao: 'Prepare-se para um dia cheio de diversão, alegria e muitas brincadeiras no nosso evento especial para as crianças!'}, {img: img2, tipoEvento: 'Adulto', descricao: 'rsadasdasdsadad'}, {img: img1, tipoEvento: 'Casamento', descricao: 'rsadasdasdsadad'}];
 
 const BannerEventos = forwardRef((props, ref) => {
   const carrossel = useRef();
@@ -64,9 +64,14 @@ const BannerEventos = forwardRef((props, ref) => {
         >
           {images.map((image, index) => (
             <Link to='/a'>
-            <motion.div className={styles.item} key={`carrossel-img-${index}`} style={{ minWidth: width }}>
-            <img src={image} alt={`carrossel-img-${index}`} />
-          </motion.div>
+            
+            <motion.div className={styles.item} key={image.tipoEvento} style={{ minWidth: width }}>
+            <img src={image.img} alt={image.tipoEvento} />
+            <div className={styles.infoEvento}>
+              <h3>{image.tipoEvento}</h3>
+              <p className='descricao'>{image.descricao}</p>
+            </div>
+            </motion.div>
           </Link>
           ))}
         </motion.div>
