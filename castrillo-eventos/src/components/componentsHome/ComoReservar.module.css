@@ -6,7 +6,7 @@
     padding: 30px 50px;
     box-sizing: border-box;
 }
-.ajuste_titulo {
+.ajuste_titulo,.ajuste_descricao {
     text-align: center;
 }
 .hr {

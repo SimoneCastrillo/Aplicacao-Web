@@ -1,17 +1,13 @@
 import { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import img1 from '../assets/imgDecoracaoBanner.jpg';
-import img2 from '../assets/imgDecoracaoBanner2.jpg';
-import img3 from '../assets/teste.jpeg';
-import img4 from '../assets/teste.jpeg';
-import img5 from '../assets/teste.jpeg';
-import img6 from '../assets/teste.jpeg';
-import img7 from '../assets/imgDecoracaoBanner2.jpg';
-import img8 from '../assets/imgDecoracaoBanner2.jpg';
+import img1 from '../../assets/decoração.jpg';
+import img2 from '../../assets/decoração2.jpg';
+import img3 from '../../assets/decoracao4.jpg';
+import { Link } from 'react-router-dom';
 
 import styles from './BannerEventos.module.css';
 
-const images = [img1, img2, img3, img4, img5, img6, img7, img8];
+const images = [img1, img2, img3];
 
 const BannerEventos = forwardRef((props, ref) => {
   const carrossel = useRef();
@@ -20,8 +16,8 @@ const BannerEventos = forwardRef((props, ref) => {
 
   useEffect(() => {
     const updateWidth = () => {
-      setWidth(carrossel.current?.offsetWidth);
-    // setWidth(350)
+      // setWidth(carrossel.current?.offsetWidth);
+    setWidth(280)
     };
 
     updateWidth(); 
@@ -34,14 +30,23 @@ const BannerEventos = forwardRef((props, ref) => {
   }, []);
 
   const nextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex < images.length - 1) {
+        return prevIndex + 1;
+      }
+      return prevIndex; 
+    });
   };
-
+  
   const prevImage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex > 0) {
+        return prevIndex - 1;
+      }
+      return prevIndex;
+    });
   };
+  
 
   useImperativeHandle(ref, () => ({
     nextImage,
@@ -58,9 +63,11 @@ const BannerEventos = forwardRef((props, ref) => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           {images.map((image, index) => (
-            <motion.div className={styles.item} key={index} style={{ minWidth: width }}>
-              <img src={image} alt={`carrossel-img-${index}`} />
-            </motion.div>
+            <Link to='/a'>
+            <motion.div className={styles.item} key={`carrossel-img-${index}`} style={{ minWidth: width }}>
+            <img src={image} alt={`carrossel-img-${index}`} />
+          </motion.div>
+          </Link>
           ))}
         </motion.div>
       </motion.div>

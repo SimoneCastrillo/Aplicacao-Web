@@ -24,23 +24,25 @@ const Eventos = () => {
       <AnimatePresence>
         <div className={styles.colTituloButton}>
           <motion.div
-            initial={{ x: 300, opacity: 0 }}
+            key='titulo eventos 1'
+            initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            exit={{ x: 300 }}
-            transition={{ duration: 1 }}
+            exit={{ x: 100 }}
+            transition={{ duration: 0.5 }}
           >
             <h2 className='titulo-principal'>EVENTOS POPULARES</h2>
             <div className={styles.hr}></div>
             <p className='descricao'>Eventos únicos para se divertir e conectar com quem você ama!</p>
           </motion.div>
           <motion.div 
+            key='botoes eventos 1'
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            exit={{ x: -300 }}
-            transition={{ duration: 1 }}
+            exit={{ x: -100 }}
+            transition={{ duration: 0.5 }}
             className={styles.containerButtons}
           >
-            <button className='btn-default-bgTransparent arrow' onClick={handlePrev}> 
+            <button className='btn-default-bgTransparent arrow hoverRosa' onClick={handlePrev}> 
               <MdArrowBack size={20} color="#FFB6C1" />
             </button>
             <button className='btn-default-bgRosa arrow' onClick={handleNext}>
@@ -49,10 +51,11 @@ const Eventos = () => {
           </motion.div>
         </div>
         <motion.div
-          initial={{ x: -300, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          exit={{ x: 300 }}
-          transition={{ duration: 1 }}
+            key='botoes eventos 1'
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          exit={{ y: 100 }}
+          transition={{ duration: 0.5 }}
         >
           <BannerEventos ref={bannerRef} />
         </motion.div>

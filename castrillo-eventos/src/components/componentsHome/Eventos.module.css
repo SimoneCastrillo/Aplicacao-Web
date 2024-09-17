@@ -6,7 +6,11 @@
     padding: 30px 50px;
     box-sizing: border-box;
 }
-
+@media (max-width: 675px) {
+    .container {
+        margin-top: 90px;
+    }
+}
 .hr {
     width: 40%;
     height: 2px;

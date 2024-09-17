@@ -19,6 +19,11 @@ button {
   border-radius: 50px;
   font-weight: bold;
 }
+.btn-default-bgRosa:hover {
+  background-color: #9b2c59;
+  transition: 0.2s;
+
+}
 .btn-default-bgTransparent {
   background-color: transparent;
   padding: 10px 20px;
@@ -26,6 +31,11 @@ button {
   font-weight: bold;
   color: #FFB6C1;
   border: 2px solid #FFB6C1;
+  transition: 0.2s;
+}
+.btn-default-bgTransparent:hover {
+  background-color: #FFB6C1;
+  color: #fff !important;
 }
 .swiper-button-next::after,
 .swiper-button-prev::after {
@@ -52,4 +62,7 @@ button {
 }
 .descricao {
   color: #fff;
+}
+.hoverRosa:hover {
+  background-color: transparent;
 }
