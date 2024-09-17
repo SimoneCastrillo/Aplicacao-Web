@@ -16,7 +16,7 @@ import 'swiper/css/pagination'
 const BannerHome = () => {
   const slides = [ img5, img6, img7, img0, img1, img2, img3, img4]
   return (
-    <div className={styles.container}>
+    <div id='bannerId' className={styles.container}>
        <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
