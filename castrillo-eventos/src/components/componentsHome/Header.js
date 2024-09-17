@@ -16,9 +16,9 @@ const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'contato'];
+            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'duvidas']; // Atualize aqui
             let secaoEncontrada = '';
-
+    
             secoes.forEach((secaoId) => {
                 const elemento = document.getElementById(secaoId);
                 if (elemento) {
@@ -28,18 +28,19 @@ const Header = () => {
                     }
                 }
             });
-
+    
             setSecaoAtiva(secaoEncontrada ? `#${secaoEncontrada}` : '');
         };
-
+    
         window.addEventListener('scroll', handleScroll);
-
+    
         handleScroll();
-
+    
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    
 
     useEffect(() => {
         if (location.hash) {
@@ -55,7 +56,7 @@ const Header = () => {
     };
 
     return (
-        <div className={styles.header}>
+        <header className={styles.header}>
             <div className={styles.container}>
                 <Link to='/'><img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" /></Link>
                 <nav className={styles.desktop}>
@@ -94,7 +95,7 @@ const Header = () => {
                         </li>
                         <li key="contato">
                             <Link 
-                                className={obterClasseAtiva('#contato')} 
+                                className={obterClasseAtiva('#duvidas')} 
                                 to="#duvidas"
                             >
                                 Dúvidas
@@ -150,12 +151,12 @@ const Header = () => {
                                             Avaliações
                                         </Link>
                                     </li>
-                                    <li key="mobile-contato">
+                                    <li key="mobile-duvidas">
                                         <Link 
-                                            className={obterClasseAtiva('#contato')} 
-                                            to="#contato"
+                                            className={obterClasseAtiva('#duvidas')} 
+                                            to="#duvidas"
                                         >
-                                            Contato
+                                            Dúvidas
                                         </Link>
                                     </li>
                                     
@@ -183,7 +184,7 @@ const Header = () => {
                     </AnimatePresence>
                 </div>
             </div>
-        </div>
+        </header>
     );
 };
 

@@ -42,7 +42,7 @@ const Eventos = () => {
             transition={{ duration: 0.5 }}
             className={styles.containerButtons}
           >
-            <button className='btn-default-bgTransparent arrow' onClick={handlePrev}> 
+            <button className='btn-default-bgTransparent arrow hoverRosa' onClick={handlePrev}> 
               <MdArrowBack size={20} color="#FFB6C1" />
             </button>
             <button className='btn-default-bgRosa arrow' onClick={handleNext}>
@@ -52,9 +52,9 @@ const Eventos = () => {
         </div>
         <motion.div
             key='botoes eventos 1'
-          initial={{ x: -100, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          exit={{ x: 100 }}
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          exit={{ y: 100 }}
           transition={{ duration: 0.5 }}
         >
           <BannerEventos ref={bannerRef} />

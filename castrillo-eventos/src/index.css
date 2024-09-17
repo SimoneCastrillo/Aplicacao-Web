@@ -63,3 +63,6 @@ button {
 .descricao {
   color: #fff;
 }
+.hoverRosa:hover {
+  background-color: transparent;
+}

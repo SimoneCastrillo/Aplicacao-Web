@@ -5,6 +5,7 @@ import Eventos from '../../components/componentsHome/Eventos'
 import ComoReservar from '../../components/componentsHome/ComoReservar'
 import Duvidas from '../../components/componentsHome/Duvidas'
 import Footer from '../../components/componentsHome/Footer'
+import Avaliacoes from '../../components/componentsHome/Avaliacoes'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <BannerHome />
       <Eventos/>
       <ComoReservar/>
+      <Avaliacoes/>
       <Duvidas/>
       <Footer/>
     </div>
