@@ -5,7 +5,7 @@ import img2 from '../../assets/imgDecoracaoBanner2.jpg';
 import img3 from '../../assets/teste.jpeg';
 import styles from './BannerEventos.module.css';
 import styles2 from './BannerAvaliacoes.module.css';
-import useWindowWidth from '../../customHooks/useWindowWidth';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 const images = [img1, img2, img3];
 

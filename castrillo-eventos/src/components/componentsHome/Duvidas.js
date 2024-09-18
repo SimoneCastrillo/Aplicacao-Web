@@ -13,7 +13,7 @@ const Duvidas = () => {
         exit={{ x: 100 }}
         transition={{ duration: 0.5 }}
         key={`${Math.random()}`}
-        style={{textAlign: 'center'}} className='titulo-principal'>DÚVIDAS FREQUENTES</motion.h1>
+        className='titulo-principal'>DÚVIDAS FREQUENTES</motion.h1>
         <motion.div
         initial={{ x: 50, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
@@ -27,7 +27,7 @@ const Duvidas = () => {
         exit={{ x: 50 }}
         transition={{ duration: 0.5 }}
         key={`${Math.random()}`}
-        style={{textAlign: 'center'}} className='descricao'>Ficou com dúvidas? Confira Aqui</motion.p>
+         className='descricao'>Ficou com dúvidas? Confira Aqui</motion.p>
         <motion.div initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         exit={{ y: 100 }}

@@ -8,7 +8,7 @@ import imgPiscina from '../../assets/piscina.jpg';
 import { Link } from 'react-router-dom';
 
 import styles from './BannerEventos.module.css';
-import useWindowWidth from '../../customHooks/useWindowWidth';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 const images = [{img: imgInfantil, tipoEvento: 'Infantil', descricao: 'Prepare-se para um dia cheio de diversão, alegria e muitas brincadeiras no nosso evento especial para as crianças!'}, 
   {img: imgDebutante, tipoEvento: 'Debutante', descricao: 'Uma festa de debutante inesquecível, com muito glamour, sofisticação e momentos emocionantes. Decoração encantadora, música vibrante e uma pista de dança animada fazem dessa celebração uma experiência mágica e cheia de surpresas.'}, 
