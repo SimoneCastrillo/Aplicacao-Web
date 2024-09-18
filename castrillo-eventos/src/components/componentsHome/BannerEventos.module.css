@@ -1,12 +1,8 @@
-.container-carrosel {
+.container_carrosel {
     width: 100%;
-    height: auto;
-    min-height: 200px;
-    margin: 0 auto;
-    display: flex;
-    max-width: 400px;
-    align-items: center;
-    justify-content: center;
+    margin-top: 50px 30px;
+    padding: 40px 0 0 0;
+    /* margin: 50px 0; */
 }
 
 .inner {
@@ -17,6 +13,7 @@
 .item {
     width: 280px; 
     height: 350px; 
+    text-align: center;
     position: relative;
     transition: 0.5s;
     background: rgba(255, 255, 255, 0.20);
