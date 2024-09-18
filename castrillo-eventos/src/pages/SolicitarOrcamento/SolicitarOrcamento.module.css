@@ -1,0 +1,16 @@
+.col_img {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+.imgLogo {
+    width: 180px;
+    
+}
+.titulo {
+    margin-top: 30px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+    color: #C54477;
+}
