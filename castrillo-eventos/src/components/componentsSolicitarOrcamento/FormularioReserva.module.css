@@ -1,0 +1,26 @@
+.containerStepEbutton {
+    display: flex;
+    /* height: 300px; */
+    align-items: center;
+    justify-content: space-between;
+}
+.form {
+    width: 50%;
+    margin: 10px auto;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.inputEspecifico::placeholder {
+  color: #d9d9d9;
+  
+}
+.controleDasInputs {
+    display: flex;
+    margin-top: 30px;
+    gap: 10px;
+}
+.erro_msg {
+    color: red;
+    text-align: center;
+}

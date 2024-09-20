@@ -6,16 +6,18 @@ import ComoReservar from '../../components/componentsHome/ComoReservar'
 import Duvidas from '../../components/componentsHome/Duvidas'
 import Footer from '../../components/componentsHome/Footer'
 import Avaliacoes from '../../components/componentsHome/Avaliacoes'
-
+import styles from './Home.module.css'
 const Home = () => {
   return (
-    <div>
+    <div >
       <Header />
       <BannerHome />
+      <div className={styles.container}>
       <Eventos/>
       <ComoReservar/>
       <Avaliacoes/>
       <Duvidas/>
+      </div>
       <Footer/>
     </div>
   )

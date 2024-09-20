@@ -35,11 +35,11 @@ const Duvidas = () => {
         key={`${Math.random()}`}
         >
           <div className={styles.perguntas}>
-          <Perguntas key={`${Math.random()}`}  titulo='aaaaaa' resposta='resposta'/>
-            <Perguntas key={`${Math.random()}`} titulo='bbbbbb' resposta='resposta'/>
-            <Perguntas key={`${Math.random()}`} titulo='cccc' resposta='resposta'/>
-            <Perguntas key={`${Math.random()}`} titulo='ddddd' resposta='resposta'/>
-            <Perguntas key={`${Math.random()}`} titulo='eeeee' resposta='resposta'/>
+          <Perguntas key={`${Math.random()}`}  titulo='Quantos convidados o buffet pode acomodar?' resposta='Nosso buffet pode acomodar até 150 convidados com total conforto e elegância.'/>
+            <Perguntas key={`${Math.random()}`} titulo='Posso fazer uma visita antes de reservar?' resposta='Sim, você pode agendar uma visita para conhecer nosso espaço antes de fazer a sua reserva. Além disso, oferecemos a opção de marcar uma degustação do nosso cardápio em um dia de evento, para que você possa experimentar a qualidade e variedade dos pratos que servimos.'/>
+            <Perguntas key={`${Math.random()}`} titulo='Existe um limite de horário para os eventos?' resposta='Não, não há um limite de horário para os eventos, mas é necessário combinar previamente os horários de início e término.'/>
+            <Perguntas key={`${Math.random()}`} titulo='O buffet oferece pacotes promocionais?' resposta='Sim, o buffet oferece pacotes promocionais de tempos em tempos. As promoções são publicadas tanto em nossas redes sociais quanto aqui no site.'/>
+            <Perguntas key={`${Math.random()}`} titulo='O buffet oferece serviços de decoração temática?' resposta='Sim, oferecemos serviços de decoração temática baseados no tipo de evento.'/>
           </div>
         </motion.div>
       </AnimatePresence>

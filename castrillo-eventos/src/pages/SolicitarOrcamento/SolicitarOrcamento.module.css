@@ -4,13 +4,30 @@
     text-align: center;
 }
 .imgLogo {
-    width: 180px;
+    width: 120px;
     
 }
+.containerGeral {
+    height: 100vh;
+    
+    overflow: hidden;
+    background: rgb(54,70,82);
+    background: linear-gradient(90deg, #19222E 0%, #2F425B 80%, #1D2736 100%);
+}
+.container {
+    padding:  0 80px;
+   
+}
 .titulo {
-    margin-top: 30px;
+    margin: 10px 0 0;
     font-weight: bold;
     text-align: center;
     font-size: 60px;
-    color: #C54477;
+    color: #FFB6C1;
+    
+}
+.descricao {
+    margin: 5px 0;
+    color: #fff;
+    text-align: center;
 }

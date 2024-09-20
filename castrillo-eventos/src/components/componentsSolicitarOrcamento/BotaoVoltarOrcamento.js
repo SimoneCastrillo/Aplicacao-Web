@@ -1,9 +1,10 @@
 import styles from './BotaoVoltarOrcamento.module.css'
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 const BotaoVoltarOrcmento = () => {
   return (
     <div className={styles.container}>
-        <button className={styles.btn}><FaArrowLeft color='C54477' fontSize={20} /></button>
+        <Link to='/' className={styles.btn}><FaHome color='FFB6C1' fontSize={20} /></Link>
     </div>
   )
 }
