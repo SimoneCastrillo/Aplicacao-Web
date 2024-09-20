@@ -99,6 +99,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(80%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(90%) contrast(90%);
   cursor: pointer;
 }
+
 .container-input select {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
