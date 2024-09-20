@@ -80,7 +80,11 @@ button {
   color: #fff;
 
 }
-.container-input input {
+label {
+  color: #fff;
+
+}
+input {
   padding: 8px 10px;
   border-radius: 16px;
   font-family: 'Montserrat', sans-serif;
@@ -100,7 +104,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-.container-input select {
+select {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   border:2px solid #40597a;
@@ -110,4 +114,35 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   border-radius: 16px;
   /* color: #454545; */
   /* border:none; */
+}
+
+option {
+  background-color: #445366;
+  color: #d9d9d9; 
+  /* border: ; */
+  border:2px solid #40597a;
+
+}
+textarea {
+  padding: 8px 10px;
+  border-radius: 16px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff16;
+  border:2px solid #40597a;
+  color: #d9d9d9;
+  font-size: 16px;
+  height: 120px;
+  resize: none;
+  width: 100%;
+}
+textarea::placeholder {
+  color: #d9d9d9;
+
+}
+.container-input-full {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+
+  flex-direction: column;
 }

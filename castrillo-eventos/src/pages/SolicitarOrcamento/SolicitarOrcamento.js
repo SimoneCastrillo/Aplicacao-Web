@@ -12,7 +12,7 @@ const SolicitarOrcamento = () => {
       <div className={styles.container}>
       <div className={styles.col_img}><Link to="/"><img className={styles.imgLogo} src={imgLogo} alt="" /></Link></div>
       <h1 className={styles.titulo}>ORÇAMENTO</h1>
-      <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
+      
       <FormularioReserva/>
       </div>
     </div>

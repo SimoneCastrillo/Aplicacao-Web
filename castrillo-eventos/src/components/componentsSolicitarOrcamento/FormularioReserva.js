@@ -40,6 +40,7 @@ const FormularioReserva = () => {
       <form className={styles.form}>
         {passoAtivo === 1 && (
           <div className='passo-1'>
+            <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
                 <div className={styles.controleDasInputs}>
                   <div className="container-input">
                     <label>Data</label>
@@ -71,12 +72,19 @@ const FormularioReserva = () => {
         )}
         {passoAtivo === 2 && (
           <div className='passo-2'>
+            <p className={styles.descricao}>Selecione as preferências para seu evento e informe o sabor do bolo</p>
           
           </div>
         )}
         {passoAtivo === 3 && (
           <div className='passo-3'>
-          
+            <p className={styles.descricao}>Observações (Opcional)</p>
+            <div className={styles.controleDasInputs}>
+                  <div className="container-input-full">
+                    <label>Observação</label>
+                    <textarea placeholder='Máximo de 200 caracteres' />
+                  </div>
+                </div>
           </div>
         )}
       {erro && <p className={styles.erro_msg}>{erro}</p>}

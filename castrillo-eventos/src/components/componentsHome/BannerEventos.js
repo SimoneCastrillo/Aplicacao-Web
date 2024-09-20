@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { motion } from 'framer-motion';
 import imgCasamento from '../../assets/casamento.jpg';
 import imgDebutante from '../../assets/debutante.jpg';
@@ -25,7 +25,6 @@ const images = [
 
 const BannerEventos = forwardRef((props, ref) => {
   const swiperRef = useRef(null);
-  const [width, setWidth] = useState(0);
   const larguraTelaDoUsuario = useWindowWidth();
 
 
@@ -60,7 +59,7 @@ const BannerEventos = forwardRef((props, ref) => {
       {images.map((image, index) => (
         <SwiperSlide key={image.tipoEvento}>
           <Link to={`/evento/${(image.tipoEvento || '').toLowerCase()}`}>
-            <motion.div className={styles.item} key={image.tipoEvento} style={{ minWidth: width }}>
+            <motion.div className={styles.item} key={image.tipoEvento} style={{ minWidth: 280 }}>
               <img src={image.img} alt={image.tipoEvento} />
               <div className={styles.infoEvento}>
                 <h3>{image.tipoEvento}</h3>
