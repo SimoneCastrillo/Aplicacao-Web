@@ -104,8 +104,8 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
-                    <Link to="" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
-                    <Link to="" className='btn-default-bgTransparent'>Login</Link>
+                    <Link to="/solicitar-orcamento" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
+                    <Link to="/login" className='btn-default-bgTransparent'>Login</Link>
                 </div>
                 <div className={styles.mobile}>
                     <button onClick={handleOpenMenu}><BsList size={35} color='#fff'/></button>

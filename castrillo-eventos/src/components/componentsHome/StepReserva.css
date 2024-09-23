@@ -52,7 +52,6 @@
   align-items: center;
   font-size: 30px;
   border: 6px solid #FFADCE;
-  cursor: pointer;
   z-index: 2;
   font-weight: bold;
   transition: transform 0.3s ease;
@@ -76,4 +75,36 @@
 
 .primeira, .ultima {
   width: 300px;
+}
+@media screen and (max-width: 1058px) {
+
+  .primeira, .ultima {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 800px) {
+
+  .primeira, .ultima {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 550px) {
+
+  .primeira, .ultima {
+    width: 50px;
+  }
+}
+@media screen and (max-width: 450px) {
+
+  .primeira, .ultima {
+    width: 0;
+  }
+  .passo.ativo {
+    width: 80px;
+    height: 80px;
+  }
+  .passo {
+    height: 60px;
+    width: 60px;
+  }
 }

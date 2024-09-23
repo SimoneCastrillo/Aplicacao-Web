@@ -7,16 +7,14 @@ const StepReserva = () => {
 
   const mensagens = [
     (<p key='mensagem1'>Para iniciar o atendimento, clique em <Link to='/solicitar-orcamento' className='destaque-texto-step'>Solicitar Orçamento</Link> <br /> Você será levado <span className='destaque-texto-step'>automaticamente</span> à página de Reservas</p>),
-    (<p key='mensagem1'>Preencha os dados <span className='destaque-texto-step'>solicidados</span> para concluir a <br/> solicitação de reserva do local.</p>),
-    "Selecione o horário",
-    "Informe o número de pessoas",
-    "Confirme os detalhes da reserva",
+    (<p key='mensagem2'>Preencha os dados <span className='destaque-texto-step'>solicidados</span> para concluir a <br/> solicitação de reserva do local.</p>),
+    (<p key='mensagem3'>Aguarde nossa <span className='destaque-texto-step'>resposta</span> e <span className='destaque-texto-step'>confirmação</span> da reserva em breve.</p>),
   ];
 
   return (
     <div className="step-reserva-wrapper">
-      <div className={`step-reserva-container ${passoAtivo === 1 ? 'inicio' : passoAtivo === 6 ? 'fim' : ''}`}>
-        {[1, 2, 3, 4, 5].map((num) => (
+      <div className={`step-reserva-container ${passoAtivo === 1 ? 'inicio' : passoAtivo === 3 ? 'fim' : ''}`}>
+        {[1, 2, 3].map((num) => (
           <React.Fragment key={num}>
             {num  === 1 && (
               <div className={`linha linha-ativa primeira`}></div>
@@ -27,10 +25,10 @@ const StepReserva = () => {
             >
               {num}
             </motion.button>
-            {num !== 5 && (
+            {num !== 3 && (
               <div className={`linha ${passoAtivo > num ? 'linha-ativa' : ''}`}></div>
             )}
-            {num === 5 && (
+            {num === 3 && (
               <div className={`linha ${passoAtivo >= num ? 'linha-ativa' : ''} ultima`}></div>
             )}
           </React.Fragment>
