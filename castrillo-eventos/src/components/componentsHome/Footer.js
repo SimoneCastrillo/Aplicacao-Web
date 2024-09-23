@@ -15,13 +15,46 @@ const Footer = () => {
 
   return (
     <footer className={styles.container}>
-      <div>
-        <img src={imgLogo} alt="" />
-        <ul className={styles.lista_redes}>
-          <li><Link to=''><FaFacebook size={20}/></Link></li>
-          <li><Link to=''><FaInstagram size={20}/></Link></li>
-          <li><Link to=''><FaWhatsapp size={20}/></Link></li>
-        </ul>
+      <div className={styles.containerNav}>
+        <div>
+            <img src={imgLogo} alt="" />
+            <ul className={styles.lista_redes}>
+              <li><Link to=''><FaFacebook size={20}/></Link></li>
+              <li><Link to=''><FaInstagram size={20}/></Link></li>
+              <li><Link to=''><FaWhatsapp size={20}/></Link></li>
+            </ul>
+        </div>
+        <div>
+            <h3>EVENTOS</h3>
+            <ul className={styles.links}>
+              <li>
+                <Link to='/eventos/aniversario' className="descricao">Aniversário</Link>
+              </li>
+              <li>
+                <Link to='/eventos/casamento' className="descricao">Casamento</Link>
+              </li>
+              <li>
+                <Link to='/eventos/coffe-break' className="descricao">Coffe Break</Link>
+              </li>
+              <li>
+                <Link to='/eventos/debutante' className="descricao">Debutante</Link>
+              </li>
+              <li>
+                <Link to='/eventos/infantil' className="descricao">Infantil</Link>
+              </li>
+              <li>
+                <Link to='/eventos/aluguel-do-espaco' className="descricao">Aluguel</Link>
+              </li>
+            </ul>
+        </div>
+        <div>
+            <h3>SERVIÇOS</h3>
+            <ul className={styles.links}>
+                <li><Link to='/solicitar-orcamento' className='descricao'>Solicitar orçamento</Link></li>
+                <li><Link to='/login' className='descricao'>Entrar</Link></li>
+                <li><Link to='/cadastro' className='descricao'>Cadastrar</Link></li>
+            </ul>
+        </div>
       </div>
 
       <div style={{  width: '254px', height: '400px' }}> 

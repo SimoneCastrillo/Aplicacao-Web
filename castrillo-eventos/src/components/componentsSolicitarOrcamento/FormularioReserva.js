@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { MdArrowBack, MdArrowForward } from 'react-icons/md';
+import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import StepOrcamento from './StepOrcamento';
 const FormularioReserva = () => {
@@ -34,6 +34,10 @@ const FormularioReserva = () => {
     }
     setErro('')
     setPassoAtivo(passoAtivo + 1)
+  }
+  const handleSubmit = ()=> {
+    console.log('aaa');
+    
   }
   return (
     <div>
@@ -103,6 +107,9 @@ const FormularioReserva = () => {
             <div style={{width: '33.3%', textAlign: 'right'}}>
             {passoAtivo !== 3 && (
               <button onClick={proximoPasso} className='btn-default-bgRosa buttonAjuste'><MdArrowForward color='#fff'/></button>
+            )}
+            {passoAtivo === 3 && (
+              <button onClick={handleSubmit} className='btn-default-bgRosa buttonAjuste'><MdCheck color='#fff'/></button>
             )}
             </div>
         </div>
