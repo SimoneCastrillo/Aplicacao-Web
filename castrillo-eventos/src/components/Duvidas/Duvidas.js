@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Duvidas.module.css'
-import Perguntas from './Perguntas'
+import Perguntas from '../Perguntas/Perguntas'
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Duvidas = () => {

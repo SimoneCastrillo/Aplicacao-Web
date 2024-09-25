@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import styles from './Avaliacoes.module.css'
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import BannerAvaliacoes from './BannerAvaliacoes';
+import BannerAvaliacoes from '../BannerAvaliacoes/BannerAvaliacoes';
 const Avaliacoes = () => {
     const bannerRef = useRef();
 

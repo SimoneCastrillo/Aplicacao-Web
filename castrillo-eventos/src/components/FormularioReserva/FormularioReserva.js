@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
-import StepOrcamento from './StepOrcamento';
+import StepOrcamento from '../StepOrcamento/StepOrcamento';
 const FormularioReserva = () => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
