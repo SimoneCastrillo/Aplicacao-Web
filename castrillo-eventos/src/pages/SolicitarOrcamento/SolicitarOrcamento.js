@@ -1,7 +1,7 @@
-import BotaoVoltarOrcamento from '../../components/componentsSolicitarOrcamento/BotaoVoltarOrcamento'
+import BotaoVoltarOrcamento from '../../components/BotaoVoltarOrcamento/BotaoVoltarOrcamento'
 import styles from './SolicitarOrcamento.module.css'
 import imgLogo from '../../assets/CastrilloEventos.png'
-import FormularioReserva from '../../components/componentsSolicitarOrcamento/FormularioReserva'
+import FormularioReserva from '../../components/FormularioReserva/FormularioReserva'
 import { Link } from 'react-router-dom'
 const SolicitarOrcamento = () => {
   

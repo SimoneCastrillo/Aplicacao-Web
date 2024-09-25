@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import img1 from '../../assets/imgDecoracaoBanner.jpg';
 import img2 from '../../assets/imgDecoracaoBanner2.jpg';
 import img3 from '../../assets/teste.jpeg';
-import styles from './BannerEventos.module.css';
+import styles from '../BannerEventos/BannerEventos.module.css'; 
 import styles2 from './BannerAvaliacoes.module.css';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { Navigation, Autoplay } from 'swiper/modules';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ComoReservar.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import StepReserva from './StepReserva';
+import StepReserva from '../StepReserva/StepReserva';
 
 const ComoReservar = () => {
   return (
