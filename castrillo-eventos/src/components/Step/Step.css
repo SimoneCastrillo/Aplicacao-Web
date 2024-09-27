@@ -1,4 +1,4 @@
-.step-reserva-wrapper-orcamento {
+.step-wrapper-util {
     display: flex;
     margin-top: 60px;
     flex-direction: column;
@@ -12,7 +12,7 @@
     color: #FFADCE;
   }
   
-  .step-reserva-container-orcamento {
+  .step-container-util {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,16 +22,16 @@
     transition: justify-content 0.5s ease;
   }
   
-  .step-reserva-container.inicio-orcamento {
+  .step-container.inicio-util {
     justify-content: flex-start; 
   }
   
-  .step-reserva-container.fim-orcamento {
+  .step-container.fim-util {
     justify-content: flex-end; 
   }
   
 
-  .passo-orcamento {
+  .passo-util {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -48,7 +48,7 @@
     transition: transform 0.3s ease;
   }
   
-  .passo-orcamento.ativo-orcamento {
+  .passo-util.ativo-util {
     width: 30px;
     border: none;
     height: 30px;
@@ -57,7 +57,7 @@
     font-size: 16px;
   }
     
-  .linha-orcamento {
+  .linha-util {
     width: 30px;
     height: 1px;
     background-color: #ffffff;
@@ -65,6 +65,6 @@
     z-index: 1;
   }
   
-  .linha-ativa-orcamento {
+  .linha-ativa-util {
     background-color: #ff4fa1;
   }

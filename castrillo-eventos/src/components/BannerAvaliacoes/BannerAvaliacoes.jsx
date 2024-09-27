@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 const images = [img1, img2, img3, img1,img2, img2];
 
-const BannerAvaliacoes = forwardRef((props, ref) => {
+const BannerAvaliacoes = forwardRef((props ,ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
 
