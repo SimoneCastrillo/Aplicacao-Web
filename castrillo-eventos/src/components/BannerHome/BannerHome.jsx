@@ -16,7 +16,7 @@ const BannerHome = () => {
     <div id='bannerId' className={styles.container}>
        <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        navigation
+        // navigation
         pagination
         autoplay={{ delay: 3000, disableOnInteraction: false }} 
       >

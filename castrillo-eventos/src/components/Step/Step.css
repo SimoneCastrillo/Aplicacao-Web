@@ -68,3 +68,6 @@
   .linha-ativa-util {
     background-color: #ff4fa1;
   }
+@media screen and (max-width: 480px) {
+  
+}

@@ -4,7 +4,7 @@ const Step = ({passo, qtdPassos}) => {
   return (
     <div>
         <div className="step-wrapper-util">
-            <div className={`step-container-util ${passo === 1 ? 'inicio-util' : passo === 3 ? 'fim-util' : ''}`}>
+            <div className={`step-container-util ${passo === 1 ? 'inicio-util' : passo === qtdPassos.length ? 'fim-util' : ''}`}>
             {qtdPassos.map((num) => (
                 <React.Fragment key={num}>
                 <div
