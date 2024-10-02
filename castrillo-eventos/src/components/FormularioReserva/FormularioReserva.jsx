@@ -1,15 +1,24 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import StepOrcamento from '../Step/Step';
-const FormularioReserva = () => {
+const FormularioReserva = ({onOpenEscolherDecoracao}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
+
   const [data, setData] = useState('');
+  
   const [horario, setHorario] = useState('');
+  
   const [quantidadePessoas, setQuantidadePessoas] = useState('');
+  
   const [tipoEvento, setTipoEvento] = useState('infantil');
+  
+  // const [decoracao, setDecoracao] = useState('');
+
+  const [saborBolo, setSaborBolo] = useState('');
+  
   const [erro, setErro] = useState(false);
   const getDiaAtual = ()=>{
     const data = new Date();
@@ -85,11 +94,22 @@ const FormularioReserva = () => {
             <div className={styles.controleDasInputs}>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Decoração</label>
-                    <button className={styles.btnModalDecoracao}>Escolher decoração</button>
+                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>Escolher decoração</button>
                   </div>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Sabor do bolo</label>
-                    <input type="text" placeholder='Escolha o sabor do bolo'/>
+                    <select value={saborBolo || ''} onChange={(e)=>setSaborBolo(e.target.value)}>
+                      <option value="chocolate_mousse_chocolate">Chocolate com mousse e pedaços de chocolate</option>
+                      <option value="chocolate_mousse_maracuja">Chocolate com mousse de maracujá e pedaços de chocolate</option>
+                      <option value="creme_mestre_pessego">Creme Mestre com pêssego</option>
+                      <option value="prestigio">Prestígio</option>
+                      <option value="abacaxi">Abacaxi</option>
+                      <option value="doce_leite_coco">Doce de leite com coco</option>
+                      <option value="doce_leite_ameixa">Doce de leite com ameixa</option>
+                      <option value="mousse_morango">Mousse de morango</option>
+                      <option value="bolo_ninho">Bolo Ninho</option>
+                      <option value="ninho_morango">Ninho com morango</option>
+                    </select>
                   </div>
                 </div>
                 <div className={styles.controleDasInputs}>

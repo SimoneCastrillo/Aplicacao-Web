@@ -13,7 +13,8 @@
 }
 
 .tamanhoLabel {
-    text-align: bottom;
+    display: flex;
+    align-items: end;
     height: 40px;
 }
 .descricao {
