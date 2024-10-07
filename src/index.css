@@ -112,14 +112,11 @@ select {
   background-color: #ffffff1f;
   padding: 8px 10px;
   border-radius: 16px;
-  /* color: #454545; */
-  /* border:none; */
 }
 
 option {
   background-color: #445366;
   color: #d9d9d9; 
-  /* border: ; */
   border:2px solid #40597a;
 
 }
@@ -139,10 +136,22 @@ textarea::placeholder {
   color: #d9d9d9;
 
 }
+input::placeholder {
+  color: #d9d9d9;
+
+}
 .container-input-full {
   display: flex;
   gap: 5px;
   width: 100%;
 
   flex-direction: column;
+}
+
+@media screen and (max-width: 868px) {
+  
+  .container-input {
+      width: 100%;
+
+  }
 }

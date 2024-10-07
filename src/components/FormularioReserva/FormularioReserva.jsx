@@ -2,14 +2,23 @@ import React from 'react'
 import { useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
-import StepOrcamento from '../StepOrcamento/StepOrcamento';
-const FormularioReserva = () => {
+import Step from '../Step/Step';
+const FormularioReserva = ({onOpenEscolherDecoracao}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
+
   const [data, setData] = useState('');
+  
   const [horario, setHorario] = useState('');
+  
   const [quantidadePessoas, setQuantidadePessoas] = useState('');
+  
   const [tipoEvento, setTipoEvento] = useState('infantil');
+  
+  // const [decoracao, setDecoracao] = useState('');
+
+  const [saborBolo, setSaborBolo] = useState('');
+  
   const [erro, setErro] = useState(false);
   const getDiaAtual = ()=>{
     const data = new Date();
@@ -28,12 +37,16 @@ const FormularioReserva = () => {
       if(data < getDiaAtual()){
         return setErro('Data inválida') 
       }
-      if(quantidadePessoas > 150){
+      if(quantidadePessoas > 180){
         return setErro('Quantidade de pessoas excedida, o maximo de pessoas permitida é 150')
       }
     }
     setErro('')
-    setPassoAtivo(passoAtivo + 1)
+    if(tipoEvento === 'alugar espaço'){
+      setPassoAtivo(3)
+    }else {
+      setPassoAtivo(passoAtivo + 1)
+    }
   }
   const handleSubmit = ()=> {
     console.log('aaa');
@@ -42,42 +55,70 @@ const FormularioReserva = () => {
   return (
     <div>
       <form className={styles.form}>
+
         {passoAtivo === 1 && (
           <div className='passo-1'>
             <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
                 <div className={styles.controleDasInputs}>
                   <div className="container-input">
-                    <label>Data</label>
+                    <label className={styles.tamanhoLabel}>Data</label>
                     <input type="date"  value={data || ''} onChange={(e)=>setData(e.target.value)} />
                   </div>
                   <div className="container-input">
-                    <label>Horario</label>
+                    <label className={styles.tamanhoLabel}>Horario</label>
                     <input type="time" value={horario || ''} onChange={(e)=>setHorario(e.target.value)}/>
                   </div>
                 </div>
                 <div className={styles.controleDasInputs}>
                   <div className="container-input">
-                    <label>Quantidade de pessoas</label>
-                    <input type="number" className={styles.inputEspecifico} placeholder='150' value={quantidadePessoas || ''} onChange={(e)=>setQuantidadePessoas(e.target.value)}/>
+                    <label className={styles.tamanhoLabel}>Quantidade de pessoas</label>
+                    <input type="number" className={styles.inputEspecifico} placeholder='Digite a quantidade de pessoas' value={quantidadePessoas || ''} onChange={(e)=>setQuantidadePessoas(e.target.value)}/>
                   </div>
                   <div className="container-input">
-                    <label>Tipo de evento</label>
+                    <label className={styles.tamanhoLabel}>Tipo de evento</label>
                     <select value={tipoEvento || ''} onChange={(e)=>setTipoEvento(e.target.value)}>
                       <option value="infantil">Infantil</option>
                       <option value="debutante">Debutante</option>
                       <option value="casamento">Casamento</option>
+                      <option value="aniversario">Aniversário</option>
                       <option value="coffe break">Coffe Break</option>
                       <option value="alugar espaço">Alugar espaço</option>
                     </select>
                   </div>
                 </div>
-                
+
           </div>
         )}
         {passoAtivo === 2 && (
           <div className='passo-2'>
             <p className={styles.descricao}>Selecione as preferências para seu evento e informe o sabor do bolo</p>
-          
+            <div className={styles.controleDasInputs}>
+                  <div className="container-input">
+                    <label className={styles.tamanhoLabel}>Decoração</label>
+                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>Escolher decoração</button>
+                  </div>
+                  <div className="container-input">
+                    <label className={styles.tamanhoLabel}>Sabor do bolo</label>
+                    <select value={saborBolo || ''} onChange={(e)=>setSaborBolo(e.target.value)}>
+                      <option value="chocolate_mousse_chocolate">Chocolate com mousse e pedaços de chocolate</option>
+                      <option value="chocolate_mousse_maracuja">Chocolate com mousse de maracujá e pedaços de chocolate</option>
+                      <option value="creme_mestre_pessego">Creme Mestre com pêssego</option>
+                      <option value="prestigio">Prestígio</option>
+                      <option value="abacaxi">Abacaxi</option>
+                      <option value="doce_leite_coco">Doce de leite com coco</option>
+                      <option value="doce_leite_ameixa">Doce de leite com ameixa</option>
+                      <option value="mousse_morango">Mousse de morango</option>
+                      <option value="bolo_ninho">Bolo Ninho</option>
+                      <option value="ninho_morango">Ninho com morango</option>
+                    </select>
+                  </div>
+                </div>
+                <div className={styles.controleDasInputs}>
+                  {tipoEvento === 'casamento' && ( <div className="container-input">
+                    <label className={styles.tamanhoLabel}>Prato principal</label>
+                    <input type="text" className={styles.inputEspecifico} />
+                  </div>)}
+                </div>
           </div>
         )}
         {passoAtivo === 3 && (
@@ -102,7 +143,7 @@ const FormularioReserva = () => {
               )}
               </div>
             <div style={{width: '33.3%', display: 'flex', justifyContent: 'center'}}>
-            <StepOrcamento  passo={passoAtivo} />
+            <Step  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
             </div>
             <div style={{width: '33.3%', textAlign: 'right'}}>
             {passoAtivo !== 3 && (

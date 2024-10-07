@@ -27,3 +27,14 @@
     
 }
 
+@media screen and (max-width : 500px) {
+    .titulo {
+        font-size: 40px;
+    }
+}
+@media screen and (max-width : 380px) {
+    .titulo {
+        font-size: 20px;
+    }
+    
+}

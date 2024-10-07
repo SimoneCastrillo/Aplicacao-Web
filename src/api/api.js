@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const api = (endpoint)=>{
-    axios.create( 
-        {
-            baseURL: process.env.REACT_APP_API_URL+endpoint,
-        }
-    )
+const api = () => {
+    return axios.create({
+        baseURL: process.env.REACT_APP_API_URL
+    });
 }
 
-export default api;
+const listarEventos = async () => {
+    const apiInstance = api();
+    return await apiInstance.get('/eventos');
+}
+
+export default listarEventos;

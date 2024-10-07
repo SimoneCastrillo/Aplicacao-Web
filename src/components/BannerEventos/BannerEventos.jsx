@@ -4,9 +4,10 @@ import imgCasamento from '../../assets/casamento.jpg';
 import imgDebutante from '../../assets/debutante.jpg';
 import imgInfantil from '../../assets/decoracao4.jpg';
 import imgCoffeBreak from '../../assets/coffebreak.jpeg';
+import imgAniversario from '../../assets/aniversario.webp';
 import imgPiscina from '../../assets/piscina.jpg';
 import { Link } from 'react-router-dom';
-import { Navigation , Autoplay} from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,6 +18,7 @@ import useWindowWidth from '../../hooks/useWindowWidth';
 
 const images = [
   { img: imgInfantil, tipoEvento: 'Infantil', descricao: 'Prepare-se para um dia cheio de diversão, alegria e muitas brincadeiras no nosso evento especial para as crianças!' },
+  { img: imgAniversario, tipoEvento: 'Aniversário', descricao: 'Venha comemorar conosco um dia especial repleto de alegria e diversão! Nossa festa de aniversário será marcada por momentos inesquecíveis, boa música, comida deliciosa e a companhia de amigos e familiares queridos.' },
   { img: imgDebutante, tipoEvento: 'Debutante', descricao: 'Uma festa de debutante inesquecível, com muito glamour, sofisticação e momentos emocionantes. Decoração encantadora, música vibrante e uma pista de dança animada fazem dessa celebração uma experiência mágica e cheia de surpresas.' },
   { img: imgCasamento, tipoEvento: 'Casamento', descricao: 'Uma celebração de amor inesquecível, com elegância, música envolvente e momentos emocionantes para marcar esse dia especial.' },
   { img: imgCoffeBreak, tipoEvento: 'Coffe Break', descricao: 'Um coffee break perfeito, com delícias variadas, bebidas quentes e um ambiente agradável para relaxar e conversar.' },
@@ -50,11 +52,9 @@ const BannerEventos = forwardRef((props, ref) => {
   return (
     <Swiper
     ref={swiperRef}
-    modules={[Navigation, Autoplay]}
+    modules={[Navigation]}
       spaceBetween={0}
       slidesPerView={slidesPerView}
-      autoplay={{ delay: 3000}}
-      
     >
       {images.map((image, index) => (
         <SwiperSlide key={image.tipoEvento}>

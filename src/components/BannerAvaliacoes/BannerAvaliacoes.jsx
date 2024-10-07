@@ -6,14 +6,14 @@ import img3 from '../../assets/teste.jpeg';
 import styles from '../BannerEventos/BannerEventos.module.css'; 
 import styles2 from './BannerAvaliacoes.module.css';
 import useWindowWidth from '../../hooks/useWindowWidth';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 const images = [img1, img2, img3, img1,img2, img2];
 
-const BannerAvaliacoes = forwardRef((props, ref) => {
+const BannerAvaliacoes = forwardRef((props ,ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
 
@@ -38,11 +38,9 @@ const BannerAvaliacoes = forwardRef((props, ref) => {
     <div className={styles2.container}>
       <Swiper
         ref={swiperRef}
-        modules={[Navigation, Autoplay]}
+        modules={[Navigation]}
         spaceBetween={0}
         slidesPerView={slidesPerView}
-        
-        autoplay={{ delay: 3000 }}
       >
         {images.map((image, index) => (
           <SwiperSlide key={`carrossel-img-${index}`}>
