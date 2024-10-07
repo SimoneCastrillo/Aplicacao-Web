@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
-import StepOrcamento from '../Step/Step';
+import Step from '../Step/Step';
 const FormularioReserva = ({onOpenEscolherDecoracao}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
@@ -55,6 +55,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
   return (
     <div>
       <form className={styles.form}>
+
         {passoAtivo === 1 && (
           <div className='passo-1'>
             <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
@@ -85,7 +86,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
                     </select>
                   </div>
                 </div>
-                
+
           </div>
         )}
         {passoAtivo === 2 && (
@@ -142,7 +143,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
               )}
               </div>
             <div style={{width: '33.3%', display: 'flex', justifyContent: 'center'}}>
-            <StepOrcamento  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
+            <Step  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
             </div>
             <div style={{width: '33.3%', textAlign: 'right'}}>
             {passoAtivo !== 3 && (

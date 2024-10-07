@@ -58,6 +58,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
+        
                 <Link to='/'><img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" /></Link>
                 <nav className={styles.desktop}>
                     <ul className={styles.nav_links}>
@@ -116,7 +117,7 @@ const Header = () => {
                             animate={{ x: 10 }}
                             exit={{ x: 300 }}
                             transition={{duration: 0.3}}
-                        className={styles.menu_container}>
+                            className={styles.menu_container}>
                             <nav className={styles.mobile_nav}>
                                 <ul className={styles.nav_links_mobile}>
                                     <li key="mobile-bannerId">

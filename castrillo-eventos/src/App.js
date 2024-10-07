@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/solicitar-orcamento" element={<SolicitarOrcamento/>} />
         <Route path="/cadastro" element={<Cadastro/>} />
+       
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
