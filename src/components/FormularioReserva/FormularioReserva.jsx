@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import Step from '../Step/Step';
-const FormularioReserva = ({onOpenEscolherDecoracao}) => {
+const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecoracaoEscolhida}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
 
@@ -15,9 +15,19 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
   
   const [tipoEvento, setTipoEvento] = useState('infantil');
   
-  // const [decoracao, setDecoracao] = useState('');
+  const [decoracao, setDecoracao] = useState('');
 
   const [saborBolo, setSaborBolo] = useState('');
+
+  const [pratoPrincipal, setPratoPrincipal] = useState('');
+  useEffect(() => {
+    setDecoracao(onDecoracaoEscolhida)
+  }, [onDecoracaoEscolhida])
+
+  useEffect(() => {
+    onTipoEventoModal(tipoEvento)
+  }, [tipoEvento])
+
   
   const [erro, setErro] = useState(false);
   const getDiaAtual = ()=>{
@@ -38,7 +48,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
         return setErro('Data inválida') 
       }
       if(quantidadePessoas > 180){
-        return setErro('Quantidade de pessoas excedida, o maximo de pessoas permitida é 150')
+        return setErro('Quantidade de pessoas excedida, o maximo de pessoas permitida é 180')
       }
     }
     setErro('')
@@ -49,7 +59,28 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
     }
   }
   const handleSubmit = ()=> {
-    console.log('aaa');
+    let orcamento = {};
+    if(tipoEvento === 'casamento'){
+      orcamento = {
+        data,
+        "inicio" : horario,
+        quantidadePessoas,
+        pratoPrincipal,
+        tipoEvento,
+        decoracao,
+        saborBolo
+      }
+    }else {
+      orcamento = {
+        data,
+        "inicio" : horario,
+        quantidadePessoas,
+        tipoEvento,
+        decoracao,
+        saborBolo
+      }
+    }
+    console.log('json orcamento', orcamento);
     
   }
   return (
@@ -76,13 +107,16 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
                   </div>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Tipo de evento</label>
-                    <select value={tipoEvento || ''} onChange={(e)=>setTipoEvento(e.target.value)}>
+                    <select value={tipoEvento || ''} onChange={(e)=>{
+                      setTipoEvento(e.target.value)
+                    }}>
                       <option value="infantil">Infantil</option>
                       <option value="debutante">Debutante</option>
                       <option value="casamento">Casamento</option>
                       <option value="aniversario">Aniversário</option>
                       <option value="coffe break">Coffe Break</option>
                       <option value="alugar espaço">Alugar espaço</option>
+                      <option value="outros">Outros</option>
                     </select>
                   </div>
                 </div>
@@ -95,7 +129,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
             <div className={styles.controleDasInputs}>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Decoração</label>
-                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>Escolher decoração</button>
+                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>{decoracao ? decoracao.nome : "Escolher decoração"}</button>
                   </div>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Sabor do bolo</label>
@@ -116,7 +150,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
                 <div className={styles.controleDasInputs}>
                   {tipoEvento === 'casamento' && ( <div className="container-input">
                     <label className={styles.tamanhoLabel}>Prato principal</label>
-                    <input type="text" className={styles.inputEspecifico} />
+                    <input type="text" onChange={(e)=> setPratoPrincipal(e.target.value)} className={styles.inputEspecifico} />
                   </div>)}
                 </div>
           </div>
@@ -134,7 +168,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
         )}
       {erro && <p className={styles.erro_msg}>{erro}</p>}
       </form>
-        <div className={styles.containerStepEbutton}>
+        <div style={{marginTop: '100px'}} className={styles.containerStepEbutton}>
             <div style={{width: '33.3%'}}>
             {passoAtivo !== 1 && (
                 <button onClick={()=>{
@@ -152,6 +186,29 @@ const FormularioReserva = ({onOpenEscolherDecoracao}) => {
             {passoAtivo === 3 && (
               <button onClick={handleSubmit} className='btn-default-bgRosa buttonAjuste'><MdCheck color='#fff'/></button>
             )}
+            </div>
+        </div>
+        <div className={styles.containerStepEbuttonMob}>
+            
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <Step  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
+            </div>
+            <div className={styles.buttonsMob}>
+            <div >
+            {passoAtivo !== 1 && (
+                <button onClick={()=>{
+                  setPassoAtivo(passoAtivo - 1)
+                }} className='btn-default-bgTransparent buttonAjuste'><MdArrowBack/></button>
+              )}
+              </div>
+            <div style={{textAlign: 'right'}}>
+            {passoAtivo !== 3 && (
+              <button onClick={proximoPasso} className='btn-default-bgRosa buttonAjuste'><MdArrowForward color='#fff'/></button>
+            )}
+            {passoAtivo === 3 && (
+              <button onClick={handleSubmit} className='btn-default-bgRosa buttonAjuste'><MdCheck color='#fff'/></button>
+            )}
+            </div>
             </div>
         </div>
     </div>

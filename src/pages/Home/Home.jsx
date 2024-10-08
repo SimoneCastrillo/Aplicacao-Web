@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import BannerHome from '../../components/BannerHome/BannerHome'
 import Eventos from '../../components/Eventos/Eventos'
@@ -7,7 +7,12 @@ import Duvidas from '../../components/Duvidas/Duvidas'
 import Footer from '../../components/Footer/Footer'
 import Avaliacoes from '../../components/Avaliacoes/Avaliacoes'
 import styles from './Home.module.css'
+import { listarDecoracoes } from '../../api/api';
+
+
 const Home = () => {
+
+
   return (
     <div >
       <Header />

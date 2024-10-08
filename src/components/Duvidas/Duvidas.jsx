@@ -7,6 +7,7 @@ const Duvidas = () => {
   return (
     <div id='duvidas' className={styles.container}>
       <AnimatePresence>
+        
         <motion.h1 
         initial={{ x: 100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}

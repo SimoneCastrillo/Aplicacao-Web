@@ -1,0 +1,46 @@
+.header {
+    width: 100%;
+    padding: 10px 0;
+    background: #C54477;
+}
+.container {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.container img {
+    width: 110px;
+}
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user p {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+}
+.user img {
+    width: 30px;
+    height: 30px;
+}
+.container nav ul {
+    display: flex;
+    gap: 10px;
+}
+.container nav ul li {
+    list-style: none;
+    
+}
+.container nav ul button {
+    color: #fff;
+    font-weight: 400;
+}

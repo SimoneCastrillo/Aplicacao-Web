@@ -11,10 +11,74 @@
 }
 .box {
     animation: fade 0.5s;
-    width: 600px;
-    height: 400px;
+    width: 80%;
+    height: 70%;
+    padding: 30px;
     border-radius: 40px;
-    background-color: #ffffff;
+    background: #29384b;
+
+    /* background: linear-gradient(90deg, #19222E 0%, #2F425B 80%, #1D2736 100%); */
+}
+.titulo {
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.decoracoes {
+    display: flex;
+    gap: 10px;
+    overflow-x: hidden;
+    justify-content: center;
+    scrollbar-width: thin;
+    scrollbar-color: white transparent;
+    width: 100%;
+    overflow-y: auto;
+    height: 90%;
+    flex-wrap: wrap;
+}
+
+.decoracoes::-webkit-scrollbar {
+    width: 12px;
+    background: transparent; 
+}
+
+.decoracoes::-webkit-scrollbar-thumb {
+    background-color: white; 
+    border-radius: 10px; 
+}
+
+.decoracoes::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.8); 
+}
+.loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading img {
+    margin-bottom: 40px;
+    width: 40px;
+}
+.decoracoes .decoracao {
+    width: 200px;
+    /* background-color: #fff; */
+    height: 280px;
+}
+.decoracoes p {
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+.decoracao img {
+    width: 100%;
+    border-radius: 20px;
+    height: 240px;
 }
 @keyframes fade{
     from {
@@ -24,3 +88,4 @@
         opacity: 1;
     }
 }
+
