@@ -8,7 +8,12 @@ a {
   text-decoration: none;
   color: #fff;
 }
+.titulo-perfil{
+  font-size: 44px;
+  color: #C54477;
+}
 button {
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -16,7 +21,16 @@ button {
 .btn-default-bgRosa {
   background-color: #C54477;
   padding: 11.6px 20px;
+  color: #fff;
   border-radius: 50px;
+  font-weight: bold;
+}
+
+.btn-default-bgRosa-perfil {
+  background-color: #C54477;
+  padding: 10px 40px;
+  color: #fff;
+  border-radius: 10px;
   font-weight: bold;
 }
 .btn-default-bgRosa:hover {
@@ -155,3 +169,6 @@ input::placeholder {
 
   }
 }
+
+
+

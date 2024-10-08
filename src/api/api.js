@@ -6,9 +6,11 @@ const api = () => {
     });
 }
 
-const listarEventos = async () => {
+const listarDecoracoesPorEvento = async (nome) => {
     const apiInstance = api();
-    return await apiInstance.get('/eventos');
+    return await apiInstance.get('/decoracoes/tipo-de-evento', {
+        params: {
+            nome
+        }});
 }
-
-export default listarEventos;
+export  { listarDecoracoesPorEvento };

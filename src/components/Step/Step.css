@@ -1,6 +1,5 @@
 .step-wrapper-util {
     display: flex;
-    margin-top: 60px;
     flex-direction: column;
     align-items: center;
     width: 200px;
