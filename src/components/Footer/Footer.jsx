@@ -28,22 +28,22 @@ const Footer = () => {
             <h3>EVENTOS</h3>
             <ul className={styles.links}>
               <li>
-                <Link to='/eventos/aniversario' className="descricao">Aniversário</Link>
+                <Link to='/evento/aniversário' className="descricao">Aniversário</Link>
               </li>
               <li>
-                <Link to='/eventos/casamento' className="descricao">Casamento</Link>
+                <Link to='/evento/casamento' className="descricao">Casamento</Link>
               </li>
               <li>
-                <Link to='/eventos/coffe-break' className="descricao">Coffe Break</Link>
+                <Link to='/evento/coffe-break' className="descricao">Coffe Break</Link>
               </li>
               <li>
-                <Link to='/eventos/debutante' className="descricao">Debutante</Link>
+                <Link to='/evento/debutante' className="descricao">Debutante</Link>
               </li>
               <li>
-                <Link to='/eventos/infantil' className="descricao">Infantil</Link>
+                <Link to='/evento/infantil' className="descricao">Infantil</Link>
               </li>
               <li>
-                <Link to='/eventos/aluguel-do-espaco' className="descricao">Aluguel</Link>
+                <Link to='/evento/aluguel-do-espaco' className="descricao">Aluguel</Link>
               </li>
             </ul>
         </div>
