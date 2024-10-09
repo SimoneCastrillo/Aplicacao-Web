@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import SolicitarOrcamento from "./pages/SolicitarOrcamento/SolicitarOrcamento";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Perfil from "./pages/Perfil/Perfil";
+import EventoEspecifico from "./pages/EventoEspecifico/EventoEspecifico";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/solicitar-orcamento" element={<SolicitarOrcamento/>} />
         <Route path="/cadastro" element={<Cadastro/>} />
         <Route path="/perfil" element={<Perfil/>} />
+        <Route path="/evento/:nome" element={<EventoEspecifico/>} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>

@@ -17,11 +17,11 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
   
   const [decoracao, setDecoracao] = useState('');
 
-  const [saborBolo, setSaborBolo] = useState('');
+  const [saborBolo, setSaborBolo] = useState('Chocolate com mousse e pedaços de chocolate');
 
   const [pratoPrincipal, setPratoPrincipal] = useState('');
   useEffect(() => {
-    setDecoracao(onDecoracaoEscolhida)
+    setDecoracao(onDecoracaoEscolhida.id)
   }, [onDecoracaoEscolhida])
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
             <div className={styles.controleDasInputs}>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Decoração</label>
-                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>{decoracao ? decoracao.nome : "Escolher decoração"}</button>
+                    <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>{decoracao ? onDecoracaoEscolhida.nome : "Escolher decoração"}</button>
                   </div>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Sabor do bolo</label>

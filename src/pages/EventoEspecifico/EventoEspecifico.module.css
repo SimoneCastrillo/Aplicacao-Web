@@ -1,0 +1,44 @@
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets/BannerInicial.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.banner h1 {
+    font-size: 70px;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+}
+.banner p {
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    margin: 30px 0 45px 0;
+    overflow-wrap: break-word;
+    width: 50%;
+    font-weight: 400;
+}
+.container {
+    padding: 50px 80px;
+    background: rgb(54,70,82);
+    background: linear-gradient(90deg, #19222E 0%, #2F425B 80%, #1D2736 100%);
+
+}
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 40px;
+    }
+    
+}
+@media screen and (max-width: 468px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+}

@@ -1,26 +1,25 @@
-import React, { useRef } from 'react';
-import styles from './Eventos.module.css';
+import  { useRef } from 'react';
+import styles from './Decoracoes.module.css';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import BannerEventos from './BannerEventos/BannerEventos';
+import BannerDecoracoes from '../BannerDecoracoes/BannerDecoracoes';
+const Decoracoes = () => {
+    const bannerRef = useRef();
 
-const Eventos = () => {
-  const bannerRef = useRef();
-
-  const handlePrev = () => {
-    if (bannerRef.current) {
-      bannerRef.current.prevImage();
-    }
-  };
-
-  const handleNext = () => {
-    if (bannerRef.current) {
-      bannerRef.current.nextImage();
-    }
-  };
-
+    const handlePrev = () => {
+      if (bannerRef.current) {
+        bannerRef.current.prevImage();
+      }
+    };
+  
+    const handleNext = () => {
+      if (bannerRef.current) {
+        bannerRef.current.nextImage();
+      }
+    };
+  
   return (
-    <div id="eventos" className={styles.container}>
+    <div className={styles.container}>
       <AnimatePresence>
         <div className={styles.colTituloButton}>
           <motion.div
@@ -30,7 +29,7 @@ const Eventos = () => {
             exit={{ x: 100 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className='titulo-principal'>EVENTOS</h2>
+            <h2 className='titulo-principal'>DECORAÇÕES</h2>
             <div className={styles.hr}></div>
             <p className='descricao'>Eventos únicos para se divertir e conectar com quem você ama!</p>
           </motion.div>
@@ -57,13 +56,12 @@ const Eventos = () => {
           exit={{ y: 100 }}
           transition={{ duration: 0.5 }}
         >
-          <BannerEventos ref={bannerRef} />
+          {/* <BannerEventos ref={bannerRef} /> */}
+          <BannerDecoracoes ref={bannerRef} />
         </motion.div>
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
-export default Eventos;
-
-
+export default Decoracoes

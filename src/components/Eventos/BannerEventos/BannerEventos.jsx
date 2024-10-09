@@ -1,11 +1,11 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { motion } from 'framer-motion';
-import imgCasamento from '../../assets/casamento.jpg';
-import imgDebutante from '../../assets/debutante.jpg';
-import imgInfantil from '../../assets/decoracao4.jpg';
-import imgCoffeBreak from '../../assets/coffebreak.jpeg';
-import imgAniversario from '../../assets/aniversario.webp';
-import imgPiscina from '../../assets/piscina.jpg';
+import imgCasamento from '../../../assets/casamento.jpg';
+import imgDebutante from '../../../assets/debutante.jpg';
+import imgInfantil from '../../../assets/decoracao4.jpg';
+import imgCoffeBreak from '../../../assets/coffebreak.jpeg';
+import imgAniversario from '../../../assets/aniversario.webp';
+import imgPiscina from '../../../assets/piscina.jpg';
 import { Link } from 'react-router-dom';
 import { Navigation } from 'swiper/modules'
 import 'swiper/css/navigation'
@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import styles from './BannerEventos.module.css';
-import useWindowWidth from '../../hooks/useWindowWidth';
+import useWindowWidth from '../../../hooks/useWindowWidth';
 
 const images = [
   { img: imgInfantil, tipoEvento: 'Infantil', descricao: 'Prepare-se para um dia cheio de diversão, alegria e muitas brincadeiras no nosso evento especial para as crianças!' },

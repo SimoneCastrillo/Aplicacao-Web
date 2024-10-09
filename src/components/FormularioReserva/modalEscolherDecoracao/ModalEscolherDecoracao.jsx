@@ -6,6 +6,7 @@ import {BsX} from 'react-icons/bs'
 const ModalEscolherDecoracao = ({onCloseEscolherDecoracao, tipoEvento, onSetDecoracao}) => {
   const [decoracoes, setDecoracoes] = useState([]);
   const [loading , setLoading] = useState(true)
+  
     useEffect(() => {
     const fetchDecoracoes = async () => {
         try {
