@@ -6,13 +6,13 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { listarDecoracoesPorEvento } from '../../api/api';
-import styles from './BannerDecoracoes.module.css';
-import useWindowWidth from '../../hooks/useWindowWidth';
+import { listarDecoracoesPorEvento } from '../../../api/api';
+import styles from './CarrosselDecoracoes.module.css';
+import useWindowWidth from '../../../hooks/useWindowWidth';
 
 
 
-const BannerDecoracoes = forwardRef((props, ref) => {
+const CarrosselDecoracoes = forwardRef((props, ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
   const [images, setImages] = useState([])
@@ -74,4 +74,4 @@ const BannerDecoracoes = forwardRef((props, ref) => {
   );
 });
 
-export default BannerDecoracoes;
+export default CarrosselDecoracoes;

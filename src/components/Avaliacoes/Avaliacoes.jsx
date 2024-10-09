@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import styles from './Avaliacoes.module.css'
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import BannerAvaliacoes from './BannerAvaliacoes/BannerAvaliacoes';
+import CarrosselAvaliacoes from './CarrosselAvaliacoes/CarrosselAvaliacoes';
 const Avaliacoes = () => {
     const bannerRef = useRef();
 
@@ -39,7 +39,7 @@ const Avaliacoes = () => {
          exit={{ y: 100 }}
          transition={{ duration: 0.5 }}
         >
-        <BannerAvaliacoes ref={bannerRef} />
+        <CarrosselAvaliacoes ref={bannerRef} />
         </motion.div>
         <motion.div 
          key='titulo avaliacoes 1'

@@ -13,7 +13,7 @@ import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import styles from './BannerEventos.module.css';
+import styles from './CarrosselEventos.module.css';
 import useWindowWidth from '../../../hooks/useWindowWidth';
 
 const images = [
@@ -25,7 +25,7 @@ const images = [
   { img: imgPiscina, tipoEvento: 'Aluguel do espaço', descricao: 'Espaço versátil e elegante, ideal para todo tipo de evento, com infraestrutura completa para garantir conforto e praticidade.' }
 ];
 
-const BannerEventos = forwardRef((props, ref) => {
+const CarrosselEventos = forwardRef((props, ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
 
@@ -73,4 +73,4 @@ const BannerEventos = forwardRef((props, ref) => {
   );
 });
 
-export default BannerEventos;
+export default CarrosselEventos;

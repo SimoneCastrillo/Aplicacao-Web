@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import img1 from '../../../assets/imgDecoracaoBanner.jpg';
 import img2 from '../../../assets/imgDecoracaoBanner2.jpg';
 import img3 from '../../../assets/teste.jpeg';
-import styles from '../../Eventos/BannerEventos/BannerEventos.module.css'; 
-import styles2 from './BannerAvaliacoes.module.css';
+import styles from '../../Eventos/CarrosselEventos/CarrosselEventos.module.css'; 
+import styles2 from './CarrosselAvaliacoes.module.css';
 import useWindowWidth from '../../../hooks/useWindowWidth';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 const images = [img1, img2, img3, img1,img2, img2];
 
-const BannerAvaliacoes = forwardRef((props ,ref) => {
+const CarrosselAvaliacoes = forwardRef((props ,ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
 
@@ -54,4 +54,4 @@ const BannerAvaliacoes = forwardRef((props ,ref) => {
   );
 });
 
-export default BannerAvaliacoes;
+export default CarrosselAvaliacoes;

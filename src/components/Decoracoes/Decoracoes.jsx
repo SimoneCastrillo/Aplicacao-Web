@@ -2,7 +2,7 @@ import  { useRef } from 'react';
 import styles from './Decoracoes.module.css';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import BannerDecoracoes from '../BannerDecoracoes/BannerDecoracoes';
+import CarrosselDecoracoes from './CarrosselDecoracoes/CarrosselDecoracoes';
 const Decoracoes = () => {
     const bannerRef = useRef();
 
@@ -56,8 +56,7 @@ const Decoracoes = () => {
           exit={{ y: 100 }}
           transition={{ duration: 0.5 }}
         >
-          {/* <BannerEventos ref={bannerRef} /> */}
-          <BannerDecoracoes ref={bannerRef} />
+          <CarrosselDecoracoes ref={bannerRef} />
         </motion.div>
       </AnimatePresence>
     </div>

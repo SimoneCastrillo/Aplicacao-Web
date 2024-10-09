@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
-import BannerHome from '../../components/BannerHome/BannerHome'
+import CarrosselHome from '../../components/CarrosselHome/CarrosselHome'
 import Eventos from '../../components/Eventos/Eventos'
 import ComoReservar from '../../components/ComoReservar/ComoReservar'
 import Duvidas from '../../components/Duvidas/Duvidas'
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div >
       <Header />
-      <BannerHome />
+      <CarrosselHome />
       <div className={styles.container}>
       <Eventos/>
       <ComoReservar/>

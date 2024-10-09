@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import styles from './Eventos.module.css';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import BannerEventos from './BannerEventos/BannerEventos';
+import CarrosselEventos from './CarrosselEventos/CarrosselEventos';
 
 const Eventos = () => {
   const bannerRef = useRef();
@@ -57,7 +57,7 @@ const Eventos = () => {
           exit={{ y: 100 }}
           transition={{ duration: 0.5 }}
         >
-          <BannerEventos ref={bannerRef} />
+          <CarrosselEventos ref={bannerRef} />
         </motion.div>
       </AnimatePresence>
     </div>
