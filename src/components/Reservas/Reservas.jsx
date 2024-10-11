@@ -82,22 +82,21 @@ const Reservas = () => {
             <div className={styles.listaDeReservas}>
               <ul>
                 {orcamento.map((item) => (
-                  <button onClick={()=>{
-                    setReservaSelecionada(item);
-                  }}
-                  disabled={item.status === "Cancelado"}
-                  style={{cursor: item.status === "Cancelado" ? 'not-allowed' : 'pointer'}}
+                  <div 
+                  key={item.id}
                   >
-                    <li key={item.id}>
+                    <li>
                       <div style={{display: 'flex', gap: '20px', width: '45%'}}>
-                      {item.status === "Pendente" && <BsClock className={styles.thickIcon}  />}
+                      {item.status === "Pendente" && <BsClock strokeWidth={1.1} className={styles.thickIcon}  />}
                       {item.status === "Aprovado" && <BsCheck strokeWidth={1} className={styles.thickIcon} />}
-                      {item.status === "Cancelado" && <BsX strokeWidth={1} className={styles.thickIcon} />}
-                      <p >{item.tipoDeEvento} {item.nomeContratante}</p>
+                      {item.status === "Cancelado" && <BsX strokeWidth={1} className={styles.thickIcon} color='#c9c9c9' />}
+                      <p className={item.status === "Cancelado" ? styles.canceladoText : ''} >{item.tipoDeEvento} {item.nomeContratante}</p>
                       </div>
-                      <p>{item.data}</p>
+                      <p className={item.status === "Cancelado" ? styles.canceladoText : ''}>{item.data}</p>
                       {item.status !== "Cancelado" && (<div className={styles.acaoReserva}>
-                        <button><img src={pincel} alt="editar" width={'18px'}/></button>
+                        <button onClick={()=>{
+                          setReservaSelecionada(item);
+                        }}><img src={pincel} alt="editar" width={'18px'}/></button>
                         <button><BsX size={16} className={styles.cancelarEvento}/></button>
                       </div>) }
                       {item.status === "Cancelado" && (<div className={styles.acaoReserva}>
@@ -105,7 +104,7 @@ const Reservas = () => {
                         <button disabled style={{cursor: 'not-allowed'}}><BsX size={16} className={styles.cancelado}/></button>
                       </div>) }
                   </li>
-                  </button>
+                  </div>
                 ))}
               </ul>
             </div>
