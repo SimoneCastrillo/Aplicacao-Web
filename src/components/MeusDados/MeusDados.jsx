@@ -2,6 +2,7 @@ import styles from './MeusDados.module.css'
 import imgPerfil from '../../assets/imgPerfil.png'
 import { MdEdit } from 'react-icons/md';
 import { useState } from 'react';
+import InputMeusDados from './InputMeusDados/InputMeusDados';
 const MeusDados = () => {
     const [isEdit, setIsEdit] = useState(false);
     const user = {
@@ -37,72 +38,28 @@ const MeusDados = () => {
                     <MdEdit color='#fff' fontSize={34}/>
                 </button>}
             </div>
-            {!isEdit && (
-                <div className={styles.infoUsuario}>
-                    <div className={styles.inputsLados}>
-                    <div className={styles.controleInfo}>
-                        <label>Nome</label>
-                        <div className={styles.caixa}>
-                            <p>{name}</p>
-                        </div>
-                    </div> 
-                    <div className={styles.controleInfo}>
-                        <label>E-mail</label>
-                        <div className={styles.caixa}>
-                            <p>{email}</p>
-                        </div>
-                    </div> 
-                    <div className={styles.controleInfo}>
-                        <label>Quantidade de reservas</label>
-                        <div className={styles.caixa}>
-                            <p>{quantidadeReserva}</p>
-                        </div>
-                    </div>
-                    </div>
-                     <div className={styles.inputsLados}>
-                     <div className={styles.controleInfo}>
-                        <label>Sobrenome</label>
-                        <div className={styles.caixa}>
-                            <p>{sobrenome}</p>
-                        </div>
-                    </div> <div className={styles.controleInfo}>
-                        <label>Telefone</label>
-                        <div className={styles.caixa}>
-                            <p>{telefone}</p>
-                        </div>
-                    </div>    
-                     </div>
-                </div>
-            )}
-            {isEdit && (
-               
                     <div className={styles.infoUsuario}>
-                    <div className={styles.inputsLados}>
-                    <div className={styles.controleInfo}>
-                        <label>Nome</label>
-                        <input type="text" className={styles.input} value={name} onChange={(e) => setName(e.target.value)}/>
-                    </div> 
-                    <div className={styles.controleInfo}>
-                        <label>E-mail</label>
-                        <input type="text" className={styles.input} value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    </div> 
-                    <div className={styles.controleInfo}>
-                        <label>Quantidade de reservas</label>
-                        <input type="text" className={styles.input} value={quantidadeReserva} onChange={(e) => setQuantidadeReserva(e.target.value)}/>
+                        <div className={styles.inputsLados}>
+                            <div className={styles.controleInfo}>
+                            <InputMeusDados label='Nome' onValue={name} onSet={setName} edit={isEdit}/>
+                            </div> 
+                            <div className={styles.controleInfo}>
+                                <InputMeusDados label='E-mail' onValue={email} onSet={setEmail} edit={isEdit}/>
+                            </div> 
+                            <div className={styles.controleInfo}>
+                            <InputMeusDados label='Quantidade de reservas' onValue={quantidadeReserva} onSet={setQuantidadeReserva} edit={isEdit}/>
+                            </div>
+                        </div>
+                        <div className={styles.inputsLados}>
+                            <div className={styles.controleInfo}>
+                                <InputMeusDados label='Sobrenome' onValue={sobrenome} onSet={setSobrenome} edit={isEdit}/>
+                            </div> 
+                            <div className={styles.controleInfo}>
+                                <InputMeusDados label='Telefone' onValue={telefone} onSet={setTelefone} edit={isEdit}/>
+                            </div>    
                     </div>
-                    </div>
-                     <div className={styles.inputsLados}>
-                     <div className={styles.controleInfo}>
-                        <label>Sobrenome</label>
-                        <input type="text" className={styles.input} value={sobrenome} onChange={(e) => setSobrenome(e.target.value)}/>
-
-                    </div> <div className={styles.controleInfo}>
-                        <label>Telefone</label>
-                        <input type="text" className={styles.input} value={telefone} onChange={(e) => setTelefone(e.target.value)}/>
-                    </div>    
-                     </div>
                 </div>
-            )}
+
         </div>
     </>
   )

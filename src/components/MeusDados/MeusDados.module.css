@@ -38,20 +38,7 @@
     font-weight: bold;
     color: #000;
 }
-.caixa {
-    background-color: #D9D9D933;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    padding-left: 20px;
-    display: flex;
-    width: 250px;
-}
-.caixa p {
-    margin: 0;
-    font-weight: bold;
-    color: #000;
-}
+
 .editar {
     padding: 10px;
     border-radius: 100%;
@@ -60,14 +47,7 @@
     bottom: 2%;
     right: 11%;
 }
-.input {
-    border: 1px solid #000;
-    padding: 10px 0 10px 20px;
-    width: 250px;
-    color: #000;
-    display: block;
-    font-weight: bold;
-}
+
 @media screen and (max-width: 1190px) {
     .infoUsuario {
         justify-content: center;
