@@ -22,22 +22,13 @@
     display: flex;
     gap: 30px;
 }
-.infoUsuarioEdit .controleInfo {
-    display: flex;
-    flex-direction: column;
-}
+
 .imagemUsuario {
     position: relative;
     width: 300px;
     height: 300px;
 }
-.controleInfo {
-    margin-bottom: 30px;
-}
-.controleInfo label {
-    font-weight: bold;
-    color: #000;
-}
+
 
 .editar {
     padding: 10px;

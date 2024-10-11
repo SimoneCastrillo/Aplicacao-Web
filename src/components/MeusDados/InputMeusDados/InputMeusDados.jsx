@@ -1,7 +1,7 @@
 import styles from './InputMeusDados.module.css'
 const InputMeusDados = ({label , onValue, onSet, edit}) => {
   return (
-    <div>
+    <div className={styles.controleInfo}>
        <label>{label}</label>
        <input type="text" 
         disabled={!edit}

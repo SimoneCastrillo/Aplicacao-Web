@@ -11,12 +11,31 @@
     padding: 10px 0 10px 20px;
     width: 250px;
     color: #000;
+    border: 1px solid #D9D9D933;
+
     background-color: #D9D9D933;
     display: block;
     font-weight: bold;
 }
+.controleInfo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.controleInfo label {
+    font-weight: bold;
+    color: #000;
+}
 @media screen and (max-width: 680px) {
     .input {
         width: calc(100% - 20px);
+    }
+    .inputBlock{
+        width: calc(100% - 20px);
+    }
+}
+@media screen and (max-width: 680px) {
+    .controleInfo {
+        width: 100%;
     }
 }

@@ -40,24 +40,14 @@ const MeusDados = () => {
             </div>
                     <div className={styles.infoUsuario}>
                         <div className={styles.inputsLados}>
-                            <div className={styles.controleInfo}>
                             <InputMeusDados label='Nome' onValue={name} onSet={setName} edit={isEdit}/>
-                            </div> 
-                            <div className={styles.controleInfo}>
-                                <InputMeusDados label='E-mail' onValue={email} onSet={setEmail} edit={isEdit}/>
-                            </div> 
-                            <div className={styles.controleInfo}>
+                            <InputMeusDados label='E-mail' onValue={email} onSet={setEmail} edit={isEdit}/>
                             <InputMeusDados label='Quantidade de reservas' onValue={quantidadeReserva} onSet={setQuantidadeReserva} edit={isEdit}/>
-                            </div>
                         </div>
                         <div className={styles.inputsLados}>
-                            <div className={styles.controleInfo}>
-                                <InputMeusDados label='Sobrenome' onValue={sobrenome} onSet={setSobrenome} edit={isEdit}/>
-                            </div> 
-                            <div className={styles.controleInfo}>
-                                <InputMeusDados label='Telefone' onValue={telefone} onSet={setTelefone} edit={isEdit}/>
-                            </div>    
-                    </div>
+                            <InputMeusDados label='Sobrenome' onValue={sobrenome} onSet={setSobrenome} edit={isEdit}/>
+                            <InputMeusDados label='Telefone' onValue={telefone} onSet={setTelefone} edit={isEdit}/>
+                        </div>
                 </div>
 
         </div>
