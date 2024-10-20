@@ -1,0 +1,146 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.containerInputs {
+    width: auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerInputs label {
+    display: block;
+    width: 100%; 
+    text-align: center; 
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+
+
+.containerInputs input {
+    width: 379px; 
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+    color: black;
+    margin-bottom: 30px;
+    margin-right: 10px;
+}
+
+.container-inputs input:focus {
+    border-color: hsl(211, 100%, 50%);
+    outline: none;
+}
+
+.error {
+    color: #d9534f;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.containerStepEbutton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.divBotoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #C54477;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px;
+}
+
+button:hover {
+    background-color: transparent;
+    border: 1px solid #FFB6C1;
+    color: #FFB6C1;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.passo-1,
+.passo-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.passo-1 input,
+.passo-2 input {
+    width: 100%;
+}
+
+.controleDasInputs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.controleDasInputs .container-input {
+    width: 100%; /* O input ocupa toda a largura */
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+.botaoVoltar{
+    background-color: transparent;
+    border: 1px solid #FFB6C1;
+    color: #FFB6C1;
+}
+
+.botaoVoltar:hover{
+    background-color: #C54477;
+    color: #fff;
+    border: none;
+}
+
+.tituloCadastrado{
+    color: #fff;
+    font-size: 50px;
+}
+
+.textoCadastrado{
+    color: #fff;
+    font-size: 32px;
+}
