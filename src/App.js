@@ -5,16 +5,18 @@ import SolicitarOrcamento from "./pages/SolicitarOrcamento/SolicitarOrcamento";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Perfil from "./pages/Perfil/Perfil";
 import EventoEspecifico from "./pages/EventoEspecifico/EventoEspecifico";
+import Gastronomia from "./pages/Gastronomia/Gastronomia";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/solicitar-orcamento" element={<SolicitarOrcamento/>} />
+        <Route path="/evento/:nome" element={<EventoEspecifico/>} />
+        <Route path="/gastronomia" element={<Gastronomia/>}/>
         <Route path="/cadastro" element={<Cadastro/>} />
         <Route path="/perfil" element={<Perfil/>} />
-        <Route path="/evento/:nome" element={<EventoEspecifico/>} />
+        <Route path="/solicitar-orcamento" element={<SolicitarOrcamento/>} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
