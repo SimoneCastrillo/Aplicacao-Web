@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './FormularioCadastro.module.css';
 import Step from '../Step/Step';
+import InputMask from 'react-input-mask';
+
 
 const FormularioCadastro = () => {
   const [passoAtivo, setPassoAtivo] = useState(1);
@@ -13,24 +15,23 @@ const FormularioCadastro = () => {
   const [erro, setErro] = useState('');
 
   const validarEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Validação básica de email
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     return regex.test(email);
   };
 
-  const validarTelefone = (telefone) => {
-    const regex = /^\d{10,11}$/; // Aceita 10 ou 11 dígitos para celular
-    return regex.test(telefone);
-  };
+  
 
   const proximoPasso = () => {
     if (passoAtivo === 1) {
       if (nome === '' || telefone === '') {
         return setErro('Preencha todos os campos');
       }
-      if (!validarTelefone(telefone)) {
+      const cleanValueTelefone = telefone.replace(/[()-\s_]/g, '');
+      
+      if (cleanValueTelefone.length !== 11) {
         return setErro('Telefone inválido.');
       }
-      setErro(''); // Limpa o erro quando os campos são válidos
+      setErro(''); 
     }
     
     if (passoAtivo === 2) {
@@ -49,10 +50,11 @@ const FormularioCadastro = () => {
       if (senha.length < 6) {
         return setErro('A senha deve ter pelo menos 6 caracteres');
       }
-      setErro(''); // Limpa o erro quando os campos são válidos
+      setErro(''); 
+      
     }
     
-    setPassoAtivo(passoAtivo + 1); // Avança para o próximo passo
+    setPassoAtivo(passoAtivo + 1); 
   };
 
   const voltarPasso = () => {
@@ -70,21 +72,21 @@ const FormularioCadastro = () => {
   }, [passoAtivo]);
 
   return (
-    <div>
+    <div style={{width: '100%'}}>
       <form className={styles.form}>
         {passoAtivo === 1 && (
-          <div className="passo-1">
+          <div className={styles.passo1}>
             <div className={styles.containerInputs}>
               <label className={styles.tamanhoLabel}>Qual seu nome?</label>
               <input type="text" value={nome || ''} onChange={(e) => setNome(e.target.value)} />
 
-              <label className={styles.tamanhoLabel}>Informe seu celular</label>
-              <input type="text" value={telefone || ''} onChange={(e) => setTelefone(e.target.value)} />
+              <label style={{marginTop: '20px'}} className={styles.tamanhoLabel}>Informe seu celular</label>
+              <InputMask  mask="(99) 99999-9999" value={telefone || ''} onChange={(e) => setTelefone(e.target.value)} />
             </div>
           </div>
         )}
         {passoAtivo === 2 && (
-          <div className="passo-2">
+          <div className={styles.passo2}>
             <div className={styles.controleDasInputs}>
               <div className={styles.containerInputs}>
                 <label className={styles.tamanhoLabel}>Informe seu e-mail</label>
@@ -116,7 +118,7 @@ const FormularioCadastro = () => {
 
         {erro && <p className={styles.error}>{erro}</p>}
       </form>
-      <div style={{ marginTop: '100px' }} className={styles.containerStepEbutton}>
+      <div className={styles.containerStepEbutton}>
        
         {passoAtivo !== 3 && (
           <Step passo={passoAtivo} qtdPassos={[1, 2]} />
@@ -124,11 +126,11 @@ const FormularioCadastro = () => {
         
         <div className={styles.divBotoes}>
           {passoAtivo >= 2 && passoAtivo < 3 && (
-            <button onClick={voltarPasso} className={styles.botaoVoltar}>Voltar</button>
+            <button onClick={voltarPasso} className={`btn-default-bgTransparent ${styles.btn}`}>Voltar</button>
           )}
 
           {passoAtivo !== 3 && (
-            <button onClick={proximoPasso}>Continuar</button>
+            <button onClick={proximoPasso} className={`btn-default-bgRosa ${styles.btn}`}>Continuar</button>
           )}
         </div>
         

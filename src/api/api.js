@@ -13,4 +13,8 @@ const listarDecoracoesPorEvento = async (nome) => {
             nome
         }});
 }
+const criarUsuario = async (usuario) => {
+    const apiInstance = api();
+    return await apiInstance.post('/usuarios', usuario);
+}
 export  { listarDecoracoesPorEvento };

@@ -5,7 +5,7 @@
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 60px 0 20px;
     border-radius: 8px;
 }
 
@@ -17,18 +17,20 @@
     justify-content: center;
     align-items: center;
 }
-
+.containerInputs input {
+    width: 100%;
+}
 .containerInputs label {
     display: block;
     width: 100%; 
     text-align: center; 
     font-size: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 5px;
 }
 
 
 
-.containerInputs input {
+/* .containerInputs input {
     width: 379px; 
     padding: 10px;
     font-size: 14px;
@@ -39,16 +41,19 @@
     color: black;
     margin-bottom: 30px;
     margin-right: 10px;
-}
+} */
 
 .container-inputs input:focus {
     border-color: hsl(211, 100%, 50%);
     outline: none;
 }
 
+.btn {
+    width: 100%;
+}
 .error {
-    color: #d9534f;
-    font-size: 14px;
+    color: #FFB6C1;
+    font-size: 17px;
     margin-top: 10px;
 }
 
@@ -56,63 +61,42 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     flex-direction: column;
 }
 
 .divBotoes {
+    width: 100%;
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-direction: row;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #C54477;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 200px;
-}
-
-button:hover {
-    background-color: transparent;
-    border: 1px solid #FFB6C1;
-    color: #FFB6C1;
-}
 
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
-
-.passo-1,
-.passo-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.passo-1 input,
-.passo-2 input {
+.passo1 {
     width: 100%;
+}
+.passo2 {
+    width: 100%;
+    
 }
 
 .controleDasInputs {
     display: flex;
     justify-content: space-between;
+    gap: 50px;
     width: 100%;
 }
 
-.controleDasInputs .container-input {
-    width: 100%; /* O input ocupa toda a largura */
+.controleDasInputs .containerInputs {
+    width: 50%; 
 }
-
 h1 {
     font-size: 24px;
     color: #333;

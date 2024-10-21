@@ -4,7 +4,6 @@
     width: 100%;
     height: 100vh;
     display: flex;
-
   }
   
   .Banner {
@@ -12,20 +11,28 @@
   }
   
   .containerBanner {
-    background-image: url("../../assets/BannerLogin.svg");
+    background-image: url("../../assets/Background\ -\ Login.svg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 830px;
     height: 100vh;
   }
-  
+  .containerLogo {
+    display: flex;
+    align-items: center;
+    height:100%;
+    justify-content: center;
+}
   .containerGeral {
+    width: 50%;
     display: flex;
     flex-direction: column;
-    margin: 100px auto;
+    margin: 0 auto ;
   }
   
   .container {
+    
+    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,11 +44,6 @@
     text-align: center;
     font-size: 60px;
     color: #FFB6C1;
-  }
-  
-  input {
-    width: 380px;
-    padding: 10px;
   }
   
   span {
@@ -64,34 +66,24 @@
       font-size: 20px;
     }
   }
-  
-
-  button {
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #C54477;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-button:hover {
-    background-color: transparent;
-    border: 1px solid #FFB6C1;
-    color: #FFB6C1;
-}
 
   .containerInputs {
-    width: auto;
-    margin-bottom: 20px;
+    width: 100%;
+    margin: 40px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.containerInputs input {
+  width: calc(100% - 20px);
+}
+.form {
+  width: 80%;
+}
+.btnEntrar {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .containerInputs label {
@@ -100,23 +92,9 @@ button:hover {
     text-align: center; 
     font-size: 16px;
     margin-top: 20px;
-    margin-bottom: 10px;
+    
 }
 
-
-
-.containerInputs input {
-    width: 380px; 
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 16px;
-    background-color: #fff;
-    transition: border-color 0.3s;
-    color: black;
-    margin-bottom: 30px;
-    margin-right: 10px;
-}
 
 .container-inputs input:focus {
     border-color: hsl(211, 100%, 50%);
@@ -124,7 +102,8 @@ button:hover {
 }
 
 .error {
-    color: #d9534f;
+  text-align: center;
+    color: #FFB6C1;
     font-size: 14px;
     margin-top: 10px;
 }

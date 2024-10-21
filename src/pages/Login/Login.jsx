@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/Matriz (1).png'
+
 import BotaoVoltarOrcamento from '../../components/BotaoVoltarCadastro/BotaoVoltarCadastro';
 
 const Login = () => {
@@ -27,13 +29,13 @@ const Login = () => {
 
   return (
     <div className={styles.container1}>
-      <BotaoVoltarOrcamento className={styles} />
       <div className={styles.containerGeral}>
+      <BotaoVoltarOrcamento className={styles} />
         <div className={styles.container}>
           <h1 className={styles.titulo}>LOGIN</h1>
           <span>Não possui uma conta? <Link className={styles.link} to="/cadastro">Cadastre-se.</Link></span>
 
-          <form onSubmit={validarLogin}> 
+          <form className={styles.form} onSubmit={validarLogin}> 
             <div className={styles.containerInputs}>
               <label className={styles.tamanhoLabel}>Insira seu email</label>
               <input
@@ -51,7 +53,7 @@ const Login = () => {
             </div>
 
             {erro && <p className={styles.error}>{erro}</p>} 
-            <button type="submit" className={styles.botaoEntrar}>
+            <button type="submit" className={`btn-default-bgRosa ${styles.btnEntrar}`}>
               Entrar
             </button>
           </form>
@@ -59,7 +61,11 @@ const Login = () => {
           <Link className={styles.link} to="/recuperar-senha">Esqueceu a senha?</Link>
         </div>
       </div>
-      <div className={styles.containerBanner}></div>
+      <div className={styles.containerBanner}>
+      <div className={styles.containerLogo}>
+        <img width={400} src={logo} alt="" />
+        </div>
+      </div>
     </div>
   );
 };
