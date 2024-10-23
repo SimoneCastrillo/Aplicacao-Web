@@ -5,3 +5,8 @@
 .box {
     padding: 20px 120px;
 }
+@media screen and (max-width: 680px) {
+    .box {
+        padding: 20px 40px;
+    }
+}

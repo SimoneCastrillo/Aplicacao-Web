@@ -35,7 +35,9 @@
     height: 450px;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #c6c6c6 transparent;
+    padding:  0 5px ;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -66,16 +68,20 @@
     stroke-width: 1;
 }
 .cancelado {
-    color: #c6c6c6;
     border: 3px solid #c6c6c6;
     border-radius: 100%;
     stroke-width: 1;
+    color: #c6c6c6;
+}
+.canceladoText {
+    color: #c6c6c6;
+
 }
 .coloredIcon {
     filter: invert(88%) sepia(12%) saturate(0%) hue-rotate(180deg) brightness(96%) contrast(87%);
 }
 .acaoReserva {
-    gap: 10px;
+    gap: 20px;
     display: flex;
     align-items: center;
 }

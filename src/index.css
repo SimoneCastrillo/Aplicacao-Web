@@ -33,6 +33,15 @@ button {
   border-radius: 10px;
   font-weight: bold;
 }
+.btn-default-bgTransparent-perfil {
+  background-color: transparent;
+  padding: 10px 40px;
+  color: #FFB6C1;
+  border-radius: 10px;
+  border: 2px solid #FFB6C1;
+
+  font-weight: bold;
+}
 .btn-default-bgRosa:hover {
   background-color: #9b2c59;
   transition: 0.2s;
