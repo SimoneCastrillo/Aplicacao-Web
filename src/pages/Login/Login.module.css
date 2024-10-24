@@ -14,7 +14,7 @@
     background-image: url("../../assets/Background\ -\ Login.svg");
     background-repeat: no-repeat;
     background-size: cover;
-    width: 830px;
+    width: 50%;
     height: 100vh;
   }
   .containerLogo {
@@ -29,7 +29,9 @@
     flex-direction: column;
     margin: 0 auto ;
   }
-  
+  .logoBuffet {
+    width: 400px;
+  }
   .container {
     
     padding: 40px;
@@ -55,7 +57,7 @@
     text-decoration: underline;
   }
   
-  @media screen and (max-width: 500px) {
+  /* @media screen and (max-width: 500px) {
     .titulo {
       font-size: 40px;
     }
@@ -65,7 +67,7 @@
     .titulo {
       font-size: 20px;
     }
-  }
+  } */
 
   .containerInputs {
     width: 100%;
@@ -106,4 +108,20 @@
     color: #FFB6C1;
     font-size: 14px;
     margin-top: 10px;
+}
+@media screen and (max-width: 888px){
+  .logoBuffet {
+      width: 300px;
+  }
+  .form {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 668px){
+  .containerBanner {
+      display: none;
+  }
+  .containerGeral {
+      width: 100%;
+  }
 }

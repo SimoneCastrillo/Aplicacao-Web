@@ -28,10 +28,11 @@
 
 
 .containerGeral {
+    padding: 0 40px;
     width: 50%;
     display: flex;
     flex-direction: column;
-    margin: 100px auto;
+    margin: auto;
 }
 .container {
     display: flex;
@@ -67,4 +68,20 @@ span{
     }
     
 }
-
+.logoBuffet {
+    width: 400px;
+}
+@media screen and (max-width: 888px){
+    .logoBuffet {
+        width: 300px;
+    }
+    
+}
+@media screen and (max-width: 768px){
+    .containerBanner {
+        display: none;
+    }
+    .containerGeral {
+        width: 100%;
+    }
+}

@@ -17,7 +17,7 @@ const Cadastro = () => {
       <div className={styles.containerBanner}>
         <BotaoVoltarOrcmento className={styles}/>
         <div className={styles.containerLogo}>
-        <img width={400} src={logo} alt="" />
+        <img className={styles.logoBuffet} src={logo} alt="" />
         </div>
       </div>
       <div className={styles.containerGeral}>

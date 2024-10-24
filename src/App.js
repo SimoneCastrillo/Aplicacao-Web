@@ -7,6 +7,8 @@ import Perfil from "./pages/Perfil/Perfil";
 import EventoEspecifico from "./pages/EventoEspecifico/EventoEspecifico";
 import Login from "./pages/Login/Login";
 import RecuperarSenha from "./pages/RecuperarSenha/RecuperarSenha";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
         <Route path="/evento/:nome" element={<EventoEspecifico/>} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 500px;
     margin: 0 auto;
     padding: 60px 0 20px;
     border-radius: 8px;
@@ -75,10 +74,7 @@
 }
 
 
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+
 .passo1 {
     width: 100%;
 }
@@ -102,11 +98,6 @@ h1 {
     color: #333;
 }
 
-p {
-    font-size: 16px;
-    color: #555;
-    margin-top: 10px;
-}
 .botaoVoltar{
     background-color: transparent;
     border: 1px solid #FFB6C1;
@@ -127,4 +118,41 @@ p {
 .textoCadastrado{
     color: #fff;
     font-size: 32px;
+}
+@media screen and (max-width: 668px){
+    .containerInputs {
+        width: 100%;
+    }
+    .containerInputs input {
+        width: 100%;
+    }
+    .containerInputs label {
+        width: 100%;
+    }
+    .containerStepEbutton {
+        width: 100%;
+    }
+    .divBotoes {
+        width: 100%;
+    }
+    .controleDasInputs {
+        flex-direction: column;
+        gap: 0;
+    }
+    .controleDasInputs .containerInputs {
+        width: 100%;
+    }
+    .botaoVoltar{
+        width: 100%;
+    }
+    .botaoVoltar:hover{
+        width: 100%;
+    }
+    .tituloCadastrado{
+        font-size: 40px;
+    }
+    .textoCadastrado{
+        font-size: 24px;
+    }
+    
 }

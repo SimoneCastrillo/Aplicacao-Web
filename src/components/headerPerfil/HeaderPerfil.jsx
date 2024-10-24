@@ -5,7 +5,7 @@ import { BsBellFill } from 'react-icons/bs';
 
 const HeaderPerfil = ({ onEscolherComponente, componenteAtivo }) => {
     const permissionUser = 'normal';
-        
+    const user = JSON.parse(sessionStorage.usuario);
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -80,7 +80,7 @@ const HeaderPerfil = ({ onEscolherComponente, componenteAtivo }) => {
                     <BsBellFill size={18} color='#fff' />
                     <div className={styles.user}>
                         <img src={avatar} alt="avatar" />
-                        <p>Igor Anthony</p>
+                        <p>{user.nome}</p>
                     </div>
                 </div>
             </div>

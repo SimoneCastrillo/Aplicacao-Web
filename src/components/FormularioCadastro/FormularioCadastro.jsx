@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './FormularioCadastro.module.css';
 import Step from '../Step/Step';
 import InputMask from 'react-input-mask';
+import { criarUsuario } from '../../api/api';
+import {  useNavigate } from 'react-router-dom';
 
 
 const FormularioCadastro = () => {
+  const navigate = useNavigate();
+
   const [passoAtivo, setPassoAtivo] = useState(1);
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -51,10 +55,25 @@ const FormularioCadastro = () => {
         return setErro('A senha deve ter pelo menos 6 caracteres');
       }
       setErro(''); 
-      
+      const telefoneFormatado = telefone.replace(/[()\- ]/g, '');
+      const formData = new FormData();
+        formData.append('nome', nome);
+        formData.append('email', email);
+        formData.append('senha', senha);  
+        formData.append('telefone', telefoneFormatado);
+      const fetchUsuario = async () => {
+        try {
+          const response = await criarUsuario(formData); 
+          console.log(response.data);
+          setPassoAtivo(3);
+        } catch (error) {
+          console.error('Erro ao criar o usuário:', error);
+        }
+      }  
+      fetchUsuario();
     }
     
-    setPassoAtivo(passoAtivo + 1); 
+    setPassoAtivo(passoAtivo + 1);
   };
 
   const voltarPasso = () => {
@@ -66,10 +85,10 @@ const FormularioCadastro = () => {
   useEffect(() => {
     if (passoAtivo === 3) {
       setTimeout(() => {
-        window.location.href = '/login';
+        navigate('/login');
       }, 2000);
     }
-  }, [passoAtivo]);
+  }, [passoAtivo, navigate]);
 
   return (
     <div style={{width: '100%'}}>
