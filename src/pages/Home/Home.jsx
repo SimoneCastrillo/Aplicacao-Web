@@ -7,11 +7,15 @@ import Duvidas from '../../components/Duvidas/Duvidas'
 import Footer from '../../components/Footer/Footer'
 import Avaliacoes from '../../components/Avaliacoes/Avaliacoes'
 import styles from './Home.module.css'
-import { listarDecoracoes } from '../../api/api';
+import img1 from '../../assets/imgDecoracaoBanner.jpg';
+import img2 from '../../assets/imgDecoracaoBanner.jpg';
+import img3 from '../../assets/imgDecoracaoBanner.jpg';
+const images = [img1, img2, img3, img1,img2, img2];
 
 
 const Home = () => {
-
+  // console.log('home',images);
+  
 
   return (
     <div >
@@ -20,7 +24,7 @@ const Home = () => {
       <div className={styles.container}>
       <Eventos/>
       <ComoReservar/>
-      <Avaliacoes/>
+      <Avaliacoes imagens={images}/>
       <Duvidas/>
       </div>
       <Footer/>

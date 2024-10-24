@@ -3,7 +3,8 @@ import styles from './Avaliacoes.module.css'
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import CarrosselAvaliacoes from './CarrosselAvaliacoes/CarrosselAvaliacoes';
-const Avaliacoes = () => {
+const Avaliacoes = ({imagens}) => {
+  // console.log('imagens banner avalia',imagens);
     const bannerRef = useRef();
 
   const handlePrev = () => {
@@ -39,7 +40,7 @@ const Avaliacoes = () => {
          exit={{ y: 100 }}
          transition={{ duration: 0.5 }}
         >
-        <CarrosselAvaliacoes ref={bannerRef} />
+        <CarrosselAvaliacoes imagensBanner={imagens} ref={bannerRef} />
         </motion.div>
         <motion.div 
          key='titulo avaliacoes 1'

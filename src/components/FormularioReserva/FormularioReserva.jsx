@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import Step from '../Step/Step';
+import InputReserva from './InputReserva/InputReserva';
 const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecoracaoEscolhida}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
@@ -91,23 +92,14 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
           <div className='passo-1'>
             <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
                 <div className={styles.controleDasInputs}>
-                  <div className="container-input">
-                    <label className={styles.tamanhoLabel}>Data</label>
-                    <input type="date"  value={data || ''} onChange={(e)=>setData(e.target.value)} />
-                  </div>
-                  <div className="container-input">
-                    <label className={styles.tamanhoLabel}>Horario</label>
-                    <input type="time" value={horario || ''} onChange={(e)=>setHorario(e.target.value)}/>
-                  </div>
+                  <InputReserva label='Data' type='date' onValue={data} onSet={setData} />
+                  <InputReserva label='Horário' type='time' onValue={horario} onSet={setHorario} />
                 </div>
                 <div className={styles.controleDasInputs}>
-                  <div className="container-input">
-                    <label className={styles.tamanhoLabel}>Quantidade de pessoas</label>
-                    <input type="number" className={styles.inputEspecifico} placeholder='Digite a quantidade de pessoas' value={quantidadePessoas || ''} onChange={(e)=>setQuantidadePessoas(e.target.value)}/>
-                  </div>
+                  <InputReserva label='Quantidade de pessoas' type='number' onValue={quantidadePessoas} onSet={setQuantidadePessoas} />
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Tipo de evento</label>
-                    <select value={tipoEvento || ''} onChange={(e)=>{
+                    <select value={tipoEvento} onChange={(e)=>{
                       setTipoEvento(e.target.value)
                     }}>
                       <option value="infantil">Infantil</option>
@@ -133,7 +125,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
                   </div>
                   <div className="container-input">
                     <label className={styles.tamanhoLabel}>Sabor do bolo</label>
-                    <select value={saborBolo || ''} onChange={(e)=>setSaborBolo(e.target.value)}>
+                    <select value={saborBolo} onChange={(e)=>setSaborBolo(e.target.value)}>
                       <option value="chocolate_mousse_chocolate">Chocolate com mousse e pedaços de chocolate</option>
                       <option value="chocolate_mousse_maracuja">Chocolate com mousse de maracujá e pedaços de chocolate</option>
                       <option value="creme_mestre_pessego">Creme Mestre com pêssego</option>
@@ -148,10 +140,9 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
                   </div>
                 </div>
                 <div className={styles.controleDasInputs}>
-                  {tipoEvento === 'casamento' && ( <div className="container-input">
-                    <label className={styles.tamanhoLabel}>Prato principal</label>
-                    <input type="text" onChange={(e)=> setPratoPrincipal(e.target.value)} className={styles.inputEspecifico} />
-                  </div>)}
+                  {tipoEvento === 'casamento' && ( 
+                    <InputReserva label='Prato principal' type='text' onValue={pratoPrincipal} onSet={setPratoPrincipal} />
+                )}
                 </div>
           </div>
         )}
