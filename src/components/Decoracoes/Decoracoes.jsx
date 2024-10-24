@@ -19,7 +19,7 @@ const Decoracoes = () => {
     };
   
   return (
-    <div className={styles.container}>
+    <div id='decoracoes' className={styles.container}>
       <AnimatePresence>
         <div className={styles.colTituloButton}>
           <motion.div
