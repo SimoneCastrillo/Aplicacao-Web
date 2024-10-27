@@ -1,0 +1,44 @@
+.container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.423);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box {
+    animation: fade 0.5s;
+    width: 60%;
+    height: 70%;
+    padding: 30px;
+    border-radius: 40px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    /* background: linear-gradient(90deg, #19222E 0%, #2F425B 80%, #1D2736 100%); */
+}
+@keyframes fade{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.foto {
+    width: 400px;
+    border-radius: 100%;
+    height: 400px;
+}
+.input {
+
+    display: block;
+    background-color: #eeeeee;
+    border: none;
+    color: #5a5a5a;
+}

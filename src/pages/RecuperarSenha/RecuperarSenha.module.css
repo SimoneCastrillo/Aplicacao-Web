@@ -1,0 +1,107 @@
+
+.container1 {
+  background: linear-gradient(90deg, #19222E 0%, #2F425B 80%, #1D2736 100%);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.containerGeral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px auto;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.descPasso1{
+  font-size: 32px;
+  text-align: center;
+}
+
+.titulo {
+  margin: 10px 0 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 36px; /* Adjusted for better readability */
+  color: #FFB6C1;
+}
+
+
+
+.tituloSenha{
+  color: #fff;
+}
+
+.containerPasso{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+span {
+  color: white;
+}
+
+
+
+label{
+  margin-bottom: 10px;
+}
+
+.containerInputsCodigo {
+  display: flex;
+  justify-content: space-between; /* Space between input fields */
+}
+
+.containerInputsCodigo input {
+  width: 50px; /* Width for individual input fields */
+  text-align: center; /* Center align text for better visibility */
+}
+
+.containerInputs{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.reenviar {
+  color: #FFB6C1;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px; /* Space above */
+}
+
+.tituloCadastrado{
+  color: #fff;
+  font-size: 50px;
+}
+
+.textoCadastrado{
+  color: #fff;
+  font-size: 32px;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 500px) {
+  .titulo {
+      font-size: 28px; /* Adjusted for smaller screens */
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .titulo {
+      font-size: 20px;
+  }
+}
