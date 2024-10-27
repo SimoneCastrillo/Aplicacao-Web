@@ -16,7 +16,7 @@ const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'duvidas']; // Atualize aqui
+            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'duvidas']; 
             let secaoEncontrada = '';
     
             secoes.forEach((secaoId) => {
@@ -102,6 +102,13 @@ const Header = () => {
                                 Dúvidas
                             </Link>
                         </li>
+                        <li key="gastronomia">
+                            <Link  
+                                to="/gastronomia"
+                            >
+                                Gastronomia
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
@@ -160,7 +167,13 @@ const Header = () => {
                                             Dúvidas
                                         </Link>
                                     </li>
-                                    
+                                    <li key="gastronomia">
+                                        <Link  
+                                            to="/gastronomia"
+                                        >
+                                            Gastronomia
+                                        </Link>
+                                    </li>
                                     <li key="mobile-solicitar-orcamento" style={{marginTop: '20px'}}>
                                         <Link 
                                         className='btn-default-bgRosa'
