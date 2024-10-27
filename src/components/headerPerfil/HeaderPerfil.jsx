@@ -3,9 +3,9 @@ import logo from '../../assets/Matriz (1).png';
 import avatar from '../../assets/Avatar.png';
 import { BsBellFill } from 'react-icons/bs';
 
-const HeaderPerfil = ({ onEscolherComponente, componenteAtivo }) => {
+const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser }) => {
     const permissionUser = 'normal';
-    const user = JSON.parse(sessionStorage.usuario);
+   
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -80,7 +80,7 @@ const HeaderPerfil = ({ onEscolherComponente, componenteAtivo }) => {
                     <BsBellFill size={18} color='#fff' />
                     <div className={styles.user}>
                         <img src={avatar} alt="avatar" />
-                        <p>{user.nome}</p>
+                        <p>{onNomeUser}</p>
                     </div>
                 </div>
             </div>
