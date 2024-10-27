@@ -9,21 +9,23 @@ import 'swiper/css';
 import { listarDecoracoesPorEvento } from '../../../api/api';
 import styles from './CarrosselDecoracoes.module.css';
 import useWindowWidth from '../../../hooks/useWindowWidth';
-
+import loadingGif from '../../../assets/loading-gif.gif';
 
 
 const CarrosselDecoracoes = forwardRef((props, ref) => {
   const swiperRef = useRef(null);
   const larguraTelaDoUsuario = useWindowWidth();
   const [images, setImages] = useState([])
+  const [loading , setLoading] = useState(true);
   const { nome } = useParams();
   useEffect(() => {
     const fetchDecoracoes = async () => {
         try {
             const response = await listarDecoracoesPorEvento(nome); 
-            console.log(response.data);
+            // console.log(.data);
             setImages(response.data);
-            
+            // console.log(images);
+            setLoading(false);
         } catch (error) {
             console.error('Erro ao buscar as decorações:', error);
         }
@@ -52,25 +54,33 @@ const CarrosselDecoracoes = forwardRef((props, ref) => {
   const slidesPerView = larguraTelaDoUsuario / 380
 
   return (
-    <Swiper
-    ref={swiperRef}
-    modules={[Navigation]}
-      spaceBetween={0}
-      slidesPerView={slidesPerView}
-    >
-      {images && images.map((image) => (
-        <SwiperSlide key={image.id}>
-          {console.log(image)}
-            <motion.div className={styles.item} key={image.id} style={{ minWidth: 280 }}>
-            <img src={`data:image/jpeg;base64,${image.foto}`} alt={image.nome} />
-               <div className={styles.infoEvento}>
-    
-    <h3 style={{overflowWrap: 'break-word', width: '100%'}}>{image.nome}</h3>
-               </div>
-             </motion.div>
-         </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      {loading && (
+        <div style={{width: '100%', textAlign: 'center'}}>
+          <img style={{marginTop: '50px'}} src={loadingGif} width='50px' alt="loading" />
+        </div>
+      )}
+      {!loading && (
+        <Swiper
+        ref={swiperRef}
+        modules={[Navigation]}
+          spaceBetween={0}
+          slidesPerView={slidesPerView}
+        >
+          {images && images.map((image) => (
+            <SwiperSlide key={image.id}>
+                <motion.div className={styles.item} key={image.id} style={{ minWidth: 280 }}>
+                <img src={`data:image/jpeg;base64,${image.foto}`} alt={image.nome} />
+                  <div className={styles.infoEvento}>
+        
+        <h3 style={{overflowWrap: 'break-word', width: '100%'}}>{image.nome}</h3>
+                  </div>
+                </motion.div>
+            </SwiperSlide>
+          ))}
+      </Swiper>
+      )}
+    </>
   );
 });
 

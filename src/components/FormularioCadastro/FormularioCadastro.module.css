@@ -1,0 +1,158 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 0 20px;
+    border-radius: 8px;
+}
+
+.containerInputs {
+    width: auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containerInputs input {
+    width: 100%;
+}
+.containerInputs label {
+    display: block;
+    width: 100%; 
+    text-align: center; 
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+
+/* .containerInputs input {
+    width: 379px; 
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+    color: black;
+    margin-bottom: 30px;
+    margin-right: 10px;
+} */
+
+.container-inputs input:focus {
+    border-color: hsl(211, 100%, 50%);
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+}
+.error {
+    color: #FFB6C1;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.containerStepEbutton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.divBotoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+
+
+.passo1 {
+    width: 100%;
+}
+.passo2 {
+    width: 100%;
+    
+}
+
+.controleDasInputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+}
+
+.controleDasInputs .containerInputs {
+    width: 50%; 
+}
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.botaoVoltar{
+    background-color: transparent;
+    border: 1px solid #FFB6C1;
+    color: #FFB6C1;
+}
+
+.botaoVoltar:hover{
+    background-color: #C54477;
+    color: #fff;
+    border: none;
+}
+
+.tituloCadastrado{
+    color: #fff;
+    font-size: 50px;
+}
+
+.textoCadastrado{
+    color: #fff;
+    font-size: 32px;
+}
+@media screen and (max-width: 668px){
+    .containerInputs {
+        width: 100%;
+    }
+    .containerInputs input {
+        width: 100%;
+    }
+    .containerInputs label {
+        width: 100%;
+    }
+    .containerStepEbutton {
+        width: 100%;
+    }
+    .divBotoes {
+        width: 100%;
+    }
+    .controleDasInputs {
+        flex-direction: column;
+        gap: 0;
+    }
+    .controleDasInputs .containerInputs {
+        width: 100%;
+    }
+    .botaoVoltar{
+        width: 100%;
+    }
+    .botaoVoltar:hover{
+        width: 100%;
+    }
+    .tituloCadastrado{
+        font-size: 40px;
+    }
+    .textoCadastrado{
+        font-size: 24px;
+    }
+    
+}

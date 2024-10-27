@@ -1,0 +1,12 @@
+
+.btn {
+    border-radius: 50%;
+    /* padding: s10px; */
+    height: 46px;
+    width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 4px solid #FFB6C1; */
+    margin: 20px;
+}
