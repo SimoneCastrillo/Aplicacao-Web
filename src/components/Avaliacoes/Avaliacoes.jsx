@@ -3,7 +3,9 @@ import styles from './Avaliacoes.module.css'
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import CarrosselAvaliacoes from './CarrosselAvaliacoes/CarrosselAvaliacoes';
-const Avaliacoes = ({imagens}) => {
+import loadingGif from '../../assets/loading-gif.gif';
+
+const Avaliacoes = ({imagens, onLoading}) => {
   // console.log('imagens banner avalia',imagens);
     const bannerRef = useRef();
 
@@ -40,7 +42,12 @@ const Avaliacoes = ({imagens}) => {
          exit={{ y: 100 }}
          transition={{ duration: 0.5 }}
         >
-        <CarrosselAvaliacoes imagensBanner={imagens} ref={bannerRef} />
+        {!onLoading && <CarrosselAvaliacoes imagensBanner={imagens} ref={bannerRef} />}
+        {onLoading && (
+        <div style={{width: '100%', textAlign: 'center'}}>
+          <img  src={loadingGif} width='50px' alt="loading" />
+        </div>
+      )}
         </motion.div>
         <motion.div 
          key='titulo avaliacoes 1'
