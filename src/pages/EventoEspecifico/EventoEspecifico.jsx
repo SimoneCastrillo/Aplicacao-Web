@@ -5,14 +5,13 @@ import Decoracoes from '../../components/Decoracoes/Decoracoes';
 import imgLogo from '../../assets/CastrilloEventos.png';
 import Footer from '../../components/Footer/Footer';
 import Avaliacoes from '../../components/Avaliacoes/Avaliacoes';
-import img1 from '../../assets/imgDecoracaoBanner.jpg';
-import img2 from '../../assets/imgDecoracaoBanner.jpg';
-import img3 from '../../assets/imgDecoracaoBanner.jpg';
+
 import { Link, useLocation } from 'react-router-dom';
 import { BsList } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-const images = [img1, img2, img3, img1,img2, img2];
+import {avaliacoesPorTipoDeEvento} from '../../api/api';
+
 const descricaoEvento = {
   infantil: "Evento voltado para crianças, com temática lúdica e atividades recreativas, ideal para festas de aniversário infantil.",
   aniversário: "Celebração de aniversário para todas as idades, com decoração personalizada, música e opções de buffet.",
@@ -25,14 +24,27 @@ const descricaoEvento = {
 const EventoEspecifico = () => {
     const { nome } = useParams();
     const nomeSemEspaco = nome.replace(/%20/g, '').replace(/\s+/g, '');
-    // console.log(nomeSemEspaco);
+    const [avaliacoes, setAvaliacoes] = useState([]);
     const location = useLocation();
     const [secaoAtiva, setSecaoAtiva] = useState('');
     const [menuAtivo, setMenuAtivo] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const handleOpenMenu = () => {
         setMenuAtivo(!menuAtivo);
     };
+    useEffect(() => {
+        setLoading(true);
+        avaliacoesPorTipoDeEvento(nome.toUpperCase())
+        .then((response) => {
+            setAvaliacoes(response.data);
+            console.log(response.data);
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error(error);
+            setLoading(false);
+        });
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -98,14 +110,14 @@ const EventoEspecifico = () => {
                                 Decorações
                             </Link>
                         </li>
-                        <li key="reservas">
+                        {/* <li key="reservas">
                             <Link 
                                 className={obterClasseAtiva('#informacoes')} 
                                 to="#informacoes"
                             >
                                 Informações
                             </Link>
-                        </li>
+                        </li> */}
                         <li key="avaliacoes">
                             <Link 
                                 className={obterClasseAtiva('#avaliacoes')} 
@@ -148,14 +160,14 @@ const EventoEspecifico = () => {
                                             Decorações
                                         </Link>
                                     </li>
-                                    <li key="mobile-reservas">
+                                    {/* <li key="mobile-reservas">
                                         <Link 
                                             className={obterClasseAtiva('#informacoes')} 
                                             to="#informacoes"
                                         >
                                             Informações
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     <li key="mobile-avaliacoes">
                                         <Link 
                                             className={obterClasseAtiva('#avaliacoes')} 
@@ -198,7 +210,7 @@ const EventoEspecifico = () => {
         </div>
         <div className={styles.containerDecora}>
             <Decoracoes />
-            <Avaliacoes imagens={images} />
+            <Avaliacoes onLoading={loading} imagens={avaliacoes} />
         </div>
         <Footer />
     </div>

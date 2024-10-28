@@ -43,7 +43,7 @@ const CarrosselAvaliacoes = forwardRef(({imagensBanner = []} ,ref ) => {
         {imagensBanner && imagensBanner.map((image, index) => (
           <SwiperSlide key={`carrossel-img-${index}`}>
             <motion.div className={styles.item} style={{ minWidth: 280 }}>
-              <img src={image} alt={`carrossel-img-${index}`} />
+              <img src={`data:image/jpeg;base64,${image.foto}`} alt={`carrossel-img-${index}`} />
             </motion.div>
           </SwiperSlide>
         ))}

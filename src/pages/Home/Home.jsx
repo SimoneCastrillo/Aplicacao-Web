@@ -7,14 +7,24 @@ import Duvidas from '../../components/Duvidas/Duvidas'
 import Footer from '../../components/Footer/Footer'
 import Avaliacoes from '../../components/Avaliacoes/Avaliacoes'
 import styles from './Home.module.css'
-import img1 from '../../assets/imgDecoracaoBanner.jpg';
-import img2 from '../../assets/imgDecoracaoBanner.jpg';
-import img3 from '../../assets/imgDecoracaoBanner.jpg';
-const images = [img1, img2, img3, img1,img2, img2];
+
+import {ultimas5avalaicoes} from '../../api/api';
+
 
 
 const Home = () => {
-  // console.log('home',images);
+  const [avaliacoes, setAvaliacoes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true)
+    ultimas5avalaicoes().then((res) => {
+      setAvaliacoes(res.data);
+      setLoading(false);
+    }).catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+  }, []);
   
 
   return (
@@ -24,7 +34,7 @@ const Home = () => {
       <div className={styles.container}>
       <Eventos/>
       <ComoReservar/>
-      <Avaliacoes imagens={images}/>
+      <Avaliacoes onLoading={loading} imagens={avaliacoes}/>
       <Duvidas/>
       </div>
       <Footer/>

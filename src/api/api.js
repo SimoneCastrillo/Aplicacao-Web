@@ -49,5 +49,16 @@ const buscarUsuario = async (id) => {
     };
     return await apiInstance.get(`/usuarios/${id}`, { headers });
 }
+const ultimas5avalaicoes = async () => {
+    const apiInstance = api();
+    return await apiInstance.get('/avaliacoes/ultimos');
+}
+const avaliacoesPorTipoDeEvento = async (tipoDeEvento) => {
+    const apiInstance = api();
+    return await apiInstance.get('/avaliacoes/tipo-de-evento', {
+        params: {
+            nome: tipoDeEvento
+        }});
+}
 
-export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario };
+export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario, ultimas5avalaicoes, avaliacoesPorTipoDeEvento };
