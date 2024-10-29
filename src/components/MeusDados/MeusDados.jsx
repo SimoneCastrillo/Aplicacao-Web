@@ -16,7 +16,9 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
    
     useEffect(() => {
         const userBanco = async () => {
+            setLoading(true)
             try{
+
                 const response = await buscarUsuario(JSON.parse(sessionStorage.usuario).id);
                 setName(response.data.nome);
                 setEmail(response.data.email);
@@ -26,12 +28,15 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                 onSetImg(response.data.foto);
                 setUser(response.data);
                 onSetNomeUser(response.data.nome);
+                sessionStorage.img = response.data.foto;
+                setLoading(false)
             } catch (error) {
+                setLoading(false)
                 console.log(error);
             }
         }
         userBanco();
-    }, [location])
+    }, [location] || [])
     
    
     const [name, setName] = useState('');
@@ -103,16 +108,16 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
             console.log('estou no then');
             
             toast.success('Usuário atualizado com sucesso!',{
-                autoClose: 1600
+                autoClose: 500
             });
             setIsEdit(false);
             setLoading(false)
             setTimeout(() => {
                 window.location.reload();
-            }, 1600);
+            }, 500);
         }).catch((error) => {
             toast.error('Erro ao atualizar',{
-                autoClose: 1600
+                autoClose: 500
             });
             console.log(error)
             setLoading(false)
@@ -125,7 +130,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
             <h1 className='titulo-perfil'>MEU PERFIL</h1>
             {!isEdit && <button className='btn-default-bgRosa-perfil' onClick={()=> setIsEdit(true)}>Editar</button>}
             {isEdit && (
-            !loading ? (
+            !loading && (
                 <div>
                     <button style={{ marginRight: '10px' }} className='btn-default-bgTransparent-perfil' onClick={cancelarEdit}>
                         Cancelar
@@ -134,12 +139,16 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                         Salvar
                     </button>
                 </div>
-            ) : (
-                <img src={loadingGif} width={'50px'} alt="loading" />
-            )
+            ) 
         )}
         </div>
-        <div className={styles.container}>
+        {loading && (
+            <div style={{textAlign: 'center', marginTop: '100px'}}>
+                <img  src={loadingGif} width={'50px'} alt="loading" />
+            </div>
+        )}
+        {!loading && (
+            <div className={styles.container}>
             <div className={styles.imagemUsuario}>
                 <img  src={imgUsuario ? urlImg.includes('blob') ? urlImg : `data:image/jpeg;base64,${imgUsuario}`  : imgPerfil} alt="img de perfil" />
                 {isEdit && <button onClick={onOpenModalFoto} className={styles.editar}>
@@ -158,6 +167,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                 </div>
 
         </div>
+        )}
     </>
   )
 }

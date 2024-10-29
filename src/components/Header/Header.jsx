@@ -130,7 +130,7 @@ const Header = () => {
                         (
                             <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                             {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
-                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
                             <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
                             </Link>
                         )
@@ -203,15 +203,16 @@ const Header = () => {
                                             Solicitar Orçamento
                                         </Link>
                                     </li>
-                                    <li key="mobile-login" className='full-width'>
-                                        <Link 
-                                        style={{width: '100%'}}
-                                        className='btn-default-bgTransparent  '
-                                            to="/login"
-                                        >
-                                            Login
-                                        </Link>
-                                    </li>
+                                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                                    {logado && 
+                                        (
+                                            <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                                            </Link>
+                                        )
+                                    }
                                 </ul>
                             </nav>
                         </motion.div>

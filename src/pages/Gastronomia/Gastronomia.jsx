@@ -5,13 +5,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import Footer from '../../components/Footer/Footer';
+import avatar from '../../assets/Avatar.png';
 
 
 const Gastronomia = () => {
     const [menuAtivo, setMenuAtivo] = useState(false);
     const [secaoAtiva, setSecaoAtiva] = useState('');
     const location = useLocation();
-
+    const [logado, setLogado] = useState(false)
+    if(sessionStorage.getItem('token') && !logado){
+        setLogado(true)
+      }
+      const [iUserImg, setIUserImg] = useState(false);
+    useEffect(() => {
+        if(sessionStorage.getItem('img') !== null ){
+            setIUserImg(true)
+    }
+    },[])
     const handleOpenMenu = () => {
         setMenuAtivo(!menuAtivo);
     };
@@ -104,7 +114,16 @@ const Gastronomia = () => {
                 </nav>
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
                     <Link to="/solicitar-orcamento" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
-                    <Link to="/login" className='btn-default-bgTransparent'>Login</Link>
+                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                    {logado && 
+                        (
+                            <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                            </Link>
+                        )
+                    }
                 </div>
                 <div className={styles.mobile}>
                     <button onClick={handleOpenMenu}><BsList size={35} color='#fff'/></button>
@@ -127,15 +146,16 @@ const Gastronomia = () => {
                                             Solicitar Orçamento
                                         </Link>
                                     </li>
-                                    <li key="mobile-login" className='full-width'>
-                                        <Link 
-                                        style={{width: '100%'}}
-                                        className='btn-default-bgTransparent  '
-                                            to="/login"
-                                        >
-                                            Login
-                                        </Link>
-                                    </li>
+                                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                                    {logado && 
+                                        (
+                                            <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                                            </Link>
+                                        )
+                                    }
                                 </ul>
                             </nav>
                         </motion.div>

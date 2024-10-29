@@ -63,10 +63,11 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
     }
   }
   const handleSubmit = async()=> {
+    const horarioFormatado = horario.split(".")[0];
     const orcamento = {
         dataEvento: data,
         qtdConvidados: Number(quantidadePessoas),
-        "inicio" : horario,
+        "inicio" : horarioFormatado,
         saborBolo,
         pratoPrincipal,
         sugestao,
