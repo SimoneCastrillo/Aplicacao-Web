@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import Footer from '../../components/Footer/Footer';
 import avatar from '../../assets/Avatar.png';
-
+import doces from '../../assets/doces.webp';
+import lanches from '../../assets/lanches.webp'
+import salgados from '../../assets/Salvagos.jpeg'
+import bolos from '../../assets/bolos.jpeg'
 
 const Gastronomia = () => {
     const [menuAtivo, setMenuAtivo] = useState(false);
@@ -194,18 +197,22 @@ const Gastronomia = () => {
 
         {[{
             titulo: 'Lanches',
+            img: lanches,
             items: ['Mini Hot Dog', 'Mini Hamburguer', 'Mini Calabresa', 'Mini Carne louca'],
             reverse: false
         }, {
             titulo: 'Salgados',
+            img: salgados,
             items: ['Mini kibe', 'Risole de pizza', 'Coxinha de frango', 'Bolinho de queijo', 'Esfiha de carne', 'Empadinhas de palmito'],
             reverse: true
         }, {
             titulo: 'Bolos',
+            img: bolos,
             items: ['Creme Mestre com pêssego', 'Prestígio', 'Abacaxi', 'Doce de leite com coco', 'Doce de leite com ameixa', 'Mousse de morango', 'Bolo Ninho', 'Ninho com morango', 'e Muito Mais!'],
             reverse: false
         }, {
             titulo: 'Doces',
+            img: doces,
             items: ['Brigadeiro tradicionais', 'Brigadeiro crocante', 'Brigadeiro de morango', 'Cajuzinho', 'Beijinhos'],
             reverse: true
         }].map((card, index) => (
@@ -227,11 +234,15 @@ const Gastronomia = () => {
                                 <p key={idx} className={styles.detalhesItemReverse}>{item}</p>
                             ))}
                         </div>
-                        <div className={styles.imgCard}></div>
+                        <div className={styles.imgCard}>
+                            <img src={card.img} alt="" />
+                        </div>
                     </>
                 ) : (
                     <>
-                        <div className={styles.imgCard}></div>
+                        <div className={styles.imgCard}>
+                        <img src={card.img} alt="" />
+                        </div>
                         <div className={styles.detalhes}>
                             <h2 className={styles.tituloCard}>{card.titulo}</h2>
                             {card.items.map((item, idx) => (
