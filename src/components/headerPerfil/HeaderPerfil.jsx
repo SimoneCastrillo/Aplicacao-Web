@@ -10,8 +10,11 @@ const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser }) => 
     const permissionUser = 'normal';
    const [iUserImg, setIUserImg] = useState(false);
    useEffect(() => {
-    if(sessionStorage.getItem('img') !== null ){
+    console.log(sessionStorage.getItem('img'))
+    if(sessionStorage.getItem('img') !== 'null' ){
         setIUserImg(true)
+  }else {
+    setIUserImg(false)
   }
    },[])
    const navigate = useNavigate();
