@@ -13,8 +13,10 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
+  const [loading , setLoading] = useState(false);
 
   const validarLogin = (e) => {
+    setLoading(true);
     e.preventDefault();
     setErro('');
 
@@ -42,23 +44,28 @@ const Login = () => {
       console.log(response.data);
       sessionStorage.setItem('token', response.data.token);
       sessionStorage.setItem('usuario', JSON.stringify(response.data));
+      sessionStorage.setItem('img', response.data.foto);
       
       toast.success('Login efetuado com sucesso!',{
-        autoClose: 1600
+        autoClose: 1000
       });
       setTimeout(()=>{
         navigate('/perfil');
       }, 2000)
+      setLoading(false);
+
     } catch (error) {
       
-      
+      setLoading(false);
       if (error.response) {
         const errorMessage = typeof error.response.data === 'string'
           ? error.response.data
           : error.response.data.message || 'Erro ao tentar efetuar login. Tente novamente.';
         toast.error(errorMessage);
       } else {
-        toast.error('Erro ao tentar efetuar login. Tente novamente.');
+        toast.error('Erro ao tentar efetuar login. Tente novamente.',{
+          autoClose: 1000
+        });
       }
     }
   };
@@ -89,14 +96,17 @@ const Login = () => {
             </div>
 
             {erro && <p className={styles.error}>{erro}</p>}
+            {!loading &&
             <button
-              type="submit"
-              className={`btn-default-bgRosa ${styles.btnEntrar}`}
-              disabled={email && senha ? false : true}
-              style={{ opacity: email && senha ? 1 : 0.5 }}
-            >
-              Entrar
-            </button>
+            type="submit"
+            className={`btn-default-bgRosa ${styles.btnEntrar}`}
+            disabled={email && senha ? false : true}
+            style={{ opacity: email && senha ? 1 : 0.5 , cursor: email && senha ? 'pointer' : 'not-allowed' }}
+          >
+            Entrar
+          </button>
+            }
+            {loading && <button style={{cursor: 'not-allowed'}} className={`btn-default-bgRosa ${styles.btnEntrar}`} disabled>Carregando...</button>}
           </form>
 
           <Link className={styles.link} to="/recuperar-senha">Esqueceu a senha?</Link>

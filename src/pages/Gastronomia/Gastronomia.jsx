@@ -1,23 +1,107 @@
 import styles from './Gastronomia.module.css'
 import imgLogo from '../../assets/CastrilloEventos.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import Footer from '../../components/Footer/Footer';
 
 
 const Gastronomia = () => {
     const [menuAtivo, setMenuAtivo] = useState(false);
+    const [secaoAtiva, setSecaoAtiva] = useState('');
+    const location = useLocation();
+
     const handleOpenMenu = () => {
         setMenuAtivo(!menuAtivo);
     };
+    const obterClasseAtiva = (hash) => {
+        return secaoAtiva === hash ? styles.active : '';
+    };
+    useEffect(() => {
+        const handleScroll = () => {
+            const secoes = ['Lanches', 'Salgados', 'Bolos', 'Doces']; 
+            let secaoEncontrada = '';
+    
+            secoes.forEach((secaoId) => {
+                const elemento = document.getElementById(secaoId);
+                if (elemento) {
+                    const rect = elemento.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        secaoEncontrada = secaoId;
+                    }
+                }
+            });
+    
+            setSecaoAtiva(secaoEncontrada ? `#${secaoEncontrada}` : '');
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        handleScroll();
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+    useEffect(() => {
+        if (location.hash) {
+            const elemento = document.getElementById(location.hash.substring(1));
+            if (elemento) {
+                elemento.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [location]);
+
   return (
     <div>
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link to='/'><img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" /></Link>
-                
+                <nav className={styles.desktop}>
+                    <ul className={styles.nav_links}>
+                        <li key="bannerId">
+                            <Link 
+                                className={obterClasseAtiva('#bannerId')} 
+                                to="/"
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li key="Lanches">
+                            <Link 
+                                className={obterClasseAtiva('#Lanches')} 
+                                to="#Lanches"
+                            >
+                                Lanches
+                            </Link>
+                        </li>
+                        <li key="Salgados">
+                            <Link 
+                                className={obterClasseAtiva('#Salgados')} 
+                                to="#Salgados"
+                            >
+                                Salgados
+                            </Link>
+                        </li>
+                        <li key="Bolos">
+                            <Link 
+                                className={obterClasseAtiva('#Bolos')} 
+                                to="#Bolos"
+                            >
+                                Bolos
+                            </Link>
+                        </li>
+                        <li key="Doces">
+                            <Link 
+                                className={obterClasseAtiva('#Doces')} 
+                                to="#Doces"
+                            >
+                                Doces
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
                     <Link to="/solicitar-orcamento" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
                     <Link to="/login" className='btn-default-bgTransparent'>Login</Link>
@@ -106,6 +190,7 @@ const Gastronomia = () => {
             reverse: true
         }].map((card, index) => (
             <motion.div
+            id={card.titulo}
                 key={card.titulo}
                 initial={{ x: 100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
@@ -116,7 +201,7 @@ const Gastronomia = () => {
             >
                 {card.reverse ? (
                     <>
-                        <div className={styles.detalhes}>
+                        <div  className={styles.detalhes}>
                             <h2 className={styles.tituloCard}>{card.titulo}</h2>
                             {card.items.map((item, idx) => (
                                 <p key={idx} className={styles.detalhesItemReverse}>{item}</p>

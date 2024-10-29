@@ -6,11 +6,14 @@ import { toast } from 'react-toastify';
 
 import InputMeusDados from './InputMeusDados/InputMeusDados';
 import {atualizarUsuario, buscarUsuario} from '../../api/api'
-
+import loadingGif from '../../assets/loading-gif.gif'
+import { useNavigate } from 'react-router-dom';
 const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [user, setUser] = useState({});    
     const [loading, setLoading] = useState(false);
+    const location = useNavigate();
+   
     useEffect(() => {
         const userBanco = async () => {
             try{
@@ -28,7 +31,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
             }
         }
         userBanco();
-    }, [])
+    }, [location])
     
    
     const [name, setName] = useState('');
@@ -47,6 +50,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
         setImgUsuario(user.foto);
         onSetImg(user.foto);
     }
+    
     useEffect(() => {
         setImgUsuario(onImg)
         
@@ -84,7 +88,6 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                 telefone
             }
         }else {
-
             usuarioBanco = {
                 nome: name,
                 email,
@@ -92,15 +95,21 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                 telefone
             }
         }
+      console.log(usuarioBanco);
       
         setLoading(true)
         atualizarUsuario(JSON.parse(sessionStorage.usuario).id, usuarioBanco)
         .then((response) => {
+            console.log('estou no then');
+            
             toast.success('Usuário atualizado com sucesso!',{
                 autoClose: 1600
             });
             setIsEdit(false);
             setLoading(false)
+            setTimeout(() => {
+                window.location.reload();
+            }, 1600);
         }).catch((error) => {
             toast.error('Erro ao atualizar',{
                 autoClose: 1600
@@ -126,7 +135,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                     </button>
                 </div>
             ) : (
-                <p>Carregando...</p>
+                <img src={loadingGif} width={'50px'} alt="loading" />
             )
         )}
         </div>

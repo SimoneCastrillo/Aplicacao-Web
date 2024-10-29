@@ -2,14 +2,23 @@ import styles from './HeaderPerfil.module.css';
 import logo from '../../assets/Matriz (1).png';
 import avatar from '../../assets/Avatar.png';
 import { BsBellFill } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router-dom';
 
 const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser }) => {
     const permissionUser = 'normal';
-   
+   const [iUserImg, setIUserImg] = useState(false);
+   useEffect(() => {
+    if(sessionStorage.getItem('img') !== null ){
+        setIUserImg(true)
+  }
+   },[])
+   const navigate = useNavigate();
     return (
         <div className={styles.header}>
             <div className={styles.container}>
-                <img src={logo} alt='logo png' />
+                <Link to="/"><img src={logo} alt='logo png' /></Link>
                 <nav>
                     <ul>
                         {permissionUser === 'admin' && (
@@ -79,8 +88,16 @@ const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser }) => 
                 <div className={styles.userInfo}>
                     <BsBellFill size={18} color='#fff' />
                     <div className={styles.user}>
-                        <img src={avatar} alt="avatar" />
+                        
+                        {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                        {iUserImg && <img style={{borderRadius: '100%'}} width={'50px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
                         <p>{onNomeUser}</p>
+                        <button onClick={()=>{
+                            sessionStorage.removeItem('token');
+                            sessionStorage.removeItem('img');
+                            sessionStorage.removeItem('usuario');
+                            navigate('/')
+                        }}> <FaSignOutAlt size={18} color='#fff' /></button>
                     </div>
                 </div>
             </div>
