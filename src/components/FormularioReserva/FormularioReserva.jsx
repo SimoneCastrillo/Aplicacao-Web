@@ -4,6 +4,7 @@ import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import Step from '../Step/Step';
 import InputReserva from './InputReserva/InputReserva';
+import {criarOrcamento} from '../../api/api';
 const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecoracaoEscolhida}) => {
 
   const [passoAtivo, setPassoAtivo] = useState(1);
@@ -21,6 +22,8 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
   const [saborBolo, setSaborBolo] = useState('Chocolate com mousse e pedaços de chocolate');
 
   const [pratoPrincipal, setPratoPrincipal] = useState('');
+
+  const [sugestao, setSugestao] = useState('')
   useEffect(() => {
     setDecoracao(onDecoracaoEscolhida.id)
   }, [onDecoracaoEscolhida])
@@ -59,34 +62,35 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
       setPassoAtivo(passoAtivo + 1)
     }
   }
-  const handleSubmit = ()=> {
-    let orcamento = {};
-    if(tipoEvento === 'casamento'){
-      orcamento = {
-        data,
-        "inicio" : horario,
-        quantidadePessoas,
+  const handleSubmit = async()=> {
+    const horarioFormatado = horario.split(".")[0];
+    const orcamento = {
+        dataEvento: data,
+        qtdConvidados: Number(quantidadePessoas),
+        "inicio" : horarioFormatado,
+        saborBolo,
         pratoPrincipal,
-        tipoEvento,
-        decoracao,
-        saborBolo
+        sugestao,
+        tipoEventoId: 1,
+        usuarioId: JSON.parse(sessionStorage.usuario).id,
+        decoracaoId: decoracao
       }
-    }else {
-      orcamento = {
-        data,
-        "inicio" : horario,
-        quantidadePessoas,
-        tipoEvento,
-        decoracao,
-        saborBolo
-      }
-    }
     console.log('json orcamento', orcamento);
+    await criarOrcamento(orcamento).then((res)=>{
+      console.log(res)
+      const h1Orcamento = document.getElementById('idH1Orcamento');
+      h1Orcamento.style.display = 'none';
+      setPassoAtivo(4)
+    }).catch((err)=>{
+      console.log(err)
+    })
     
   }
   return (
     <div>
-      <form className={styles.form}>
+      {passoAtivo != 4 && (
+        <>
+        <form className={styles.form}>
 
         {passoAtivo === 1 && (
           <div className='passo-1'>
@@ -102,13 +106,13 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
                     <select value={tipoEvento} onChange={(e)=>{
                       setTipoEvento(e.target.value)
                     }}>
-                      <option value="infantil">Infantil</option>
-                      <option value="debutante">Debutante</option>
-                      <option value="casamento">Casamento</option>
-                      <option value="aniversario">Aniversário</option>
-                      <option value="coffe break">Coffe Break</option>
-                      <option value="alugar espaço">Alugar espaço</option>
-                      <option value="outros">Outros</option>
+                      <option value="1">Infantil</option>
+                      <option value="2">Debutante</option>
+                      <option value="3">Casamento</option>
+                      <option value="4">Aniversário</option>
+                      <option value="5">Coffe Break</option>
+                      <option value="6">Alugar espaço</option>
+                      <option value="7">Outros</option>
                     </select>
                   </div>
                 </div>
@@ -152,13 +156,13 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
             <div className={styles.controleDasInputs}>
                   <div className="container-input-full">
                     <label>Observação</label>
-                    <textarea placeholder='Máximo de 200 caracteres' />
+                    <textarea onChange={(e)=> setSugestao(e.target.value) } placeholder='Máximo de 200 caracteres' />
                   </div>
                 </div>
           </div>
         )}
-      {erro && <p className={styles.erro_msg}>{erro}</p>}
-      </form>
+        {erro && <p className={styles.erro_msg}>{erro}</p>}
+        </form>
         <div style={{marginTop: '100px'}} className={styles.containerStepEbutton}>
             <div style={{width: '33.3%'}}>
             {passoAtivo !== 1 && (
@@ -202,6 +206,16 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
             </div>
             </div>
         </div>
+        </>
+      )}
+      {passoAtivo === 4 && (
+        <div className={styles.orcamentoFeito}>
+          <h1>Orçamento enviado com Sucesso!</h1>
+          <h4>Logo entraremos em contato.
+            <br></br>
+          Obrigada pela preferência!</h4>
+        </div>
+      )}
     </div>
   )
 }

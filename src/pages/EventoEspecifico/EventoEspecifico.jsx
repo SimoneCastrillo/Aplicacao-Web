@@ -11,6 +11,7 @@ import { BsList } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {avaliacoesPorTipoDeEvento} from '../../api/api';
+import avatar from '../../assets/Avatar.png';
 
 const descricaoEvento = {
   infantil: "Evento voltado para crianças, com temática lúdica e atividades recreativas, ideal para festas de aniversário infantil.",
@@ -29,6 +30,16 @@ const EventoEspecifico = () => {
     const [secaoAtiva, setSecaoAtiva] = useState('');
     const [menuAtivo, setMenuAtivo] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [logado, setLogado] = useState(false)
+    if(sessionStorage.getItem('token') && !logado){
+        setLogado(true)
+      }
+      const [iUserImg, setIUserImg] = useState(false);
+    useEffect(() => {
+        if(sessionStorage.getItem('img') !== null ){
+            setIUserImg(true)
+    }
+    },[])
     const handleOpenMenu = () => {
         setMenuAtivo(!menuAtivo);
     };
@@ -130,7 +141,16 @@ const EventoEspecifico = () => {
                 </nav>
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
                     <Link to="/solicitar-orcamento" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
-                    <Link to="/login" className='btn-default-bgTransparent'>Login</Link>
+                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                    {logado && 
+                        (
+                            <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                            </Link>
+                        )
+                    }
                 </div>
                 <div className={styles.mobile}>
                     <button onClick={handleOpenMenu}><BsList size={35} color='#fff'/></button>
@@ -186,15 +206,16 @@ const EventoEspecifico = () => {
                                             Solicitar Orçamento
                                         </Link>
                                     </li>
-                                    <li key="mobile-login" className='full-width'>
-                                        <Link 
-                                        style={{width: '100%'}}
-                                        className='btn-default-bgTransparent  '
-                                            to="/login"
-                                        >
-                                            Login
-                                        </Link>
-                                    </li>
+                                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                                    {logado && 
+                                        (
+                                            <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                                            </Link>
+                                        )
+                                    }
                                 </ul>
                             </nav>
                         </motion.div>

@@ -60,5 +60,15 @@ const avaliacoesPorTipoDeEvento = async (tipoDeEvento) => {
             nome: tipoDeEvento
         }});
 }
+const criarOrcamento = async (orcamento) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
 
-export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario, ultimas5avalaicoes, avaliacoesPorTipoDeEvento };
+    return await apiInstance.post('/orcamentos', orcamento , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+
+export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario, ultimas5avalaicoes, avaliacoesPorTipoDeEvento, criarOrcamento };

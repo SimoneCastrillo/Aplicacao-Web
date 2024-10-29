@@ -83,3 +83,14 @@
         height: auto;
     }
 }
+.orcamentoFeito {
+    text-align: center;
+}
+.orcamentoFeito h1 {
+    color: #FFB6C1;
+    font-size: 50px;
+}
+.orcamentoFeito h4 {
+    color: #ffffff;
+    font-size: 24px;
+}
