@@ -17,7 +17,7 @@ const Header = () => {
       }
       const [iUserImg, setIUserImg] = useState(false);
     useEffect(() => {
-        if(sessionStorage.getItem('img') !== null ){
+        if(sessionStorage.getItem('img') !== 'null' ){
             setIUserImg(true)
     }
     },[])
@@ -129,7 +129,7 @@ const Header = () => {
                     {logado && 
                         (
                             <Link to='/perfil' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                            {!iUserImg && <img width={'30px'} src={avatar} alt="avatar" />}
                             {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
                             <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
                             </Link>
