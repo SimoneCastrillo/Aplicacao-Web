@@ -47,11 +47,11 @@ const Login = () => {
       sessionStorage.setItem('img', response.data.foto);
       
       toast.success('Login efetuado com sucesso!',{
-        autoClose: 1000
+        autoClose: 600
       });
       setTimeout(()=>{
         navigate('/perfil');
-      }, 2000)
+      }, 1000)
       setLoading(false);
 
     } catch (error) {

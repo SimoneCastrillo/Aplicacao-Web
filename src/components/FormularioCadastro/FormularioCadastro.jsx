@@ -9,7 +9,7 @@ import {  useNavigate } from 'react-router-dom';
 const FormularioCadastro = () => {
   const navigate = useNavigate();
 
-  const [passoAtivo, setPassoAtivo] = useState(3);
+  const [passoAtivo, setPassoAtivo] = useState(1);
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
@@ -82,13 +82,13 @@ const FormularioCadastro = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (passoAtivo === 3) {
-  //     setTimeout(() => {
-  //       navigate('/login');
-  //     }, 2000);
-  //   }
-  // }, [passoAtivo, navigate]);
+  useEffect(() => {
+    if (passoAtivo === 3) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    }
+  }, [passoAtivo, navigate]);
 
   return (
     <div style={{width: '100%'}}>

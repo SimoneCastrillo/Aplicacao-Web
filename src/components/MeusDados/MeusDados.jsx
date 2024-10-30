@@ -30,6 +30,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
                 onSetNomeUser(response.data.nome);
                 sessionStorage.img = response.data.foto;
                 setLoading(false)
+                sessionStorage.setItem('usuario', JSON.stringify(response.data));
             } catch (error) {
                 setLoading(false)
                 console.log(error);
