@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Ignorar erros do ESLint
+      # Ignorar os erros do ESLint
       - name: Run ESLint (ignore errors)
         run: |
-          npm run lint || true   # O || true garante que o erro não vai interromper o build
+          npm run lint || true  # O '|| true' garante que o erro do ESLint não vai falhar o build
 
       - name: Build the app
         run: npm run build
@@ -33,3 +33,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'YOUR_AZURE_APP_NAME'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: ./build
