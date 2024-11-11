@@ -70,5 +70,46 @@ const criarOrcamento = async (orcamento) => {
         },
     });
 }
+const orcamentosPorIdDoUuario = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
 
-export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario, ultimas5avalaicoes, avaliacoesPorTipoDeEvento, criarOrcamento };
+    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const deletarOrcamento = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.delete(`/orcamentos/${id}` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const editarOrcamento = async (id, orcamento) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.put(`/orcamentos/${id}`, orcamento , {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    });
+}
+export  { 
+    listarDecoracoesPorEvento, 
+    criarUsuario, 
+    logar, 
+    atualizarUsuario, 
+    buscarUsuario, 
+    ultimas5avalaicoes, 
+    avaliacoesPorTipoDeEvento, 
+    criarOrcamento, 
+    orcamentosPorIdDoUuario,
+    deletarOrcamento,
+    editarOrcamento
+ };

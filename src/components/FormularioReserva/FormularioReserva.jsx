@@ -5,7 +5,11 @@ import styles from './FormularioReserva.module.css';
 import Step from '../Step/Step';
 import InputReserva from './InputReserva/InputReserva';
 import {criarOrcamento} from '../../api/api';
+import loadingGif from '../../assets/loading-gif.gif';
+
 const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecoracaoEscolhida}) => {
+
+  const [diaAtual, setDiaAtual] = useState('');
 
   const [passoAtivo, setPassoAtivo] = useState(1);
 
@@ -19,11 +23,10 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
   
   const [decoracao, setDecoracao] = useState('');
 
-  const [saborBolo, setSaborBolo] = useState('Chocolate com mousse e pedaços de chocolate');
-
-  const [pratoPrincipal, setPratoPrincipal] = useState('');
-
   const [sugestao, setSugestao] = useState('')
+
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setDecoracao(onDecoracaoEscolhida.id)
   }, [onDecoracaoEscolhida])
@@ -32,8 +35,13 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
     onTipoEventoModal(tipoEvento)
   }, [tipoEvento])
 
+  useEffect(() => {
+    setDiaAtual(getDiaAtual())
+
+  },[])
   
   const [erro, setErro] = useState(false);
+
   const getDiaAtual = ()=>{
     const data = new Date();
     const dia = data.getDate();
@@ -47,7 +55,6 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
       if(data === '' || horario === '' || quantidadePessoas === '') {
         return setErro('Preencha todos os campos')
       }
-      
       if(data < getDiaAtual()){
         return setErro('Data inválida') 
       }
@@ -63,32 +70,52 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
     }
   }
   const handleSubmit = async()=> {
+    setLoading(true);
     const horarioFormatado = horario.split(".")[0];
+
+    
+
     const orcamento = {
         dataEvento: data,
         qtdConvidados: Number(quantidadePessoas),
         "inicio" : horarioFormatado,
-        saborBolo,
-        pratoPrincipal,
         sugestao,
         tipoEventoId: 1,
         usuarioId: JSON.parse(sessionStorage.usuario).id,
         decoracaoId: decoracao
       }
-    console.log('json orcamento', orcamento);
+  
     await criarOrcamento(orcamento).then((res)=>{
+      setLoading(false);
       console.log(res)
       const h1Orcamento = document.getElementById('idH1Orcamento');
       h1Orcamento.style.display = 'none';
-      setPassoAtivo(4)
+      setPassoAtivo(3)
+      
+      const mensagem = `Olá, meu nome é ${JSON.parse(sessionStorage.usuario).nome} e gostaria de saber os valores para o orçamento:
+
+Data do evento: ${data}
+Quantidade de pessoas: ${quantidadePessoas}
+Horário de início: ${horarioFormatado}
+Tipo de evento: ${tipoEvento}
+Decoração: ${decoracao ? onDecoracaoEscolhida.nome : 'N/A'}
+Observação: ${sugestao || 'N/A'}`;
+
+      const numeroWhatsApp = '+5511997828063';
+      const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+      
+      setTimeout(() => {
+            window.location.href = urlWhatsApp;
+      }, 3000);
     }).catch((err)=>{
+      setLoading(false);
       console.log(err)
     })
     
   }
   return (
     <div>
-      {passoAtivo != 4 && (
+      {passoAtivo !== 3 && (
         <>
         <form className={styles.form}>
 
@@ -96,7 +123,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
           <div className='passo-1'>
             <p className={styles.descricao}>Selecione o horário e data da sua reserva e a quantidade de pessoas.</p>
                 <div className={styles.controleDasInputs}>
-                  <InputReserva label='Data' type='date' onValue={data} onSet={setData} />
+                  <InputReserva label='Data' type='date' onMin={diaAtual} onValue={data} onSet={setData} />
                   <InputReserva label='Horário' type='time' onValue={horario} onSet={setHorario} />
                 </div>
                 <div className={styles.controleDasInputs}>
@@ -122,48 +149,30 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
         {passoAtivo === 2 && (
           <div className='passo-2'>
             <p className={styles.descricao}>Selecione as preferências para seu evento e informe o sabor do bolo</p>
-            <div className={styles.controleDasInputs}>
-                  <div className="container-input">
+                  <div className="container-input" style={{width: '100%'}}>
                     <label className={styles.tamanhoLabel}>Decoração</label>
                     <button className={styles.btnModalDecoracao} onClick={onOpenEscolherDecoracao}>{decoracao ? onDecoracaoEscolhida.nome : "Escolher decoração"}</button>
                   </div>
-                  <div className="container-input">
-                    <label className={styles.tamanhoLabel}>Sabor do bolo</label>
-                    <select value={saborBolo} onChange={(e)=>setSaborBolo(e.target.value)}>
-                      <option value="chocolate_mousse_chocolate">Chocolate com mousse e pedaços de chocolate</option>
-                      <option value="chocolate_mousse_maracuja">Chocolate com mousse de maracujá e pedaços de chocolate</option>
-                      <option value="creme_mestre_pessego">Creme Mestre com pêssego</option>
-                      <option value="prestigio">Prestígio</option>
-                      <option value="abacaxi">Abacaxi</option>
-                      <option value="doce_leite_coco">Doce de leite com coco</option>
-                      <option value="doce_leite_ameixa">Doce de leite com ameixa</option>
-                      <option value="mousse_morango">Mousse de morango</option>
-                      <option value="bolo_ninho">Bolo Ninho</option>
-                      <option value="ninho_morango">Ninho com morango</option>
-                    </select>
-                  </div>
-                </div>
-                <div className={styles.controleDasInputs}>
-                  {tipoEvento === 'casamento' && ( 
-                    <InputReserva label='Prato principal' type='text' onValue={pratoPrincipal} onSet={setPratoPrincipal} />
-                )}
+                
+               
+                <div  className={styles.controleDasInputs} style={{margin: '0', marginTop: '10px'}}>
+                    <div className={styles.textareaSemPrato}>
+                      <label style={{display: 'block',marginBottom: '10px'}}>Observação</label>
+                      <textarea onChange={(e)=> setSugestao(e.target.value) } placeholder='Máximo de 200 caracteres' />
+                    </div>
                 </div>
           </div>
         )}
-        {passoAtivo === 3 && (
-          <div className='passo-3'>
-            <p className={styles.descricao}>Observações (Opcional)</p>
-            <div className={styles.controleDasInputs}>
-                  <div className="container-input-full">
-                    <label>Observação</label>
-                    <textarea onChange={(e)=> setSugestao(e.target.value) } placeholder='Máximo de 200 caracteres' />
-                  </div>
-                </div>
-          </div>
-        )}
+        
+        
         {erro && <p className={styles.erro_msg}>{erro}</p>}
         </form>
-        <div style={{marginTop: '100px'}} className={styles.containerStepEbutton}>
+        {loading && <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '70px'}}>
+            <img width={50} src={loadingGif} alt="loading" />
+          </div>}
+        {!loading && (
+          <>
+          <div style={{marginTop: '100px'}} className={styles.containerStepEbutton}>
             <div style={{width: '33.3%'}}>
             {passoAtivo !== 1 && (
                 <button onClick={()=>{
@@ -172,21 +181,20 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
               )}
               </div>
             <div style={{width: '33.3%', display: 'flex', justifyContent: 'center'}}>
-            <Step  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
+            <Step  passo={passoAtivo} qtdPassos={[1, 2]} />
             </div>
             <div style={{width: '33.3%', textAlign: 'right'}}>
-            {passoAtivo !== 3 && (
+            {passoAtivo !== 2 && (
               <button onClick={proximoPasso} className='btn-default-bgRosa buttonAjuste'><MdArrowForward color='#fff'/></button>
             )}
-            {passoAtivo === 3 && (
+            {passoAtivo === 2 && (
               <button onClick={handleSubmit} className='btn-default-bgRosa buttonAjuste'><MdCheck color='#fff'/></button>
             )}
             </div>
         </div>
         <div className={styles.containerStepEbuttonMob}>
-            
             <div style={{display: 'flex', justifyContent: 'center'}}>
-            <Step  passo={passoAtivo} qtdPassos={[1, 2, 3]} />
+            <Step  passo={passoAtivo} qtdPassos={[1, 2]} />
             </div>
             <div className={styles.buttonsMob}>
             <div >
@@ -197,21 +205,23 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
               )}
               </div>
             <div style={{textAlign: 'right'}}>
-            {passoAtivo !== 3 && (
+            {passoAtivo !== 2 && (
               <button onClick={proximoPasso} className='btn-default-bgRosa buttonAjuste'><MdArrowForward color='#fff'/></button>
             )}
-            {passoAtivo === 3 && (
+            {passoAtivo === 2 && (
               <button onClick={handleSubmit} className='btn-default-bgRosa buttonAjuste'><MdCheck color='#fff'/></button>
             )}
             </div>
             </div>
         </div>
+          </>
+        )}
         </>
       )}
-      {passoAtivo === 4 && (
+      {passoAtivo === 3 && (
         <div className={styles.orcamentoFeito}>
           <h1>Orçamento enviado com Sucesso!</h1>
-          <h4>Logo entraremos em contato.
+          <h4>Estamos redirecionando você para o whatsapp.
             <br></br>
           Obrigada pela preferência!</h4>
         </div>

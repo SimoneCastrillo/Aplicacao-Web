@@ -15,7 +15,7 @@
 .tamanhoLabel {
     display: flex;
     align-items: end;
-    height: 40px;
+
 }
 .descricao {
     margin: 5px 0;
@@ -35,7 +35,7 @@
     padding: 8px 10px;
   border-radius: 16px;
   font-family: 'Montserrat', sans-serif;
-  /* color: #454545; */
+
   background-color: #ffffff16;
   border:2px solid #40597a;
   color: #d9d9d9;
@@ -82,7 +82,11 @@
     .form {
         height: auto;
     }
+    .textarea {
+        width: 97% !important;
+    }
 }
+
 .orcamentoFeito {
     text-align: center;
 }
@@ -93,4 +97,14 @@
 .orcamentoFeito h4 {
     color: #ffffff;
     font-size: 24px;
+}
+.textarea {
+    width: 46%;
+}
+.textareaSemPrato {
+    width: 97%;
+   
+}
+.textareaSemPrato textarea {
+    height: 80px;
 }

@@ -8,7 +8,7 @@ import InputMeusDados from './InputMeusDados/InputMeusDados';
 import {atualizarUsuario, buscarUsuario} from '../../api/api'
 import loadingGif from '../../assets/loading-gif.gif'
 import { useNavigate } from 'react-router-dom';
-const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
+const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser, onOpenModalCancelarEditar , onDescartarAlteracoes, onSetUserRole}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [user, setUser] = useState({});    
     const [loading, setLoading] = useState(false);
@@ -20,6 +20,9 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
             try{
 
                 const response = await buscarUsuario(JSON.parse(sessionStorage.usuario).id);
+                if(response.data.role === 'ADMIN'){
+                    onSetUserRole('admin');
+                }
                 setName(response.data.nome);
                 setEmail(response.data.email);
                 setTelefone(response.data.telefone);
@@ -39,6 +42,11 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
         userBanco();
     }, [location] || [])
     
+    useEffect(() => {
+        if(onDescartarAlteracoes){
+            cancelarEditConfirm();
+        }
+    }, [onDescartarAlteracoes])
    
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -48,6 +56,9 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser}) => {
     const [urlImg, setUrlImg] = useState('');
 
     const cancelarEdit = () => {
+        onOpenModalCancelarEditar(true);
+    }
+    const cancelarEditConfirm = () => {
         setIsEdit(false)
         setName(user.nome);
         setEmail(user.email);

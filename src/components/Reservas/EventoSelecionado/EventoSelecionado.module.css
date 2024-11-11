@@ -1,0 +1,31 @@
+.tituloEventoSelecionado {
+    color: #C54477;
+    font-size: 32px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+
+    margin-bottom: 10px;
+}
+.dataEventoSelecionado {
+    text-align: center;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+}
+.btnSalvar {
+    text-align: center;
+}
+.form {
+    display: flex;
+    gap: 10px;
+}
+.formInput {
+    margin-top: 10px;
+}
