@@ -4,6 +4,7 @@ import styles from './Perfil.module.css'
 import Reservas from '../../components/Reservas/Reservas';
 import MeusDados from '../../components/MeusDados/MeusDados';
 import ModalFoto from '../../components/MeusDados/modalFoto/ModalFoto';
+import DecoracoesEdicao from '../../components/DecoracoesEdicao/DecoracoesEdicao';
 
 const Perfil = () => {
     const [modalFoto, setModalFoto] = useState(false);
@@ -19,6 +20,7 @@ const Perfil = () => {
       <HeaderPerfil componenteAtivo={componenteParaExibir} onNomeUser={nomeUser} onEscolherComponente={handleEscolherComponente} />
       <div className={styles.box}>
         {componenteParaExibir === 'minhas-reservas' && <Reservas/>}
+        {componenteParaExibir === 'decoracao' && <DecoracoesEdicao/>}
         {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img} onSetImg={setImg} onSetNomeUser={setNomeUser} onOpenModalFoto={()=> setModalFoto(true)} />}
       </div>
       
