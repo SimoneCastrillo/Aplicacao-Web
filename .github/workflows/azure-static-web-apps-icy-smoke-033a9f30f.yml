@@ -20,17 +20,23 @@ jobs:
           submodules: true
           lfs: false
 
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build the application
+        run: npm run build
+
       - name: Build And Deploy
         id: builddeploy
+        continue-on-error: true
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_DESERT_084196A0F }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ICY_SMOKE_033A9F30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"  # Caminho para o código da aplicação (root)
-          api_location: "api"  # Se você tiver uma API, defina o caminho
-          output_location: "build"  # Local onde os arquivos de build são gerados
-        continue-on-error: true  # Ignora os erros dessa etapa e continua
+          app_location: "/" # Caminho para o código do frontend
+          api_location: "/api" # Caminho para o código da API (se houver)
+          output_location: "build" # Caminho onde os arquivos gerados pelo build estão localizados
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -41,6 +47,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_DESERT_084196A0F }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ICY_SMOKE_033A9F30F }}
           action: "close"
-        continue-on-error: true  # Ignora os erros dessa etapa e continua

@@ -13,6 +13,7 @@
     width: 794px;
     background-color: #D9D9D933;
     border-radius: 20px;
+    border: 1px solid #D9D9D9;
     padding: 30px;
   }
   .semReservaSelecionada{
@@ -83,5 +84,12 @@
 .acaoReserva {
     gap: 20px;
     display: flex;
+    align-items: center;
+}
+
+.colIconName {
+    display: flex;
+    gap: 20px;
+    width: 45%;
     align-items: center;
 }
