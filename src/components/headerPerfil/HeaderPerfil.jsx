@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
 
-const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser }) => {
-    const permissionUser = 'normal';
+const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser, onUserRole }) => {
+    const permissionUser = onUserRole;
    const [iUserImg, setIUserImg] = useState(false);
    useEffect(() => {
-    console.log(sessionStorage.getItem('img'))
+    
     if(sessionStorage.getItem('img') !== 'null' ){
         setIUserImg(true)
   }else {

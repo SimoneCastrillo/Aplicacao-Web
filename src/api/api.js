@@ -70,5 +70,68 @@ const criarOrcamento = async (orcamento) => {
         },
     });
 }
+const todosOrcamentos = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
 
-export  { listarDecoracoesPorEvento, criarUsuario, logar, atualizarUsuario, buscarUsuario, ultimas5avalaicoes, avaliacoesPorTipoDeEvento, criarOrcamento };
+    return await apiInstance.get(`/orcamentos` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const orcamentosPorIdDoUuario = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const cancelarOrcamento = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.patch(`/orcamentos/${id}/cancelamento`, null, {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const aceitarOrcamento = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.patch(`/orcamentos/${id}/confirmar`, null, {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const editarOrcamento = async (id, orcamento) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.put(`/orcamentos/${id}`, orcamento , {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    });
+}
+export  { 
+    listarDecoracoesPorEvento, 
+    criarUsuario, 
+    logar, 
+    todosOrcamentos,
+    atualizarUsuario, 
+    buscarUsuario, 
+    ultimas5avalaicoes, 
+    avaliacoesPorTipoDeEvento, 
+    criarOrcamento, 
+    orcamentosPorIdDoUuario,
+    aceitarOrcamento,
+    cancelarOrcamento,
+    editarOrcamento
+ };

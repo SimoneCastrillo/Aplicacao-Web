@@ -22,9 +22,9 @@ const CarrosselDecoracoes = forwardRef((props, ref) => {
     const fetchDecoracoes = async () => {
         try {
             const response = await listarDecoracoesPorEvento(nome); 
-            // console.log(.data);
+      
             setImages(response.data);
-            // console.log(images);
+         
             setLoading(false);
         } catch (error) {
             console.error('Erro ao buscar as decorações:', error);
