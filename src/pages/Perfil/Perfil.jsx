@@ -33,7 +33,7 @@ const Perfil = () => {
       {modalCancelarReserva && <ModalCancelarReserva onCloseModalReserva={() => setModalCancelarReserva(false)} onSetCancelarReserva={setCancelarReserva}/>}
       <HeaderPerfil componenteAtivo={componenteParaExibir} onNomeUser={nomeUser} onEscolherComponente={handleEscolherComponente} onUserRole={userRole} />
       <div className={styles.box}>
-        {componenteParaExibir === 'minhas-reservas' && <Reservas onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
+        {componenteParaExibir === 'minhas-reservas' && <Reservas onSetCancelarReserva={()=>setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
         {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img} 
         onSetImg={setImg} 
         onSetNomeUser={setNomeUser} 
@@ -42,6 +42,7 @@ const Perfil = () => {
         onDescartarAlteracoes={descartarAlteracoes}
          />}
         {componenteParaExibir === 'calendario' && <Calendario/>}
+        {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={()=>setCancelarReserva(false)} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
       </div>
       
     </div>

@@ -64,7 +64,7 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
   const styleInput = {
             
     "& .MuiOutlinedInput-notchedOutline": { 
-        borderRadius: "10px",
+        borderRadius: "5px",
         backgroundColor: '#D9D9D933',
       },
     "& .MuiInputBase-input": {
