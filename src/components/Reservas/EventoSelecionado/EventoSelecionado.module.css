@@ -20,12 +20,22 @@
     background-color: #fff;
 }
 .btnSalvar {
+    margin-top: 20px;
     text-align: center;
 }
 .form {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: flex;
     gap: 10px;
 }
 .formInput {
     margin-top: 10px;
+}
+.inputValor {
+    border-radius: 5px;
+    color: #000;
+    background-color: #F7F7F7;
+    border: 1px solid #BEBEBE;
 }

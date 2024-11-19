@@ -94,7 +94,7 @@ const cancelarOrcamento = async (id) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.patch(`/orcamentos/${id}/cancelamento`, null, {
+    return await apiInstance.patch(`/orcamentos/${id}/cancelamento`,null, {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -120,11 +120,22 @@ const editarOrcamento = async (id, orcamento) => {
         },
     });
 }
+const confirmarDadosOrcamento = async (id, orcamento) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.put(`orcamentos/${id}/confirmar-dados`, orcamento , {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    });
+}
 export  { 
     listarDecoracoesPorEvento, 
     criarUsuario, 
     logar, 
     todosOrcamentos,
+    confirmarDadosOrcamento,
     atualizarUsuario, 
     buscarUsuario, 
     ultimas5avalaicoes, 

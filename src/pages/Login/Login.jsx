@@ -61,7 +61,9 @@ const Login = () => {
         const errorMessage = typeof error.response.data === 'string'
           ? error.response.data
           : error.response.data.message || 'Erro ao tentar efetuar login. Tente novamente.';
-        toast.error(errorMessage);
+        toast.error(errorMessage, {
+          autoClose: 1000
+        });
       } else {
         toast.error('Erro ao tentar efetuar login. Tente novamente.',{
           autoClose: 1000
