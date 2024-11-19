@@ -8,6 +8,7 @@ import ModalCancelarEditar from '../../components/MeusDados/modalCancelarEditar/
 import Calendario from '../../components/Calendario/Calendario';
 import ModalCancelarReserva from '../../components/Reservas/ModalCancelarReserva/ModalCancelarReserva';
 import DecoracoesEdicao from '../../components/DecoracoesEdicao/DecoracoesEdicao';
+import AvaliacoesEdicao from '../../components/AvaliacoesEdicao/AvaliacoesEdicao';
 
 const Perfil = () => {
   const [modalFoto, setModalFoto] = useState(false);
@@ -25,6 +26,7 @@ const Perfil = () => {
 
   const handleEscolherComponente = (componente) => {
     setComponenteParaExibir(componente);
+    // console.log(componenteParaExibir)
   }
 
   return (
@@ -43,6 +45,7 @@ const Perfil = () => {
           onDescartarAlteracoes={descartarAlteracoes}
         />}
         {componenteParaExibir === 'decoracao' && <DecoracoesEdicao />}
+        {componenteParaExibir === 'avaliacao' && <AvaliacoesEdicao />}
 
         {componenteParaExibir === 'calendario' && <Calendario />}
         {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={() => setCancelarReserva(false)} openModalCacelarReserva={() => setModalCancelarReserva(true)} />}

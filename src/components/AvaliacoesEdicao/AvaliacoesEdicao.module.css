@@ -1,0 +1,147 @@
+.divTituloBotao{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.titulo{
+    font-size: 45px;
+    color: #C54477;
+    }
+
+.botaoAdicionar{
+    color: #fff;
+    background-color: #C54477;
+    width: 200px;
+    height: 45px;
+    border-radius: 16px;
+}
+
+.divBotao{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalBody {
+    display: flex;
+    gap: 20px;
+}
+
+.imageContainer {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    height: 300px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #d8d8d8;
+}
+
+.editButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d75485;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 6px;
+    font-size: 12px;
+}
+
+.fieldsContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.inputField, .textareaField {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f1f1f1;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: black;
+}
+
+.textareaField {
+    resize: none;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: center; /* Centraliza os botões */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancelButton, .saveButton {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.cancelButton {
+    background-color: none;
+    transition: 0.2s;
+    color: #f28a8a;
+    border: 1px solid #f28a8a;
+}
+
+.cancelButton:hover {
+    background-color: #d75485;
+    color: white;
+}
+
+.saveButton {
+    background-color: #d75485;
+    color: white;
+}
+
+.saveButton:hover{
+    background-color: white;
+    color: #d75485;
+    border: 1px solid #d75485;
+}
