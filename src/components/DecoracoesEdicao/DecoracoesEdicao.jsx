@@ -13,7 +13,7 @@ const DecoracoesEdicao = () => {
             <div className={styles.divTituloBotao}>
                 <h1 className={styles.titulo}>DECORAÇÕES</h1>
                 <div className={styles.divBotao}>
-                    <button className={styles.botaoAdicionar} onClick={toggleModal}>Adicionar</button>
+                    <button className='btn-default-bgRosa-perfil' onClick={toggleModal}>Adicionar</button>
                 </div>
             </div>
 
@@ -39,8 +39,8 @@ const DecoracoesEdicao = () => {
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
-                            <button onClick={toggleModal} className={styles.cancelButton}>Cancelar</button>
-                            <button className={styles.saveButton}>Salvar</button>
+                            <button onClick={toggleModal} className='btn-default-bgTransparent-perfil'>Cancelar</button>
+                            <button className='btn-default-bgRosa-perfil'>Salvar</button>
                         </div>
                     </div>
                 </div>
