@@ -6,7 +6,7 @@ import img5 from '../../assets/imgDecoracaoBanner5.jpg'
 import img6 from '../../assets/imgDecoracaoBanner6.jpg'
 import img7 from '../../assets/imgDecoracaoBanner7.jpg'
 import styles from './CarrosselHome.module.css'
-import agenda from '../../assets/agendaImg.webp'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -68,4 +68,4 @@ const CarrosselHome = () => {
   )
 }
 
-export default CarrosselHome
+export default CarrosselHome 

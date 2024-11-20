@@ -30,7 +30,9 @@ const Home = () => {
   return (
     <div >
       <Header />
+      <div className={styles.contaienrBanner}>
       <CarrosselHome />
+      </div>
       <div className={styles.container}>
       <Eventos/>
       <ComoReservar/>
