@@ -11,15 +11,16 @@ const listarDecoracoesPorEvento = async (nome) => {
     return await apiInstance.get('/decoracoes/tipo-de-evento', {
         params: {
             nome
-        }});
+        }
+    });
 }
 const criarUsuario = async (usuario) => {
     const apiInstance = api();
     return await apiInstance.post('/usuarios', usuario, {
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
-      });
+    });
 }
 const logar = async (usuario) => {
     const apiInstance = api();
@@ -31,21 +32,33 @@ const logar = async (usuario) => {
 }
 const atualizarUsuario = async (id, usuario) => {
     const apiInstance = api();
-    
+
     const token = sessionStorage.getItem('token');
 
     const headers = {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`, 
+        'Authorization': `Bearer ${token}`,
     };
 
     return await apiInstance.patch(`/usuarios/${id}`, usuario, { headers });
+}
+const criarAvaliacao = async (avaliacao) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return await apiInstance.post(`/avaliacoes`, avaliacao, { headers });
 }
 const buscarUsuario = async (id) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
     const headers = {
-        'Authorization': `Bearer ${token}`, 
+        'Authorization': `Bearer ${token}`,
     };
     return await apiInstance.get(`/usuarios/${id}`, { headers });
 }
@@ -58,15 +71,16 @@ const avaliacoesPorTipoDeEvento = async (tipoDeEvento) => {
     return await apiInstance.get('/avaliacoes/tipo-de-evento', {
         params: {
             nome: tipoDeEvento
-        }});
+        }
+    });
 }
 const criarOrcamento = async (orcamento) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.post('/orcamentos', orcamento , {
+    return await apiInstance.post('/orcamentos', orcamento, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -74,9 +88,9 @@ const todosOrcamentos = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/orcamentos` , {
+    return await apiInstance.get(`/orcamentos`, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -84,9 +98,9 @@ const orcamentosPorIdDoUuario = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}` , {
+    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}`, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -96,7 +110,7 @@ const cancelarOrcamento = async (id) => {
 
     return await apiInstance.patch(`/orcamentos/${id}/cancelamento`, null, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -106,7 +120,7 @@ const aceitarOrcamento = async (id) => {
 
     return await apiInstance.patch(`/orcamentos/${id}/confirmar`, null, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -114,24 +128,25 @@ const editarOrcamento = async (id, orcamento) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.put(`/orcamentos/${id}`, orcamento , {
+    return await apiInstance.put(`/orcamentos/${id}`, orcamento, {
         headers: {
             'Authorization': `Bearer ${token}`
         },
     });
 }
-export  { 
-    listarDecoracoesPorEvento, 
-    criarUsuario, 
-    logar, 
+export {
+    listarDecoracoesPorEvento,
+    criarUsuario,
+    logar,
+    criarAvaliacao,
     todosOrcamentos,
-    atualizarUsuario, 
-    buscarUsuario, 
-    ultimas5avalaicoes, 
-    avaliacoesPorTipoDeEvento, 
-    criarOrcamento, 
+    atualizarUsuario,
+    buscarUsuario,
+    ultimas5avalaicoes,
+    avaliacoesPorTipoDeEvento,
+    criarOrcamento,
     orcamentosPorIdDoUuario,
     aceitarOrcamento,
     cancelarOrcamento,
     editarOrcamento
- };
+};
