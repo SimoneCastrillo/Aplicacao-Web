@@ -54,6 +54,20 @@ const criarAvaliacao = async (avaliacao) => {
 
     return await apiInstance.post(`/avaliacoes`, avaliacao, { headers });
 }
+
+const atualizarAvaliacao = async (avaliacao, id) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return await apiInstance.put(`/avaliacoes/${id}`, avaliacao, { headers });
+}
+
 const buscarUsuario = async (id) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
@@ -134,9 +148,21 @@ const editarOrcamento = async (id, orcamento) => {
         },
     });
 }
+const listarTodasAvaliacoes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/avaliacoes`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+
+}
 export {
     listarDecoracoesPorEvento,
     criarUsuario,
+    listarTodasAvaliacoes,
     logar,
     criarAvaliacao,
     todosOrcamentos,
@@ -148,5 +174,6 @@ export {
     orcamentosPorIdDoUuario,
     aceitarOrcamento,
     cancelarOrcamento,
+    atualizarAvaliacao,
     editarOrcamento
 };
