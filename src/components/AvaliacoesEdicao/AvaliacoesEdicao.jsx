@@ -109,27 +109,39 @@ const AvaliacoesEdicao = () => {
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalContent}>
                         <div className={styles.modalBody}>
-                            <div className={styles.imageContainer}>
-                                <div className={styles.image}>
-                                    {foto ? (
-                                       <img 
-                                       src={foto?.name 
-                                         ? URL.createObjectURL(foto) 
-                                         : `data:image/jpeg;base64,${foto}`} 
-                                       alt="Preview" 
-                                       className={styles.previewImage} 
-                                     />
-                                    ) : (
-                                        <span>Sem imagem</span>
-                                    )}
-                                </div>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    className={styles.editButton}
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
+                        <div className={styles.imageContainer}>
+    <div className={styles.image}>
+        {foto ? (
+            <img 
+                src={foto?.name 
+                    ? URL.createObjectURL(foto) 
+                    : `data:image/jpeg;base64,${foto}`} 
+                alt="Preview" 
+                className={styles.previewImage} 
+            />
+        ) : (
+            <span>Sem imagem</span>
+        )}
+    </div>
+    
+    {/* Input de arquivo escondido */}
+    <input
+        type="file"
+        accept="image/*"
+        className={styles.hiddenInput}
+        id="fileInput"
+        onChange={handleImageUpload}
+    />
+
+    {/* Botão de lápis */}
+    <button
+        className={styles.editButton}
+        onClick={() => document.getElementById('fileInput').click()}
+    >
+        ✏️ {/* Ícone de lápis */}
+    </button>
+</div>
+
                             <div className={styles.fieldsContainer}>
                                 <label className={styles.label}>Avaliação:
                                     <input
@@ -181,7 +193,7 @@ const AvaliacoesEdicao = () => {
                 </div>
             )}
             <div className={styles.cards}>
-                {avaliacoes && avaliacoes.map((item) => (
+                {avaliacoes && avaliacoes((item) => (
                     <button
                     onClick={()=>{
                         setIsModalOpen(true);

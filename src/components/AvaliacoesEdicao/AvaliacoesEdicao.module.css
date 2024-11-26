@@ -67,19 +67,35 @@
     border-radius: 8px;
     background-color: #d8d8d8;
 }
+.hiddenInput {
+    display: none; /* Esconde o input real */
+}
 
 .editButton {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #d75485;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 6px;
-    font-size: 12px;
+    bottom: 10px; /* Ajuste fino para a posição */
+    right: 10px; /* Ajuste fino para a posição */
+    background-color: #d75485; /* Fundo semi-transparente */
+    color: white; /* Cor do lápis */
+    border: none; /* Remove bordas */
+    border-radius: 50%; /* Forma circular */
+    cursor: pointer; /* Mostra que é clicável */
+    width: 40px; /* Tamanho do botão */
+    height: 40px; /* Tamanho do botão */
+    display: flex;
+    align-items: center; /* Centraliza o ícone */
+    justify-content: center; /* Centraliza o ícone */
+    font-size: 18px; /* Tamanho do lápis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona um leve sombreamento */
+    transition: background-color 0.2s, transform 0.2s;
 }
+
+.editButton:hover {
+    background-color: #d75485; /* Fundo mais escuro no hover */
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+
 
 .previewImage {
     width: 100%;
