@@ -8,17 +8,14 @@ const DecoracoesEdicao = () => {
     const [idDecoracao, setIdDecoracao] = useState('');
     const [nome, setNome] = useState('');
     const [foto, setFoto] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [decoracoes, setDecoracoes] = useState([]); // Garantir que é um array vazio inicialmente
+    const [tipoEvento, setTipoEvento] = useState('');
+    const [decoracoes, setDecoracoes] = useState([]);
 
-    // Fetch data from API
     const fetchData = async () => {
         try {
             const response = await listarTodasDecoracoes();
-            console.log('Resposta da API:', response.data); // Log para depuração
-            setDecoracoes(Array.isArray(response.data) ? response.data : []); // Garante que é um array
+            setDecoracoes(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
-            console.error('Erro ao listar decorações:', error);
             toast.error('Erro ao carregar decorações.', { autoClose: 2000 });
         }
     };
@@ -29,6 +26,13 @@ const DecoracoesEdicao = () => {
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
+        // Reseta os campos quando o modal é fechado
+        if (isModalOpen) {
+            setIdDecoracao('');
+            setNome('');
+            setFoto('');
+            setTipoEvento('');
+        }
     };
 
     const handleImageUpload = (e) => {
@@ -42,10 +46,9 @@ const DecoracoesEdicao = () => {
         try {
             await criarDecoracao(data);
             toast.success('Decoração criada com sucesso!', { autoClose: 1000 });
-            setIsModalOpen(false);
+            toggleModal(); // Fecha o modal
             fetchData();
         } catch (error) {
-            console.error('Erro ao criar decoração:', error.response?.data || error.message);
             toast.error('Erro ao criar decoração.', { autoClose: 1000 });
         }
     };
@@ -54,10 +57,9 @@ const DecoracoesEdicao = () => {
         try {
             await atualizarDecoracao(data, idDecoracao);
             toast.success('Decoração atualizada com sucesso!', { autoClose: 1000 });
-            setIsModalOpen(false);
+            toggleModal(); // Fecha o modal
             fetchData();
         } catch (error) {
-            console.error('Erro ao atualizar decoração:', error.response?.data || error.message);
             toast.error('Erro ao atualizar decoração.', { autoClose: 1000 });
         }
     };
@@ -66,7 +68,7 @@ const DecoracoesEdicao = () => {
         const data = new FormData();
         data.append('nome', nome);
         data.append('foto', foto);
-        data.append('descricao', descricao);
+        data.append('tipoEventoId', tipoEvento);
 
         if (idDecoracao === '') {
             novaDecoracao(data);
@@ -94,11 +96,7 @@ const DecoracoesEdicao = () => {
                                 <div className={styles.image}>
                                     {foto ? (
                                         <img
-                                            src={
-                                                foto?.name
-                                                    ? URL.createObjectURL(foto)
-                                                    : `data:image/jpeg;base64,${foto}`
-                                            }
+                                            src={foto.name ? URL.createObjectURL(foto) : `data:image/jpeg;base64,${foto}`}
                                             alt="Preview"
                                             className={styles.previewImage}
                                         />
@@ -133,14 +131,21 @@ const DecoracoesEdicao = () => {
                                     />
                                 </label>
                                 <label className={styles.label}>
-                                    Descrição:
-                                    <textarea
-                                        className={styles.textareaField}
-                                        placeholder="Máximo de 200 caracteres"
-                                        rows="4"
-                                        value={descricao}
-                                        onChange={(e) => setDescricao(e.target.value)}
-                                    />
+                                    Evento:
+                                    <select
+                                        className={styles.inputField}
+                                        value={tipoEvento}
+                                        onChange={(e) => setTipoEvento(e.target.value)}
+                                    >
+                                        <option value="">Selecione</option>
+                                        <option value="1">Infantil</option>
+                                        <option value="2">Casamento</option>
+                                        <option value="3">Debutante</option>
+                                        <option value="4">Coffee Break</option>
+                                        <option value="5">Aniversário</option>
+                                        <option value="6">Aluguel_Espaço</option>
+                                        <option value="7">Outros</option>
+                                    </select>
                                 </label>
                             </div>
                         </div>
@@ -157,25 +162,30 @@ const DecoracoesEdicao = () => {
             )}
 
             <div className={styles.cards}>
-                {Array.isArray(decoracoes) && decoracoes.map((item) => (
-                    <button
-                        key={item.id}
-                        onClick={() => {
-                            setIsModalOpen(true);
-                            setIdDecoracao(item.id);
-                            setNome(item.nome);
-                            setDescricao(item.descricao);
-                            setFoto(item.foto);
-                        }}
-                        className={styles.card}
-                    >
-                        <img
-                            className={styles.cardImg}
-                            src={`data:image/jpeg;base64,${item.foto}`}
-                            alt={item.nome}
-                        />
-                    </button>
-                ))}
+                {decoracoes.length > 0 ? (
+                    decoracoes.map((item) => (
+                        <button
+                            key={item.id}
+                            onClick={() => {
+                                setIsModalOpen(true);
+                                setIdDecoracao(item.id);
+                                setNome(item.nome);
+                                setTipoEvento(item.tipoEvento?.id || '');
+                                setFoto(item.foto);
+                            }}
+                            className={styles.card}
+                        >
+                            <img
+                                className={styles.cardImg}
+                                src={`data:image/jpeg;base64,${item.foto}`}
+                                alt={item.nome || 'Decoração'}
+                            />
+                            <p className={styles.cardText}>{item.nome}</p>
+                        </button>
+                    ))
+                ) : (
+                    <p className={styles.noDataText}>Nenhuma decoração encontrada.</p>
+                )}
             </div>
         </div>
     );

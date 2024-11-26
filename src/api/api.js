@@ -188,15 +188,14 @@ const listarTodasDecoracoes = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    const response = await apiInstance.get(`/decoracoes`, {
+    return await apiInstance.get(`/decoracoes`, {
         headers: {
             'Authorization': `Bearer ${token}`,
         },
-    });
+    })
 
-    console.log('Resposta da API:', response); // Para verificar o retorno da API
-    return response.data; // Certifique-se de que response.data é um array
-};
+}
+
 
 
 export {
