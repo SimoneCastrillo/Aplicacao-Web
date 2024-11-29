@@ -1,12 +1,17 @@
 .input {
-    border: 1px solid #000;
+    border: 1px solid #BEBEBE;
     padding: 10px 0 10px 20px;
     width: 250px;
     color: #000;
+    background-color: #F7F7F7;
+
+    border-radius: 5px !important;
     display: block;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 .inputBlock {
+    border-radius: 5px !important;
+
     border: none;
     padding: 10px 0 10px 20px;
     width: 250px;
@@ -15,7 +20,7 @@
 
     background-color: #D9D9D933;
     display: block;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 .controleInfo {
     display: flex;

@@ -1,25 +1,43 @@
 import { InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import styles from './EventoSelecionado.module.css'
 import { useEffect, useState } from 'react';
-import { listarDecoracoesPorEvento, editarOrcamento } from '../../../api/api';
+import { listarDecoracoesPorEvento, editarOrcamento, confirmarDadosOrcamento } from '../../../api/api';
 import { toast } from 'react-toastify';
+import { NumericFormat } from 'react-number-format';
+
 const EventoSelecionado = ({ reservaSelecionada }) => {
+  const [reserva, setReserva] = useState(reservaSelecionada);
+  const [decoracoes, setDecoracoes] = useState([]);
+
   const [decoracao, setDecoracao] = useState('');
   const [data, setData] = useState('');
   const [qtdConvidados, setQtdConvidados] = useState('');
   const [inicio, setInicio] = useState('');
+  const [fim, setFim] = useState('');
+  const [valorTotal, setValorTotal] = useState('');
+  const [lucro, setLucro] = useState('');
+  const [despesas, setDespesas] = useState('');
+  const [pratoPrincipal, setPratoPrincipal] = useState('');
+  const [saborBolo, setSaborBolo] = useState('');
+  
   const [loading, setLoading] = useState(false);
-
+  const [userAdmin, setUserAdmin] = useState(false);
   useEffect(() => {
-    setReserva(reservaSelecionada);
-    setDecoracao(reservaSelecionada.decoracao.id);
-    setData(reservaSelecionada.dataEvento);
-    setQtdConvidados(reservaSelecionada.qtdConvidados);
-    setInicio(reservaSelecionada.inicio);
-  },[reservaSelecionada])
-
-  const [reserva, setReserva] = useState(reservaSelecionada);
-  const [decoracoes, setDecoracoes] = useState([]);
+    if (reservaSelecionada) {
+      setReserva(reservaSelecionada);
+      setDecoracao(reservaSelecionada.decoracao?.id || '');
+      setData(reservaSelecionada.dataEvento || '');
+      setQtdConvidados(reservaSelecionada.qtdConvidados || 0);
+      setInicio(reservaSelecionada.inicio || '');
+      setFim(reservaSelecionada.fim || '');
+      setValorTotal(reservaSelecionada.faturamento || 0);
+      setLucro(reservaSelecionada.lucro || 0);
+      setDespesas(reservaSelecionada.despesa || 0);
+      setPratoPrincipal(reservaSelecionada.pratoPrincipal || '');
+      setSaborBolo(reservaSelecionada.saborBolo || '');
+    }
+  }, [reservaSelecionada]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +49,9 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
       }
     }
     fetchData();
+    if(JSON.parse(sessionStorage.usuario).role === 'ADMIN'){
+      setUserAdmin(true);
+    }
   },[])
 
   const atulizarOrcamento = async () => {
@@ -38,28 +59,43 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
       "dataEvento": data,
       qtdConvidados,
       inicio,
+      fim,
+      saborBolo,
+      pratoPrincipal,
+      lucro,
+      "faturamento": valorTotal,
+      "despesa": despesas,
       "sugestao": reserva.sugestao,
       "tipoEventoId": reserva.tipoEvento.id,
-      "usuarioId": reserva.usuario.id,
       "decoracaoId": decoracao
-    }
+    };
+  
+    console.log(orcamento);
+    const acao = userAdmin ? confirmarDadosOrcamento : editarOrcamento;
+  
     setLoading(true);
-    console.log(JSON.stringify(orcamento));
-    await editarOrcamento(reserva.id ,orcamento)
-    .then((response) => {
-      setLoading(false);
-      toast.success('Orçamento atualizado com sucesso!', {
-        autoClose: 700,
+  
+    await acao(reserva.id, orcamento)
+      .then((response) => {
+        setLoading(false);
+        toast.success('Orçamento atualizado com sucesso!', {
+          autoClose: 700,
+        });
+        console.log(response);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error('Erro ao atualizar orçamento!', {
+          autoClose: 700,
+        });
+        console.log(error);
       });
-      console.log(response);
-    }).catch((error) => {
-      setLoading(false);
-      toast.error('Erro ao atualizar orçamento!', {
-        autoClose: 700,
-      });
-      console.log(error);
-    })
-  }
+  };
+
+  useEffect(() => {
+    setLucro(parseFloat(valorTotal - despesas));
+  }, [valorTotal, despesas])
+  
 
   const styleInput = {
             
@@ -72,7 +108,6 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
     },
   }
 
-  console.log(reservaSelecionada);
   return (
     <div className={styles.container}>
       <div>
@@ -105,26 +140,63 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
         value={inicio} 
         onChange={(e) => setInicio(e.target.value)}
         />
-          <InputLabel className={styles.formInput}>Valor total</InputLabel>
+        <InputLabel className={styles.formInput}>Fim</InputLabel>
           <TextField 
           sx={{
-            "& .MuiOutlinedInput-notchedOutline": { 
-              borderTop: 'none',
-              borderLeft: 'none',
-              borderRight: 'none',
-              borderBottom: 'none',
-            },
+            ...( 
+              !userAdmin && {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderTop: "none",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  borderBottom: "none",
+                },
+              }
+            ),
             "& .MuiInputBase-input": {
               padding: "7px 10px",
-              backgroundColor: '#D9D9D933',
+              backgroundColor: "#D9D9D933",
             },
             "& .MuiInputBase-root": {
-              borderRadius: "10px",
-            }
+              borderRadius: "5px",
+            },
           }}
-          disabled={JSON.parse(sessionStorage.usuario).role !== 'ADMIN'}
-          type='text' variant="outlined" />
+          value={fim} 
+          fullWidth       
+          disabled={!userAdmin}
+          onChange={(e) => setFim(e.target.value)}
+          type='time' variant="outlined" />
+          {userAdmin && (
+            <>
+            <InputLabel className={styles.formInput}>Valor total</InputLabel>
+          <NumericFormat 
+            className={styles.inputValor}
+            value={valorTotal}
+            onValueChange={(values) => setValorTotal(values.floatValue)}
+            disabled={!userAdmin}
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            decimalScale={2}
+            type="text" 
+            variant="outlined" 
+            />
 
+              <InputLabel className={styles.formInput}>Lucro</InputLabel>
+              <NumericFormat 
+            className={styles.inputValor}
+            value={lucro}
+            disabled={!userAdmin}
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            decimalScale={2}
+            type="text" 
+            variant="outlined" 
+            />
+              
+            </>
+          )}
         </div>
         <div >
         <InputLabel className={styles.formInput}>Data</InputLabel>
@@ -141,6 +213,65 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
         type='number' variant="outlined" value={qtdConvidados} 
         onChange={(e) => setQtdConvidados(e.target.value)}
         />
+        {!userAdmin && (
+          <>
+          <InputLabel className={styles.formInput}>Valor total</InputLabel>
+          <TextField 
+          sx={{
+            ...( 
+              !userAdmin && {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderTop: "none",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  borderBottom: "none",
+                },
+              }
+            ),
+            "& .MuiInputBase-input": {
+              padding: "7px 10px",
+              backgroundColor: "#D9D9D933",
+            },
+            "& .MuiInputBase-root": {
+              borderRadius: "5px",
+            },
+          }}
+                    
+          disabled={!userAdmin}
+          type='text' variant="outlined" />
+          </>
+        )}
+        {userAdmin && (
+          <>
+            <InputLabel className={styles.formInput}>Sabor do bolo</InputLabel>
+            <TextField 
+              sx={styleInput}
+              value={saborBolo}
+              onChange={(e) => setSaborBolo(e.target.value)}
+              type='text' variant="outlined" 
+            />
+            <InputLabel className={styles.formInput}>Prato principal</InputLabel>
+            <TextField 
+              sx={styleInput}
+              value={pratoPrincipal}
+              onChange={(e) => setPratoPrincipal(e.target.value)}
+              type='text' variant="outlined" 
+            />
+            <InputLabel className={styles.formInput}>Despesas</InputLabel>
+            <NumericFormat 
+            className={styles.inputValor}
+            value={despesas}
+            onValueChange={(values) => setDespesas(values.floatValue)}
+            disabled={!userAdmin}
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            decimalScale={2}
+            type="text" 
+            variant="outlined" 
+            />
+          </>
+        )}
         </div>
       </div>
       <div className={styles.btnSalvar}>

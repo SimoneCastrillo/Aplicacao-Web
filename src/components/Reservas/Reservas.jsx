@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import loadingGift from '../../assets/loading-gif.gif'
 import EventoSelecionado from './EventoSelecionado/EventoSelecionado';
-import {orcamentosPorIdDoUuario, cancelarOrcamento, todosOrcamentos, aceitarOrcamento} from '../../api/api'	
+import {orcamentosPorIdDoUuario, cancelarOrcamento, downloadCSV ,todosOrcamentos, aceitarOrcamento} from '../../api/api'	
 import { toast } from 'react-toastify';
 
 
@@ -16,6 +16,9 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
   const [idCancelar, setIdCancelar] = useState('');
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [filtro, setFiltro] = useState('Todos');
+  const [resultadosFiltros, setResultadosFiltros] = useState([]);
+
 
   useEffect(() => {
     setLoading(true);
@@ -31,15 +34,54 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
         
         setLoading(false)
         setOrcamento(response.data);
+        setResultadosFiltros(response.data);
+
         console.log(response.data);
       } catch (error) {
         setLoading(false)
         console.log(error);
       }
     };
-  
+    console.log(admin)
     fetchData(); 
   }, []);
+  const downloadDoCsv = async () => {
+    console.log('chamando');
+    
+    try {
+      const response = await downloadCSV();
+      console.log(response);
+      
+      // Conteúdo CSV recebido
+      const csvContent = response.data;
+      
+      // Criar um Blob (objeto que representa os dados do arquivo)
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      
+      // Criar um link temporário para o download
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      
+      // Definir o nome do arquivo
+      link.download = 'dados.csv';
+      
+      // Simular um clique no link para iniciar o download
+      link.click();
+    } catch (error) {
+      console.log('Erro ao baixar CSV:', error);
+    }
+  };
+  
+  useEffect(()=> {
+    if(filtro === 'Pendentes'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
+    }else if(filtro === 'Abertos'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
+    }else if(filtro === 'Todos'){
+      setResultadosFiltros(orcamento)
+    }
+    
+  },[filtro])
 
   useEffect(()=>{
     setLoading(true)
@@ -47,7 +89,20 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
     const handleCancelarReserva = async (id) => {
       let response;
       try {
-        await cancelarOrcamento(id);
+        await cancelarOrcamento(id)
+        .then((response) => {
+          toast.success('Reserva cancelada com sucesso!', {
+            autoClose: 700,
+          });
+  
+        })
+        .catch((error) => {
+          toast.error('Erro ao cancelar reserva!', {
+            autoClose: 700,
+          })
+          console.error(error)
+  
+        })
         if(!admin){
           response = await orcamentosPorIdDoUuario();
         }else {
@@ -89,7 +144,15 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
     <div>
         <div className={styles.containerHeader}>
            <h1 className='titulo-perfil'>{admin ? "Reservas" : "Minhas reservas"}</h1>
-           <Link to='/solicitar-orcamento' className='btn-default-bgRosa-perfil'>Novas reservas</Link>
+          {!admin && <Link to='/solicitar-orcamento' className='btn-default-bgRosa-perfil'>Novo Orçamento</Link>}
+          {admin && (
+            <div style={{display: 'flex', gap: '10px' }}>
+              <button onClick={()=>downloadDoCsv()} className={styles.btnFiltro}>Download CSV</button>
+              <button onClick={()=>setFiltro('Pendentes')} className={styles.btnFiltro}>Orçamentos Pendentes</button>
+              <button onClick={()=>setFiltro('Abertos')} className={styles.btnFiltro}>Orçamentos Abertos</button>
+              <button onClick={()=>setFiltro('Todos')} className={styles.btnFiltro}>Todos Orçamentos</button>
+            </div>
+          )}
         </div>
         {loading && <div style={{textAlign: 'center'}}>
           <img src={loadingGift} width={50} alt='loading' />
@@ -98,7 +161,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
           <div className={styles.containerReservas}>
           <div className={styles.listaDeReservas}>
             <ul>
-              {orcamento && orcamento.map((item) => (
+              {resultadosFiltros && resultadosFiltros.map((item) => (
                 <div 
                 key={item.id}
                 >
