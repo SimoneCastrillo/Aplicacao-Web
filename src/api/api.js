@@ -130,10 +130,104 @@ const confirmarDadosOrcamento = async (id, orcamento) => {
         },
     });
 }
+const percentualCancelados = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/percentual-cancelados` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const resumoFinanceiro = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/resumo-financeiro` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+
+const lucroPorTipoDeEvento1 = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/lucro-por-tipo-evento` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const qtdPorMes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/quantidade-por-mes` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const faturamentDespesaMes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/faturamento-despesa-por-mes` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const tipoEventoContagem = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/tipo-evento-contagem` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const downloadCSV = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/csv/download` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+
+const atualizarCalendario = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.patch(
+        `/orcamentos/atualizar-status-expirados`,
+        {}, 
+        {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        }
+    );
+};
 export  { 
+    resumoFinanceiro,
+    atualizarCalendario,
+    lucroPorTipoDeEvento1,
+    downloadCSV,
+    tipoEventoContagem,
+    percentualCancelados,
     listarDecoracoesPorEvento, 
     criarUsuario, 
     logar, 
+    qtdPorMes,
+    faturamentDespesaMes,
     todosOrcamentos,
     confirmarDadosOrcamento,
     atualizarUsuario, 

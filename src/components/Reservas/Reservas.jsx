@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import loadingGift from '../../assets/loading-gif.gif'
 import EventoSelecionado from './EventoSelecionado/EventoSelecionado';
-import {orcamentosPorIdDoUuario, cancelarOrcamento, todosOrcamentos, aceitarOrcamento} from '../../api/api'	
+import {orcamentosPorIdDoUuario, cancelarOrcamento, downloadCSV ,todosOrcamentos, aceitarOrcamento} from '../../api/api'	
 import { toast } from 'react-toastify';
 
 
@@ -45,11 +45,35 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
     console.log(admin)
     fetchData(); 
   }, []);
-
+  const downloadDoCsv = async () => {
+    console.log('chamando');
+    
+    try {
+      const response = await downloadCSV();
+      console.log(response);
+      
+      // Conteúdo CSV recebido
+      const csvContent = response.data;
+      
+      // Criar um Blob (objeto que representa os dados do arquivo)
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      
+      // Criar um link temporário para o download
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      
+      // Definir o nome do arquivo
+      link.download = 'dados.csv';
+      
+      // Simular um clique no link para iniciar o download
+      link.click();
+    } catch (error) {
+      console.log('Erro ao baixar CSV:', error);
+    }
+  };
+  
   useEffect(()=> {
-    console.log('fucnao sendo chamada')
     if(filtro === 'Pendentes'){
-      console.log('entrou no if de pendentes')
       setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
     }else if(filtro === 'Abertos'){
       setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
@@ -123,6 +147,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
           {!admin && <Link to='/solicitar-orcamento' className='btn-default-bgRosa-perfil'>Novo Orçamento</Link>}
           {admin && (
             <div style={{display: 'flex', gap: '10px' }}>
+              <button onClick={()=>downloadDoCsv()} className={styles.btnFiltro}>Download CSV</button>
               <button onClick={()=>setFiltro('Pendentes')} className={styles.btnFiltro}>Orçamentos Pendentes</button>
               <button onClick={()=>setFiltro('Abertos')} className={styles.btnFiltro}>Orçamentos Abertos</button>
               <button onClick={()=>setFiltro('Todos')} className={styles.btnFiltro}>Todos Orçamentos</button>

@@ -7,6 +7,7 @@ import ModalFoto from '../../components/MeusDados/modalFoto/ModalFoto';
 import ModalCancelarEditar from '../../components/MeusDados/modalCancelarEditar/ModalCancelarEditar';
 import Calendario from '../../components/Calendario/Calendario';
 import ModalCancelarReserva from '../../components/Reservas/ModalCancelarReserva/ModalCancelarReserva';
+import Metricas from '../../components/Metricas/Metricas';
 
 const Perfil = () => {
     const [modalFoto, setModalFoto] = useState(false);
@@ -27,12 +28,21 @@ const Perfil = () => {
     }
 
   return (
-    <div className={styles.container}>
+    <div
+        className={styles.container}
+        style={componenteParaExibir === 'metricas' ? { backgroundColor: '#EEEEEE', important: true } : {}}
+      >
       {modalFoto && <ModalFoto onSetImg={setImg} onFoto={img} onCloseModalFoto={() => setModalFoto(false)}/>}
       {modalCancelarEdit && <ModalCancelarEditar onCloseModalEdit={() => setModalCancelarEdit(false)} onSetDescartarAlteracoes={setDescartarAlteracoes}/>}
       {modalCancelarReserva && <ModalCancelarReserva onCloseModalReserva={() => setModalCancelarReserva(false)} onSetCancelarReserva={setCancelarReserva}/>}
       <HeaderPerfil componenteAtivo={componenteParaExibir} onNomeUser={nomeUser} onEscolherComponente={handleEscolherComponente} onUserRole={userRole} />
-      <div className={styles.box}>
+      <div
+          style={
+            componenteParaExibir === 'metricas'
+              ? { padding: '20px 20px' }
+              : { padding: '20px 120px' }
+          }
+        >
         {componenteParaExibir === 'minhas-reservas' && <Reservas onSetCancelarReserva={()=>setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
         {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img} 
         onSetImg={setImg} 
@@ -42,6 +52,7 @@ const Perfil = () => {
         onDescartarAlteracoes={descartarAlteracoes}
          />}
         {componenteParaExibir === 'calendario' && <Calendario/>}
+        {componenteParaExibir === 'metricas' && <Metricas/>}
         {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={()=>setCancelarReserva(false)} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
       </div>
       

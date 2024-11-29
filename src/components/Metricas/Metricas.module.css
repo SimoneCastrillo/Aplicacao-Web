@@ -1,0 +1,102 @@
+.kpis {
+    display: flex;
+    gap: 20px;
+}
+.boxKPI {
+    background-color: #fff;
+    height: 120px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.boxKPI h1, .boxKPI h2 {
+  margin: 0;
+  padding: 0;
+}
+.containerBox {
+    width: 50%;
+    margin: 0 auto;
+}
+.linha {
+    background-color: #C54477;
+    width: 100%;
+    height: 3px;
+}
+.cancelamentoConversao h1 {
+    font-size: 30px;
+    color:#C54477;
+}
+.cancelamentoConversao h2 {
+    font-size: 14px;
+    color:#B4B4B4;
+}
+.cancelamentoConversao {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
+}
+.lucroFinalizado {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    background-color: #C54477;
+}
+.faturamento {
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;   width: 25%;
+}
+.gastos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 25%;
+}
+.lucroFinalizado h2{
+    font-size: 20px;
+    text-align: center;
+    color: #F0F0F0;
+}
+.lucroFinalizado h1 {
+    font-size: 44px;
+    text-align: center;
+    color: #fff;
+}
+.faturamento h1, .gastos h1 {
+    font-size: 44px;
+    text-align: center;
+    color: #C54477;
+}
+.faturamento h2, .gastos h2 {
+    font-size: 20px;
+    text-align: center;
+    color: #B4B4B4;
+}
+.graficos {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+.grafico {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 50%;
+    height: 200px;
+}
+.grafico h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+    color: #B4B4B4;
+}
+.itemGrafico {
+    height: 180px;
+    margin: 0 auto;
+}
