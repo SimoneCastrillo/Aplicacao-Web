@@ -149,7 +149,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
             <div style={{display: 'flex', gap: '10px' }}>
               <button onClick={()=>downloadDoCsv()} className={styles.btnFiltro}>Download CSV</button>
               <button onClick={()=>setFiltro('Pendentes')} className={styles.btnFiltro}>Orçamentos Pendentes</button>
-              <button onClick={()=>setFiltro('Abertos')} className={styles.btnFiltro}>Orçamentos Abertos</button>
+              <button onClick={()=>setFiltro('Abertos')} className={styles.btnFiltro}>Orçamentos Confirmados</button>
               <button onClick={()=>setFiltro('Todos')} className={styles.btnFiltro}>Todos Orçamentos</button>
             </div>
           )}

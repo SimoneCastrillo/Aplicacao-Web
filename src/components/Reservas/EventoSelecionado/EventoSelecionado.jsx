@@ -55,20 +55,42 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
   },[])
 
   const atulizarOrcamento = async () => {
-    const orcamento = {
-      "dataEvento": data,
-      qtdConvidados,
-      inicio,
-      fim,
-      saborBolo,
-      pratoPrincipal,
-      lucro,
-      "faturamento": valorTotal,
-      "despesa": despesas,
-      "sugestao": reserva.sugestao,
-      "tipoEventoId": reserva.tipoEvento.id,
-      "decoracaoId": decoracao
-    };
+    let orcamento;
+
+    if(userAdmin) {
+      orcamento = {
+        "dataEvento": data,
+        qtdConvidados,
+        inicio,
+        fim,
+        saborBolo,
+        pratoPrincipal,
+        lucro,
+        "faturamento": valorTotal,
+        "despesa": despesas,
+        "sugestao": reserva.sugestao,
+        "tipoEventoId": reserva.tipoEvento.id,
+        "decoracaoId": decoracao
+      };
+    } else {
+      orcamento = {
+        "dataEvento": data,
+        qtdConvidados,
+        inicio,
+        fim,
+        saborBolo,
+        pratoPrincipal,
+        lucro,
+        "faturamento": valorTotal,
+        "despesa": despesas,
+        "sugestao": reserva.sugestao,
+        "tipoEventoId": reserva.tipoEvento.id,
+        "usuarioId": JSON.parse(sessionStorage.usuario).id,
+        "decoracaoId": decoracao
+      };
+    }
+
+    
   
     console.log(orcamento);
     const acao = userAdmin ? confirmarDadosOrcamento : editarOrcamento;

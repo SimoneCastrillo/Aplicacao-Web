@@ -19,7 +19,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
   
   const [quantidadePessoas, setQuantidadePessoas] = useState('');
   
-  const [tipoEvento, setTipoEvento] = useState('infantil');
+  const [tipoEvento, setTipoEvento] = useState(1);
   
   const [decoracao, setDecoracao] = useState('');
 
@@ -74,7 +74,8 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
     const horarioFormatado = horario.split(".")[0];
 
     
-    console.log(decoracao)
+    console.log(tipoEvento)
+    
     const orcamento = {
         dataEvento: data,
         qtdConvidados: Number(quantidadePessoas),
