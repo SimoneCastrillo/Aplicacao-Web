@@ -132,7 +132,15 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
       })
       setLoading(false)
     });
-    await todosOrcamentos()
+    const response = await todosOrcamentos()
+    setOrcamento(response.data);
+    if(filtro === 'Pendentes'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
+    }else if(filtro === 'Abertos'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
+    }else if(filtro === 'Todos'){
+      setResultadosFiltros(orcamento)
+    }
   }
   return (
     <div>
