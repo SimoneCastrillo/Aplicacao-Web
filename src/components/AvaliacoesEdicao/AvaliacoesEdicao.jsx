@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './AvaliacoesEdicao.module.css';
-import { criarAvaliacao, listarTodasAvaliacoes, atualizarAvaliacao } from '../../api/api';
+import { criarAvaliacao, listarTodasAvaliacoes, atualizarAvaliacao, deleteAvaliacoes } from '../../api/api';
 import { toast } from 'react-toastify';
 
 const AvaliacoesEdicao = () => {
@@ -9,7 +9,7 @@ const AvaliacoesEdicao = () => {
     const [avaliacao, setAvaliacao] = useState('');
     const [foto, setFoto] = useState('');
     const [tipoEvento, setTipoEvento] = useState('');
-    const [descricao, setDescricao] = useState('');
+    const [descricao, setDescricao] = useState(''); // Campo para descrição
     const [avaliacoes, setAvaliacoes] = useState([]); // Inicializado como array vazio
 
     const fetchData = async () => {
@@ -27,8 +27,25 @@ const AvaliacoesEdicao = () => {
         fetchData();
     }, []);
 
-    const toggleModal = () => {
+    const toggleModal = (isEditing = false, item = null) => {
         setIsModalOpen(!isModalOpen);
+
+        if (!isEditing) {
+            // Resetar campos ao adicionar
+            setIdAvaliacao('');
+            setAvaliacao('');
+            setFoto('');
+            setTipoEvento('');
+            setDescricao('');
+        } else if (item) {
+            console.log(item); // Depuração para verificar o objeto recebido
+            // Preencher campos ao editar
+            setIdAvaliacao(item.id);
+            setAvaliacao(item.texto || ''); // Garantir que texto seja preenchido ou vazio
+            setTipoEvento(item.tipoEvento?.id || ''); // Validação defensiva
+            setDescricao(item.descricao || ''); // Adicionar descrição corretamente
+            setFoto(item.foto);
+        }
     };
 
     const handleImageUpload = (e) => {
@@ -63,11 +80,30 @@ const AvaliacoesEdicao = () => {
         }
     };
 
+    const handleRemoverAvaliacao = async () => {
+        try {
+            await deleteAvaliacoes(idAvaliacao);
+            toast.success('Avaliação removida com sucesso!', { autoClose: 1000 });
+            toggleModal();
+            fetchData();
+        } catch (error) {
+            toast.error('Erro ao remover avaliação.', { autoClose: 1000 });
+        }
+    };
+
     const handleClickSave = () => {
         const data = new FormData();
         data.append('texto', avaliacao);
-        data.append('foto', foto);
+
+        // Verifica se foto é arquivo ou Base64 e adiciona corretamente
+        if (foto && foto.name) {
+            data.append('foto', foto); // Arquivo
+        } else if (typeof foto === 'string') {
+            data.append('fotoBase64', foto); // String Base64 para edição
+        }
+
         data.append('tipoEventoId', tipoEvento);
+        data.append('descricao', descricao); // Adiciona a descrição no envio
         data.append('nomeCliente', 'Robson');
 
         if (idAvaliacao === '') {
@@ -82,7 +118,7 @@ const AvaliacoesEdicao = () => {
             <div className={styles.divTituloBotao}>
                 <h1 className={styles.titulo}>AVALIAÇÕES</h1>
                 <div className={styles.divBotao}>
-                    <button className="btn-default-bgRosa-perfil" onClick={toggleModal}>
+                    <button className="btn-default-bgRosa-perfil" onClick={() => toggleModal(false)}>
                         Adicionar
                     </button>
                 </div>
@@ -165,9 +201,17 @@ const AvaliacoesEdicao = () => {
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
-                            <button onClick={toggleModal} className="btn-default-bgTransparent-perfil">
+                            <button onClick={() => toggleModal(false)} className="btn-default-bgTransparent-perfil">
                                 Cancelar
                             </button>
+                            {idAvaliacao&& (
+                                <button
+                                    onClick={handleRemoverAvaliacao}
+                                    className="btn-default-bgTransparent-perfil"
+                                >
+                                    Remover
+                                </button>
+                            )}
                             <button
                                 className="btn-default-bgRosa-perfil"
                                 onClick={handleClickSave}
@@ -183,15 +227,7 @@ const AvaliacoesEdicao = () => {
                     avaliacoes.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => {
-                                setIsModalOpen(true);
-                                setIdAvaliacao(item.id);
-                                setAvaliacao(item.texto);
-                                setTipoEvento(item.tipoEvento.id);
-                                setDescricao(item.descricao);
-                                setFoto(item.foto);
-                                console.log(item.foto);
-                            }}
+                            onClick={() => toggleModal(true, item)}
                             className={styles.card}
                         >
                             <img

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DecoracoesEdicao.module.css';
-import { criarDecoracao, listarTodasDecoracoes, atualizarDecoracao } from '../../api/api';
+import { criarDecoracao, listarTodasDecoracoes, atualizarDecoracao, deleteDecoracoes } from '../../api/api';
 import { toast } from 'react-toastify';
 
 const DecoracoesEdicao = () => {
@@ -16,6 +16,7 @@ const DecoracoesEdicao = () => {
             const response = await listarTodasDecoracoes();
             setDecoracoes(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
+            console.error('Erro ao carregar decorações:', error);
             toast.error('Erro ao carregar decorações.', { autoClose: 2000 });
         }
     };
@@ -24,14 +25,21 @@ const DecoracoesEdicao = () => {
         fetchData();
     }, []);
 
-    const toggleModal = () => {
+    const toggleModal = (isEditing = false, item = null) => {
         setIsModalOpen(!isModalOpen);
-        // Reseta os campos quando o modal é fechado
-        if (isModalOpen) {
+
+        if (!isEditing) {
+            // Resetar campos ao adicionar
             setIdDecoracao('');
             setNome('');
             setFoto('');
             setTipoEvento('');
+        } else if (item) {
+            // Preencher campos ao editar
+            setIdDecoracao(item.id);
+            setNome(item.nome || '');
+            setFoto(item.foto || '');
+            setTipoEvento(item.tipoEvento?.id || '');
         }
     };
 
@@ -46,9 +54,10 @@ const DecoracoesEdicao = () => {
         try {
             await criarDecoracao(data);
             toast.success('Decoração criada com sucesso!', { autoClose: 1000 });
-            toggleModal(); // Fecha o modal
+            setIsModalOpen(false);
             fetchData();
         } catch (error) {
+            console.error('Erro ao criar decoração:', error.response?.data || error.message);
             toast.error('Erro ao criar decoração.', { autoClose: 1000 });
         }
     };
@@ -57,17 +66,36 @@ const DecoracoesEdicao = () => {
         try {
             await atualizarDecoracao(data, idDecoracao);
             toast.success('Decoração atualizada com sucesso!', { autoClose: 1000 });
-            toggleModal(); // Fecha o modal
+            setIsModalOpen(false);
             fetchData();
         } catch (error) {
+            console.error('Erro ao atualizar decoração:', error.response?.data || error.message);
             toast.error('Erro ao atualizar decoração.', { autoClose: 1000 });
+        }
+    };
+
+    const handleRemoverDecoracao = async () => {
+        try {
+            await deleteDecoracoes(idDecoracao);
+            toast.success('Decoração removida com sucesso!', { autoClose: 1000 });
+            setIsModalOpen(false);
+            fetchData();
+        } catch (error) {
+            console.error('Erro ao remover decoração:', error.response?.data || error.message);
+            toast.error('Erro ao remover decoração.', { autoClose: 1000 });
         }
     };
 
     const handleClickSave = () => {
         const data = new FormData();
         data.append('nome', nome);
-        data.append('foto', foto);
+
+        if (foto?.name) {
+            data.append('foto', foto); // Adiciona o arquivo se for um novo
+        } else if (typeof foto === 'string') {
+            data.append('fotoBase64', foto); // Caso seja uma string Base64
+        }
+
         data.append('tipoEventoId', tipoEvento);
 
         if (idDecoracao === '') {
@@ -82,7 +110,7 @@ const DecoracoesEdicao = () => {
             <div className={styles.divTituloBotao}>
                 <h1 className={styles.titulo}>DECORAÇÕES</h1>
                 <div className={styles.divBotao}>
-                    <button className="btn-default-bgRosa-perfil" onClick={toggleModal}>
+                    <button className="btn-default-bgRosa-perfil" onClick={() => toggleModal(false)}>
                         Adicionar
                     </button>
                 </div>
@@ -96,7 +124,11 @@ const DecoracoesEdicao = () => {
                                 <div className={styles.image}>
                                     {foto ? (
                                         <img
-                                            src={foto.name ? URL.createObjectURL(foto) : `data:image/jpeg;base64,${foto}`}
+                                            src={
+                                                foto?.name
+                                                    ? URL.createObjectURL(foto)
+                                                    : `data:image/jpeg;base64,${foto}`
+                                            }
                                             alt="Preview"
                                             className={styles.previewImage}
                                         />
@@ -150,10 +182,18 @@ const DecoracoesEdicao = () => {
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
-                            <button onClick={toggleModal} className="btn-default-bgTransparent-perfil">
+                            <button onClick={() => toggleModal(false)} className="btn-default-bgTransparent-perfil">
                                 Cancelar
                             </button>
-                            <button className="btn-default-bgRosa-perfil" onClick={handleClickSave}>
+                            {idDecoracao && (
+                                <button
+                                    onClick={handleRemoverDecoracao}
+                                    className="btn-default-bgTransparent-perfil"
+                                >
+                                    Remover
+                                </button>
+                            )}
+                            <button className="btn-default-bgRosa-perfil" onClick={atualizarDecoracaoJS}>
                                 Salvar
                             </button>
                         </div>
@@ -166,13 +206,7 @@ const DecoracoesEdicao = () => {
                     decoracoes.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => {
-                                setIsModalOpen(true);
-                                setIdDecoracao(item.id);
-                                setNome(item.nome);
-                                setTipoEvento(item.tipoEvento?.id || '');
-                                setFoto(item.foto);
-                            }}
+                            onClick={() => toggleModal(true, item)}
                             className={styles.card}
                         >
                             <img

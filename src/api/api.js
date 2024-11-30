@@ -196,9 +196,33 @@ const listarTodasDecoracoes = async () => {
 
 }
 
+const deleteDecoracoes = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.delete(`/decoracoes/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+}
+
+const deleteAvaliacoes = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.delete(`/avaliacoes/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+}
+
 
 
 export {
+    deleteAvaliacoes,
+    deleteDecoracoes,
     listarTodasDecoracoes,
     criarDecoracao,
     atualizarDecoracao,
