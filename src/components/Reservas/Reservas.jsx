@@ -52,20 +52,15 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
       const response = await downloadCSV();
       console.log(response);
       
-      // Conteúdo CSV recebido
       const csvContent = response.data;
       
-      // Criar um Blob (objeto que representa os dados do arquivo)
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       
-      // Criar um link temporário para o download
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       
-      // Definir o nome do arquivo
       link.download = 'dados.csv';
       
-      // Simular um clique no link para iniciar o download
       link.click();
     } catch (error) {
       console.log('Erro ao baixar CSV:', error);
@@ -85,7 +80,6 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
 
   useEffect(()=>{
     setLoading(true)
-    // console.log(onCancelarReserva);
     const handleCancelarReserva = async (id) => {
       let response;
       try {
@@ -126,7 +120,6 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
   const handleAceitarOrcamento = async (id) => {
     setLoading(true)
     await aceitarOrcamento(id)
-    await todosOrcamentos()
     .then((response) => {
       toast.success('Orçamento aceito com sucesso!', {
         autoClose: 700,
@@ -139,6 +132,15 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
       })
       setLoading(false)
     });
+    const response = await todosOrcamentos()
+    setOrcamento(response.data);
+    if(filtro === 'Pendentes'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
+    }else if(filtro === 'Abertos'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
+    }else if(filtro === 'Todos'){
+      setResultadosFiltros(orcamento)
+    }
   }
   return (
     <div>
