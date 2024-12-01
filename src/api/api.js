@@ -6,11 +6,11 @@ const api = () => {
     });
 }
 
-const listarDecoracoesPorEvento = async (nome) => {
+const listarDecoracoesPorEvento = async (tipoEventoId) => {
     const apiInstance = api();
     return await apiInstance.get('/decoracoes/tipo-de-evento', {
         params: {
-            nome
+            tipoEventoId
         }});
 }
 const criarUsuario = async (usuario) => {
