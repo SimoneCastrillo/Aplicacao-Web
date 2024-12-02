@@ -118,30 +118,35 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
   },[onCancelarReserva])
  
   const handleAceitarOrcamento = async (id) => {
-    setLoading(true)
-    await aceitarOrcamento(id)
-    .then((response) => {
+    setLoading(true);
+    try {
+      await aceitarOrcamento(id);
       toast.success('Orçamento aceito com sucesso!', {
         autoClose: 700,
       });
-      setLoading(false)
-    })
-    .catch((error) => {
+  
+      const updatedOrcamento = orcamento.map((item) =>
+        item.id === id ? { ...item, status: 'CONFIRMADO' } : item
+      );
+      setOrcamento(updatedOrcamento);
+  
+      if (filtro === 'Pendentes') {
+        setResultadosFiltros(updatedOrcamento.filter((item) => item.status === 'PENDENTE'));
+      } else if (filtro === 'Abertos') {
+        setResultadosFiltros(updatedOrcamento.filter((item) => item.status === 'CONFIRMADO'));
+      } else {
+        setResultadosFiltros(updatedOrcamento);
+      }
+  
+      setLoading(false);
+    } catch (error) {
       toast.error('Erro ao aceitar orçamento!', {
         autoClose: 700,
-      })
-      setLoading(false)
-    });
-    const response = await todosOrcamentos()
-    setOrcamento(response.data);
-    if(filtro === 'Pendentes'){
-      setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
-    }else if(filtro === 'Abertos'){
-      setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
-    }else if(filtro === 'Todos'){
-      setResultadosFiltros(orcamento)
+      });
+      setLoading(false);
     }
-  }
+  };
+  
   return (
     <div>
         <div className={styles.containerHeader}>
