@@ -36,13 +36,14 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
       setPratoPrincipal(reservaSelecionada.pratoPrincipal || '');
       setSaborBolo(reservaSelecionada.saborBolo || '');
     }
+    console.log('valor total', valorTotal)
   }, [reservaSelecionada]);
   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await listarDecoracoesPorEvento(reservaSelecionada.tipoEvento.nome);
+        const response = await listarDecoracoesPorEvento(reservaSelecionada.tipoEvento.id);
         setDecoracoes(response.data);
       } catch (error) {
         console.log(error);
@@ -141,7 +142,7 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
         </h3>
       </div>
       <div className={styles.form}>
-        <div >
+        <div style={{width: '50%'}}>
         <InputLabel className={styles.formInput}>Decorações</InputLabel>
         <Select
           fullWidth
@@ -258,7 +259,7 @@ const EventoSelecionado = ({ reservaSelecionada }) => {
               borderRadius: "5px",
             },
           }}
-                    
+          value={valorTotal}        
           disabled={!userAdmin}
           type='text' variant="outlined" />
           </>

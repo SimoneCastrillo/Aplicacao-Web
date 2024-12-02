@@ -30,6 +30,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
             response = await todosOrcamentos();
         }else {
           response = await orcamentosPorIdDoUuario();
+          console.log(response.data)
         }
         
         setLoading(false)
@@ -189,6 +190,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
                     {item.status !== "CANCELADO" && (<div className={styles.acaoReserva}>
                       
                       <button onClick={()=>{
+                        console.log(item)
                         setReservaSelecionada(item);
                       }}><img src={pincel} alt="editar" width={'18px'}/></button>
                       {admin && item.status === "PENDENTE" &&

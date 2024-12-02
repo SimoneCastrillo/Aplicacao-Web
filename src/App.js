@@ -32,7 +32,7 @@ function App() {
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/login" element={<Login />} />
       <Route path="/recuperar-senha" element={<RecuperarSenha />} />
-      <Route path="/perfil" element={<Perfil />} />
+      <Route path="/perfil/:abaPerfil" element={<Perfil />} />
       <Route path="/solicitar-orcamento" element={logado ? <SolicitarOrcamento /> : <Login />} />
       <Route path="*" element={<h1>Not Found</h1>} />
     </Routes>

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
 
-const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser, onUserRole }) => {
+const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
     const permissionUser = onUserRole;
    const [iUserImg, setIUserImg] = useState(false);
    useEffect(() => {
@@ -27,64 +27,64 @@ const HeaderPerfil = ({ onEscolherComponente, componenteAtivo, onNomeUser, onUse
                         {permissionUser === 'admin' && (
                             <>
                                 <li>
-                                    <button 
+                                    <Link to='/perfil/reservas'
                                         className={componenteAtivo === 'reservas' ? styles.active : ''} 
-                                        onClick={() => onEscolherComponente('reservas')}
+                                        
                                     >
                                         Reservas
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button 
+                                    <Link to='/perfil/metricas'
                                         className={componenteAtivo === 'metricas' ? styles.active : ''} 
-                                        onClick={() => onEscolherComponente('metricas')}
+                                    
                                     >
                                         Métricas
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button 
+                                    <Link to='/perfil/calendario'
                                         className={componenteAtivo === 'calendario' ? styles.active : ''} 
-                                        onClick={() => onEscolherComponente('calendario')}
+                                   
                                     >
                                         Calendário
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button 
+                                    <Link to='/perfil/decoracao'
                                         className={componenteAtivo === 'decoracao' ? styles.active : ''} 
-                                        onClick={() => onEscolherComponente('decoracao')}
+                             
                                     >
                                         Decorações
-                                    </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button 
+                                    <Link to='/perfil/avaliacao'
                                         className={componenteAtivo === 'avaliacao' ? styles.active : ''} 
-                                        onClick={() => onEscolherComponente('avaliacao')}
+                                  
                                     >
                                         Avaliações
-                                    </button>
+                                    </Link>
                                 </li>
                             </>
                         )}
                         {permissionUser !== 'admin' && (
                             <li>
-                                <button 
+                                <Link to='/perfil/minhas-reservas'
                                     className={componenteAtivo === 'minhas-reservas' ? styles.active : ''} 
-                                    onClick={() => onEscolherComponente('minhas-reservas')}
+                             
                                 >
                                     Minhas Reservas
-                                </button>
+                                </Link>
                             </li>
                         )}
                         <li>
-                            <button 
+                            <Link to='/perfil/meus-dados'
                                 className={componenteAtivo === 'meus-dados' ? styles.active : ''} 
-                                onClick={() => onEscolherComponente('meus-dados')}
+                        
                             >
                                 Meus dados
-                            </button>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

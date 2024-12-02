@@ -50,7 +50,7 @@ const Login = () => {
         autoClose: 600
       });
       setTimeout(()=>{
-        navigate('/perfil');
+        navigate('/perfil/meus-dados');
       }, 1000)
       setLoading(false);
 

@@ -10,6 +10,7 @@ import ModalCancelarReserva from '../../components/Reservas/ModalCancelarReserva
 import DecoracoesEdicao from '../../components/DecoracoesEdicao/DecoracoesEdicao';
 import AvaliacoesEdicao from '../../components/AvaliacoesEdicao/AvaliacoesEdicao';
 import Metricas from '../../components/Metricas/Metricas';
+import { useParams } from 'react-router-dom';
 
 
 const Perfil = () => {
@@ -23,43 +24,40 @@ const Perfil = () => {
   const [cancelarReserva, setCancelarReserva] = useState(false);
 
   const [nomeUser, setNomeUser] = useState('');
-  const [componenteParaExibir, setComponenteParaExibir] = useState('meus-dados');
+  const { abaPerfil } = useParams();
   const [userRole, setUserRole] = useState('normal');
 
-  const handleEscolherComponente = (componente) => {
-    setComponenteParaExibir(componente);
-
-  }
+ 
 
   return (
     <div
         className={styles.container}
-        style={componenteParaExibir === 'metricas' ? { backgroundColor: '#EEEEEE', important: true } : {}}
+        style={abaPerfil === 'metricas' ? { backgroundColor: '#EEEEEE', important: true } : {}}
       >
       {modalFoto && <ModalFoto onSetImg={setImg} onFoto={img} onCloseModalFoto={() => setModalFoto(false)}/>}
       {modalCancelarEdit && <ModalCancelarEditar onCloseModalEdit={() => setModalCancelarEdit(false)} onSetDescartarAlteracoes={setDescartarAlteracoes}/>}
       {modalCancelarReserva && <ModalCancelarReserva onCloseModalReserva={() => setModalCancelarReserva(false)} onSetCancelarReserva={setCancelarReserva}/>}
-      <HeaderPerfil componenteAtivo={componenteParaExibir} onNomeUser={nomeUser} onEscolherComponente={handleEscolherComponente} onUserRole={userRole} />
+      <HeaderPerfil componenteAtivo={abaPerfil} onNomeUser={nomeUser}  onUserRole={userRole} />
       <div
           style={
-            componenteParaExibir === 'metricas'
+            abaPerfil === 'metricas'
               ? { padding: '20px 20px' }
               : { padding: '20px 120px' }
           }
         >
-        {componenteParaExibir === 'minhas-reservas' && <Reservas onSetCancelarReserva={()=>setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
-        {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img} 
+        {abaPerfil === 'minhas-reservas' && <Reservas onSetCancelarReserva={()=>setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
+        {abaPerfil === 'meus-dados' && <MeusDados onImg={img} 
         onSetImg={setImg} 
         onSetNomeUser={setNomeUser} 
         onSetUserRole={setUserRole}
         onOpenModalCancelarEditar={()=>setModalCancelarEdit(true)} onOpenModalFoto={()=> setModalFoto(true)} 
         onDescartarAlteracoes={descartarAlteracoes}
          />}
-        {componenteParaExibir === 'decoracao' && <DecoracoesEdicao />}
-        {componenteParaExibir === 'avaliacao' && <AvaliacoesEdicao />}
-        {componenteParaExibir === 'calendario' && <Calendario/>}
-        {componenteParaExibir === 'metricas' && <Metricas/>}
-        {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={()=>setCancelarReserva(false)} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
+        {abaPerfil === 'decoracao' && <DecoracoesEdicao />}
+        {abaPerfil === 'avaliacao' && <AvaliacoesEdicao />}
+        {abaPerfil === 'calendario' && <Calendario/>}
+        {abaPerfil === 'metricas' && <Metricas/>}
+        {abaPerfil === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={()=>setCancelarReserva(false)} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
       </div>
 
     </div>

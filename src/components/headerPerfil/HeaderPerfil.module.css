@@ -34,7 +34,7 @@
 }
 .container nav ul {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 .container nav ul li {
     list-style: none;
