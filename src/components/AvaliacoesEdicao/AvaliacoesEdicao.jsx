@@ -43,7 +43,7 @@ const AvaliacoesEdicao = () => {
             setIdAvaliacao(item.id);
             setAvaliacao(item.texto || ''); // Garantir que texto seja preenchido ou vazio
             setTipoEvento(item.tipoEvento?.id || ''); // Validação defensiva
-            setDescricao(item.descricao || ''); // Adicionar descrição corretamente
+            setDescricao(item.nomeCliente || ''); // Adicionar descrição corretamente
             setFoto(item.foto);
         }
     };
@@ -103,8 +103,8 @@ const AvaliacoesEdicao = () => {
         }
 
         data.append('tipoEventoId', tipoEvento);
-        data.append('descricao', descricao); // Adiciona a descrição no envio
-        data.append('nomeCliente', 'Robson');
+        data.append('nomeCliente', descricao); // Adiciona a descrição no envio
+        
 
         if (idAvaliacao === '') {
             novaAvaliacao(data);
@@ -223,7 +223,7 @@ const AvaliacoesEdicao = () => {
                 </div>
             )}
             <div className={styles.cards}>
-                {Array.isArray(avaliacoes) &&
+                {avaliacoes.length > 0 ? (
                     avaliacoes.map((item) => (
                         <button
                             key={item.id}
@@ -233,10 +233,14 @@ const AvaliacoesEdicao = () => {
                             <img
                                 className={styles.cardImg}
                                 src={`data:image/jpeg;base64,${item.foto}`}
-                                alt={item.texto}
+                                alt={item.nome || 'Avaliacao'}
                             />
+                            <p className={styles.cardText}>{item.texto}</p>
                         </button>
-                    ))}
+                    ))
+                ) : (
+                    <p className={styles.noDataText}>Nenhuma avaliação encontrada.</p>
+                )}
             </div>
         </div>
     );

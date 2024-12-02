@@ -182,6 +182,7 @@ const atualizarDecoracao = async (decoracao, id) => {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`,
     };
+    return await apiInstance.put(`/decoracoes/${id}`, decoracao, { headers });
 }
 
 const listarTodasDecoracoes = async () => {

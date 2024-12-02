@@ -193,7 +193,7 @@ const DecoracoesEdicao = () => {
                                     Remover
                                 </button>
                             )}
-                            <button className="btn-default-bgRosa-perfil" onClick={atualizarDecoracaoJS}>
+                            <button className="btn-default-bgRosa-perfil" onClick={handleClickSave}>
                                 Salvar
                             </button>
                         </div>
