@@ -17,9 +17,9 @@ const criarUsuario = async (usuario) => {
     const apiInstance = api();
     return await apiInstance.post('/usuarios', usuario, {
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
-      });
+    });
 }
 const logar = async (usuario) => {
     const apiInstance = api();
@@ -31,21 +31,47 @@ const logar = async (usuario) => {
 }
 const atualizarUsuario = async (id, usuario) => {
     const apiInstance = api();
-    
+
     const token = sessionStorage.getItem('token');
 
     const headers = {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`, 
+        'Authorization': `Bearer ${token}`,
     };
 
     return await apiInstance.patch(`/usuarios/${id}`, usuario, { headers });
 }
+const criarAvaliacao = async (avaliacao) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return await apiInstance.post(`/avaliacoes`, avaliacao, { headers });
+}
+
+const atualizarAvaliacao = async (avaliacao, id) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return await apiInstance.put(`/avaliacoes/${id}`, avaliacao, { headers });
+}
+
 const buscarUsuario = async (id) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
     const headers = {
-        'Authorization': `Bearer ${token}`, 
+        'Authorization': `Bearer ${token}`,
     };
     return await apiInstance.get(`/usuarios/${id}`, { headers });
 }
@@ -58,15 +84,16 @@ const avaliacoesPorTipoDeEvento = async (tipoDeEvento) => {
     return await apiInstance.get('/avaliacoes/tipo-de-evento', {
         params: {
             nome: tipoDeEvento
-        }});
+        }
+    });
 }
 const criarOrcamento = async (orcamento) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.post('/orcamentos', orcamento , {
+    return await apiInstance.post('/orcamentos', orcamento, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -74,9 +101,9 @@ const todosOrcamentos = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/orcamentos` , {
+    return await apiInstance.get(`/orcamentos`, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -84,9 +111,9 @@ const orcamentosPorIdDoUuario = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}` , {
+    return await apiInstance.get(`/orcamentos/usuario/${JSON.parse(sessionStorage.usuario).id}`, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -96,7 +123,7 @@ const cancelarOrcamento = async (id) => {
 
     return await apiInstance.patch(`/orcamentos/${id}/cancelamento`,null, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -106,7 +133,7 @@ const aceitarOrcamento = async (id) => {
 
     return await apiInstance.patch(`/orcamentos/${id}/confirmar`, null, {
         headers: {
-            'Authorization': `Bearer ${token}`, 
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -114,7 +141,7 @@ const editarOrcamento = async (id, orcamento) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.put(`/orcamentos/${id}`, orcamento , {
+    return await apiInstance.put(`/orcamentos/${id}`, orcamento, {
         headers: {
             'Authorization': `Bearer ${token}`
         },
@@ -147,6 +174,76 @@ const resumoFinanceiro = async () => {
     return await apiInstance.get(`/admin/dashboard/resumo-financeiro` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const listarTodasAvaliacoes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/avaliacoes`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+
+}
+
+const criarDecoracao = async (decoracao) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return await apiInstance.post(`/decoracoes`, decoracao, { headers });
+}
+
+const atualizarDecoracao = async (decoracao, id) => {
+    const apiInstance = api();
+
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+    return await apiInstance.put(`/decoracoes/${id}`, decoracao, { headers });
+}
+
+const listarTodasDecoracoes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/decoracoes`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+
+}
+
+const deleteDecoracoes = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.delete(`/decoracoes/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+}
+
+const deleteAvaliacoes = async (id) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.delete(`/avaliacoes/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
         },
     });
 }
@@ -217,6 +314,13 @@ const atualizarCalendario = async () => {
     );
 };
 export  { 
+    listarTodasAvaliacoes,
+    deleteAvaliacoes,
+    criarAvaliacao,
+    atualizarDecoracao,
+    deleteDecoracoes,
+    criarDecoracao,
+
     resumoFinanceiro,
     atualizarCalendario,
     lucroPorTipoDeEvento1,
@@ -238,5 +342,7 @@ export  {
     orcamentosPorIdDoUuario,
     aceitarOrcamento,
     cancelarOrcamento,
+    listarTodasDecoracoes,
+    atualizarAvaliacao,
     editarOrcamento
- };
+};

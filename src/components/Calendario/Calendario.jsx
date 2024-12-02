@@ -4,6 +4,7 @@ const Calendario = () => {
   const atualizar = async () => {
     try {
       await atualizarCalendario().then((response) => {console.log(response)})
+      window.location.reload()
     } catch (error) {
       console.log(error);
     }

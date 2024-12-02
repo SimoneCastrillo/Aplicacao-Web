@@ -27,6 +27,7 @@
     height: 400px;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-right: 5px;
     display: flex;
     gap: 10px;
 }
