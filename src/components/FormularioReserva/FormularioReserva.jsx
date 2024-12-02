@@ -19,7 +19,7 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
   
   const [quantidadePessoas, setQuantidadePessoas] = useState('');
   
-  const [tipoEvento, setTipoEvento] = useState('infantil');
+  const [tipoEvento, setTipoEvento] = useState(1);
   
   const [decoracao, setDecoracao] = useState('');
 
@@ -74,17 +74,18 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
     const horarioFormatado = horario.split(".")[0];
 
     
-
+    console.log(tipoEvento)
+    
     const orcamento = {
         dataEvento: data,
         qtdConvidados: Number(quantidadePessoas),
         "inicio" : horarioFormatado,
         sugestao,
-        tipoEventoId: 1,
+        tipoEventoId: tipoEvento,
         usuarioId: JSON.parse(sessionStorage.usuario).id,
         decoracaoId: decoracao
       }
-  
+      console.log(orcamento)
     await criarOrcamento(orcamento).then((res)=>{
       setLoading(false);
       console.log(res)
@@ -134,10 +135,10 @@ Observação: ${sugestao || 'N/A'}`;
                       setTipoEvento(e.target.value)
                     }}>
                       <option value="1">Infantil</option>
-                      <option value="2">Debutante</option>
-                      <option value="3">Casamento</option>
-                      <option value="4">Aniversário</option>
-                      <option value="5">Coffe Break</option>
+                      <option value="3">Debutante</option>
+                      <option value="2">Casamento</option>
+                      <option value="5">Aniversário</option>
+                      <option value="4">Coffe Break</option>
                       <option value="6">Alugar espaço</option>
                       <option value="7">Outros</option>
                     </select>

@@ -6,13 +6,12 @@ const api = () => {
     });
 }
 
-const listarDecoracoesPorEvento = async (nome) => {
+const listarDecoracoesPorEvento = async (tipoEventoId) => {
     const apiInstance = api();
     return await apiInstance.get('/decoracoes/tipo-de-evento', {
         params: {
-            nome
-        }
-    });
+            tipoEventoId
+        }});
 }
 const criarUsuario = async (usuario) => {
     const apiInstance = api();
@@ -122,7 +121,7 @@ const cancelarOrcamento = async (id) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.patch(`/orcamentos/${id}/cancelamento`, null, {
+    return await apiInstance.patch(`/orcamentos/${id}/cancelamento`,null, {
         headers: {
             'Authorization': `Bearer ${token}`,
         },
@@ -145,6 +144,36 @@ const editarOrcamento = async (id, orcamento) => {
     return await apiInstance.put(`/orcamentos/${id}`, orcamento, {
         headers: {
             'Authorization': `Bearer ${token}`
+        },
+    });
+}
+const confirmarDadosOrcamento = async (id, orcamento) => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.put(`orcamentos/${id}/confirmar-dados`, orcamento , {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    });
+}
+const percentualCancelados = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/percentual-cancelados` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const resumoFinanceiro = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/resumo-financeiro` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
         },
     });
 }
@@ -219,28 +248,101 @@ const deleteAvaliacoes = async (id) => {
     });
 }
 
+const lucroPorTipoDeEvento1 = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
 
+    return await apiInstance.get(`/admin/dashboard/lucro-por-tipo-evento` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const qtdPorMes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
 
-export {
-    deleteAvaliacoes,
-    deleteDecoracoes,
-    listarTodasDecoracoes,
-    criarDecoracao,
-    atualizarDecoracao,
-    listarDecoracoesPorEvento,
-    criarUsuario,
+    return await apiInstance.get(`/admin/dashboard/quantidade-por-mes` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const faturamentDespesaMes = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/faturamento-despesa-por-mes` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const tipoEventoContagem = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/admin/dashboard/tipo-evento-contagem` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+const downloadCSV = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.get(`/csv/download` , {
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+        },
+    });
+}
+
+const atualizarCalendario = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+
+    return await apiInstance.patch(
+        `/orcamentos/atualizar-status-expirados`,
+        {}, 
+        {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        }
+    );
+};
+export  { 
     listarTodasAvaliacoes,
-    logar,
+    deleteAvaliacoes,
     criarAvaliacao,
+    atualizarDecoracao,
+    deleteDecoracoes,
+    criarDecoracao,
+
+    resumoFinanceiro,
+    atualizarCalendario,
+    lucroPorTipoDeEvento1,
+    downloadCSV,
+    tipoEventoContagem,
+    percentualCancelados,
+    listarDecoracoesPorEvento, 
+    criarUsuario, 
+    logar, 
+    qtdPorMes,
+    faturamentDespesaMes,
     todosOrcamentos,
-    atualizarUsuario,
-    buscarUsuario,
-    ultimas5avalaicoes,
-    avaliacoesPorTipoDeEvento,
-    criarOrcamento,
+    confirmarDadosOrcamento,
+    atualizarUsuario, 
+    buscarUsuario, 
+    ultimas5avalaicoes, 
+    avaliacoesPorTipoDeEvento, 
+    criarOrcamento, 
     orcamentosPorIdDoUuario,
     aceitarOrcamento,
     cancelarOrcamento,
+    listarTodasDecoracoes,
     atualizarAvaliacao,
     editarOrcamento
 };

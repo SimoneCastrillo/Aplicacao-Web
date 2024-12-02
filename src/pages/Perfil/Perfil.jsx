@@ -9,6 +9,8 @@ import Calendario from '../../components/Calendario/Calendario';
 import ModalCancelarReserva from '../../components/Reservas/ModalCancelarReserva/ModalCancelarReserva';
 import DecoracoesEdicao from '../../components/DecoracoesEdicao/DecoracoesEdicao';
 import AvaliacoesEdicao from '../../components/AvaliacoesEdicao/AvaliacoesEdicao';
+import Metricas from '../../components/Metricas/Metricas';
+
 
 const Perfil = () => {
   const [modalFoto, setModalFoto] = useState(false);
@@ -26,29 +28,38 @@ const Perfil = () => {
 
   const handleEscolherComponente = (componente) => {
     setComponenteParaExibir(componente);
-    // console.log(componenteParaExibir)
+
   }
 
   return (
-    <div className={styles.container}>
-      {modalFoto && <ModalFoto onSetImg={setImg} onFoto={img} onCloseModalFoto={() => setModalFoto(false)} />}
-      {modalCancelarEdit && <ModalCancelarEditar onCloseModalEdit={() => setModalCancelarEdit(false)} onSetDescartarAlteracoes={setDescartarAlteracoes} />}
-      {modalCancelarReserva && <ModalCancelarReserva onCloseModalReserva={() => setModalCancelarReserva(false)} onSetCancelarReserva={setCancelarReserva} />}
+    <div
+        className={styles.container}
+        style={componenteParaExibir === 'metricas' ? { backgroundColor: '#EEEEEE', important: true } : {}}
+      >
+      {modalFoto && <ModalFoto onSetImg={setImg} onFoto={img} onCloseModalFoto={() => setModalFoto(false)}/>}
+      {modalCancelarEdit && <ModalCancelarEditar onCloseModalEdit={() => setModalCancelarEdit(false)} onSetDescartarAlteracoes={setDescartarAlteracoes}/>}
+      {modalCancelarReserva && <ModalCancelarReserva onCloseModalReserva={() => setModalCancelarReserva(false)} onSetCancelarReserva={setCancelarReserva}/>}
       <HeaderPerfil componenteAtivo={componenteParaExibir} onNomeUser={nomeUser} onEscolherComponente={handleEscolherComponente} onUserRole={userRole} />
-      <div className={styles.box}>
-        {componenteParaExibir === 'minhas-reservas' && <Reservas onSetCancelarReserva={() => setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={() => setModalCancelarReserva(true)} />}
-        {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img}
-          onSetImg={setImg}
-          onSetNomeUser={setNomeUser}
-          onSetUserRole={setUserRole}
-          onOpenModalCancelarEditar={() => setModalCancelarEdit(true)} onOpenModalFoto={() => setModalFoto(true)}
-          onDescartarAlteracoes={descartarAlteracoes}
-        />}
+      <div
+          style={
+            componenteParaExibir === 'metricas'
+              ? { padding: '20px 20px' }
+              : { padding: '20px 120px' }
+          }
+        >
+        {componenteParaExibir === 'minhas-reservas' && <Reservas onSetCancelarReserva={()=>setCancelarReserva(false)} onCancelarReserva={cancelarReserva} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
+        {componenteParaExibir === 'meus-dados' && <MeusDados onImg={img} 
+        onSetImg={setImg} 
+        onSetNomeUser={setNomeUser} 
+        onSetUserRole={setUserRole}
+        onOpenModalCancelarEditar={()=>setModalCancelarEdit(true)} onOpenModalFoto={()=> setModalFoto(true)} 
+        onDescartarAlteracoes={descartarAlteracoes}
+         />}
         {componenteParaExibir === 'decoracao' && <DecoracoesEdicao />}
         {componenteParaExibir === 'avaliacao' && <AvaliacoesEdicao />}
-
-        {componenteParaExibir === 'calendario' && <Calendario />}
-        {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={() => setCancelarReserva(false)} openModalCacelarReserva={() => setModalCancelarReserva(true)} />}
+        {componenteParaExibir === 'calendario' && <Calendario/>}
+        {componenteParaExibir === 'metricas' && <Metricas/>}
+        {componenteParaExibir === 'reservas' && <Reservas onCancelarReserva={cancelarReserva} onSetCancelarReserva={()=>setCancelarReserva(false)} openModalCacelarReserva={()=> setModalCancelarReserva(true)}/>}
       </div>
 
     </div>

@@ -93,3 +93,9 @@
     width: 45%;
     align-items: center;
 }
+.btnFiltro {
+    background-color: #C54477;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px; border-radius: 5px;
+}

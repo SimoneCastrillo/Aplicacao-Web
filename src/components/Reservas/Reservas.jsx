@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import loadingGift from '../../assets/loading-gif.gif'
 import EventoSelecionado from './EventoSelecionado/EventoSelecionado';
-import {orcamentosPorIdDoUuario, cancelarOrcamento, todosOrcamentos, aceitarOrcamento} from '../../api/api'	
+import {orcamentosPorIdDoUuario, cancelarOrcamento, downloadCSV ,todosOrcamentos, aceitarOrcamento} from '../../api/api'	
 import { toast } from 'react-toastify';
 
 
@@ -16,6 +16,9 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
   const [idCancelar, setIdCancelar] = useState('');
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [filtro, setFiltro] = useState('Todos');
+  const [resultadosFiltros, setResultadosFiltros] = useState([]);
+
 
   useEffect(() => {
     setLoading(true);
@@ -31,23 +34,69 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
         
         setLoading(false)
         setOrcamento(response.data);
+        setResultadosFiltros(response.data);
+
         console.log(response.data);
       } catch (error) {
         setLoading(false)
         console.log(error);
       }
     };
-  
+    console.log(admin)
     fetchData(); 
   }, []);
+  const downloadDoCsv = async () => {
+    console.log('chamando');
+    
+    try {
+      const response = await downloadCSV();
+      console.log(response);
+      
+      const csvContent = response.data;
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      
+      link.download = 'dados.csv';
+      
+      link.click();
+    } catch (error) {
+      console.log('Erro ao baixar CSV:', error);
+    }
+  };
+  
+  useEffect(()=> {
+    if(filtro === 'Pendentes'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'PENDENTE'))
+    }else if(filtro === 'Abertos'){
+      setResultadosFiltros(orcamento.filter((item) => item.status === 'CONFIRMADO'))
+    }else if(filtro === 'Todos'){
+      setResultadosFiltros(orcamento)
+    }
+    
+  },[filtro])
 
   useEffect(()=>{
     setLoading(true)
-    // console.log(onCancelarReserva);
     const handleCancelarReserva = async (id) => {
       let response;
       try {
-        await cancelarOrcamento(id);
+        await cancelarOrcamento(id)
+        .then((response) => {
+          toast.success('Reserva cancelada com sucesso!', {
+            autoClose: 700,
+          });
+  
+        })
+        .catch((error) => {
+          toast.error('Erro ao cancelar reserva!', {
+            autoClose: 700,
+          })
+          console.error(error)
+  
+        })
         if(!admin){
           response = await orcamentosPorIdDoUuario();
         }else {
@@ -69,27 +118,48 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
   },[onCancelarReserva])
  
   const handleAceitarOrcamento = async (id) => {
-    setLoading(true)
-    await aceitarOrcamento(id)
-    await todosOrcamentos()
-    .then((response) => {
+    setLoading(true);
+    try {
+      await aceitarOrcamento(id);
       toast.success('Orçamento aceito com sucesso!', {
         autoClose: 700,
       });
-      setLoading(false)
-    })
-    .catch((error) => {
+  
+      const updatedOrcamento = orcamento.map((item) =>
+        item.id === id ? { ...item, status: 'CONFIRMADO' } : item
+      );
+      setOrcamento(updatedOrcamento);
+  
+      if (filtro === 'Pendentes') {
+        setResultadosFiltros(updatedOrcamento.filter((item) => item.status === 'PENDENTE'));
+      } else if (filtro === 'Abertos') {
+        setResultadosFiltros(updatedOrcamento.filter((item) => item.status === 'CONFIRMADO'));
+      } else {
+        setResultadosFiltros(updatedOrcamento);
+      }
+  
+      setLoading(false);
+    } catch (error) {
       toast.error('Erro ao aceitar orçamento!', {
         autoClose: 700,
-      })
-      setLoading(false)
-    });
-  }
+      });
+      setLoading(false);
+    }
+  };
+  
   return (
     <div>
         <div className={styles.containerHeader}>
            <h1 className='titulo-perfil'>{admin ? "Reservas" : "Minhas reservas"}</h1>
-           <Link to='/solicitar-orcamento' className='btn-default-bgRosa-perfil'>Novas reservas</Link>
+          {!admin && <Link to='/solicitar-orcamento' className='btn-default-bgRosa-perfil'>Novo Orçamento</Link>}
+          {admin && (
+            <div style={{display: 'flex', gap: '10px' }}>
+              <button onClick={()=>downloadDoCsv()} className={styles.btnFiltro}>Download CSV</button>
+              <button onClick={()=>setFiltro('Pendentes')} className={styles.btnFiltro}>Orçamentos Pendentes</button>
+              <button onClick={()=>setFiltro('Abertos')} className={styles.btnFiltro}>Orçamentos Confirmados</button>
+              <button onClick={()=>setFiltro('Todos')} className={styles.btnFiltro}>Todos Orçamentos</button>
+            </div>
+          )}
         </div>
         {loading && <div style={{textAlign: 'center'}}>
           <img src={loadingGift} width={50} alt='loading' />
@@ -98,7 +168,7 @@ const MinhasReservas = ({onCancelarReserva, openModalCacelarReserva, onSetCancel
           <div className={styles.containerReservas}>
           <div className={styles.listaDeReservas}>
             <ul>
-              {orcamento && orcamento.map((item) => (
+              {resultadosFiltros && resultadosFiltros.map((item) => (
                 <div 
                 key={item.id}
                 >
