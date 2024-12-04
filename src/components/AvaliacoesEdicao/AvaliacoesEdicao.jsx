@@ -2,22 +2,29 @@ import React, { useEffect, useState } from 'react';
 import styles from './AvaliacoesEdicao.module.css';
 import { criarAvaliacao, listarTodasAvaliacoes, atualizarAvaliacao, deleteAvaliacoes } from '../../api/api';
 import { toast } from 'react-toastify';
+import loadingGif from '../../assets/loading-gif.gif'
 
 const AvaliacoesEdicao = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [idAvaliacao, setIdAvaliacao] = useState('');
     const [avaliacao, setAvaliacao] = useState('');
     const [foto, setFoto] = useState('');
+    const [loading, setLoading] = useState(false);
     const [tipoEvento, setTipoEvento] = useState('');
     const [descricao, setDescricao] = useState(''); // Campo para descrição
     const [avaliacoes, setAvaliacoes] = useState([]); // Inicializado como array vazio
 
     const fetchData = async () => {
+        setLoading(true);
         try {
+            setLoading(false);
+            console.log(loading)
             const response = await listarTodasAvaliacoes();
             console.log(response.data);
             setAvaliacoes(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
+            setLoading(false);
+            console.log(loading)
             console.error('Erro ao buscar avaliações:', error);
             toast.error('Erro ao carregar avaliações.', { autoClose: 2000 });
         }
@@ -223,7 +230,7 @@ const AvaliacoesEdicao = () => {
                 </div>
             )}
             <div className={styles.cards}>
-                {avaliacoes.length > 0 ? (
+                {loading === false && avaliacoes && avaliacoes.length > 0 && (
                     avaliacoes.map((item) => (
                         <button
                             key={item.id}
@@ -238,9 +245,11 @@ const AvaliacoesEdicao = () => {
                             <p className={styles.cardText}>{item.texto}</p>
                         </button>
                     ))
-                ) : (
-                    <p className={styles.noDataText}>Nenhuma avaliação encontrada.</p>
                 )}
+                {loading === false && avaliacoes && avaliacoes.length === 0 && (
+                    <img width={50} height={50} src={loadingGif} alt='loading' />
+                )}
+                {loading === true && <p>Carregando...</p>}
             </div>
         </div>
     );

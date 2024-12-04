@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './DecoracoesEdicao.module.css';
 import { criarDecoracao, listarTodasDecoracoes, atualizarDecoracao, deleteDecoracoes } from '../../api/api';
 import { toast } from 'react-toastify';
-
+import loadingGif from '../../assets/loading-gif.gif';
 const DecoracoesEdicao = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [idDecoracao, setIdDecoracao] = useState('');
@@ -218,7 +218,9 @@ const DecoracoesEdicao = () => {
                         </button>
                     ))
                 ) : (
-                    <p className={styles.noDataText}>Nenhuma decoração encontrada.</p>
+                    <img width={50} height={50} src={loadingGif} alt='loading' />
+
+
                 )}
             </div>
         </div>

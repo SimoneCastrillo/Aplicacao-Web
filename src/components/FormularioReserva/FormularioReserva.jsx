@@ -92,17 +92,33 @@ const FormularioReserva = ({onOpenEscolherDecoracao, onTipoEventoModal, onDecora
       const h1Orcamento = document.getElementById('idH1Orcamento');
       h1Orcamento.style.display = 'none';
       setPassoAtivo(3)
-      
+      let valorEvento;
+      if(tipoEvento === 1){
+        valorEvento = 'Infantil'
+      }else if(tipoEvento === 2){
+        valorEvento = 'Casamento'
+      }else if(tipoEvento === 3){
+        valorEvento = 'Debutante'
+      }else if(tipoEvento === 4){
+        valorEvento = 'Coffe Break'
+      }else if(tipoEvento === 5){
+        valorEvento = 'Aniversário'
+      }else if(tipoEvento === 6){
+        valorEvento = 'Alugar espaço'
+      }else if(tipoEvento === 7){
+        valorEvento = 'Outros'
+      }
+
       const mensagem = `Olá, meu nome é ${JSON.parse(sessionStorage.usuario).nome} e gostaria de saber os valores para o orçamento:
 
 Data do evento: ${data}
 Quantidade de pessoas: ${quantidadePessoas}
 Horário de início: ${horarioFormatado}
-Tipo de evento: ${tipoEvento}
+Tipo de evento: ${valorEvento}
 Decoração: ${decoracao ? onDecoracaoEscolhida.nome : 'N/A'}
 Observação: ${sugestao || 'N/A'}`;
 
-      const numeroWhatsApp = '+5511997828063';
+      const numeroWhatsApp = '+5511953311150';
       const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
       
       setTimeout(() => {
