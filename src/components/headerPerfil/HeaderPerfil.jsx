@@ -8,16 +8,16 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
     const permissionUser = onUserRole;
-   const [iUserImg, setIUserImg] = useState(false);
-   useEffect(() => {
-    
-    if(sessionStorage.getItem('img') !== 'null' ){
-        setIUserImg(true)
-  }else {
-    setIUserImg(false)
-  }
-   },[])
-   const navigate = useNavigate();
+    const [iUserImg, setIUserImg] = useState(false);
+    useEffect(() => {
+
+        if (sessionStorage.getItem('img') !== 'null') {
+            setIUserImg(true)
+        } else {
+            setIUserImg(false)
+        }
+    }, [])
+    const navigate = useNavigate();
     return (
         <div className={styles.header}>
             <div className={styles.container}>
@@ -28,51 +28,44 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
                             <>
                                 <li>
                                     <Link to='/perfil/reservas'
-                                        className={componenteAtivo === 'reservas' ? styles.active : ''} 
-                                        
+                                        className={componenteAtivo === 'reservas' ? styles.active : ''}
+
                                     >
                                         Reservas
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to='/perfil/metricas'
-                                        className={componenteAtivo === 'metricas' ? styles.active : ''} 
-                                    
+                                        className={componenteAtivo === 'metricas' ? styles.active : ''}
+
                                     >
                                         Métricas
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to='/perfil/calendario'
-                                        className={componenteAtivo === 'calendario' ? styles.active : ''} 
-                                   
+                                        className={componenteAtivo === 'calendario' ? styles.active : ''}
+
                                     >
                                         Calendário
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to='/perfil/decoracao'
-                                        className={componenteAtivo === 'decoracao' ? styles.active : ''} 
-                             
+                                        className={componenteAtivo === 'decoracao' ? styles.active : ''}
+
                                     >
                                         Decorações
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to='/perfil/avaliacao'
-                                        className={componenteAtivo === 'avaliacao' ? styles.active : ''} 
-                                  
-                                    >
-                                        Avaliações
-                                    </Link>
-                                </li>
+
                             </>
                         )}
                         {permissionUser !== 'admin' && (
                             <li>
                                 <Link to='/perfil/minhas-reservas'
-                                    className={componenteAtivo === 'minhas-reservas' ? styles.active : ''} 
-                             
+                                    className={componenteAtivo === 'minhas-reservas' ? styles.active : ''}
+
                                 >
                                     Minhas Reservas
                                 </Link>
@@ -80,8 +73,8 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
                         )}
                         <li>
                             <Link to='/perfil/meus-dados'
-                                className={componenteAtivo === 'meus-dados' ? styles.active : ''} 
-                        
+                                className={componenteAtivo === 'meus-dados' ? styles.active : ''}
+
                             >
                                 Meus dados
                             </Link>
@@ -91,11 +84,11 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
                 <div className={styles.userInfo}>
                     <BsBellFill size={18} color='#fff' />
                     <div className={styles.user}>
-                        
+
                         {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
-                        {iUserImg && <img style={{borderRadius: '100%'}} width={'50px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                        {iUserImg && <img style={{ borderRadius: '100%' }} width={'50px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
                         <p>{onNomeUser}</p>
-                        <button onClick={()=>{
+                        <button onClick={() => {
                             sessionStorage.removeItem('token');
                             sessionStorage.removeItem('img');
                             sessionStorage.removeItem('usuario');

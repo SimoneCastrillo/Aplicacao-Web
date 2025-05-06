@@ -5,7 +5,14 @@ const api = () => {
         baseURL: process.env.REACT_APP_API_URL
     });
 }
-
+const listarTipoEventosPorBuffet = async () => {
+    const apiInstance = api();
+  
+    return await apiInstance.get('/tipos-evento', {
+        params:{
+            buffetId: process.env.REACT_APP_BUFFET_ID
+        }
+})}
 const listarDecoracoesPorEvento = async (tipoEventoId) => {
     const apiInstance = api();
     return await apiInstance.get('/decoracoes/tipo-de-evento', {
@@ -13,9 +20,18 @@ const listarDecoracoesPorEvento = async (tipoEventoId) => {
             tipoEventoId
         }});
 }
+const buscarBuffetPorId = async () => {
+    const apiInstance = api();
+    const token = sessionStorage.getItem('token');
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
+    };
+    return await apiInstance.get(`/enderecos`, {headers});
+}
 const criarUsuario = async (usuario) => {
     const apiInstance = api();
-    return await apiInstance.post('/usuarios', usuario, {
+    return await apiInstance.post(`/usuarios/${process.env.REACT_APP_BUFFET_ID}`, usuario, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -23,7 +39,7 @@ const criarUsuario = async (usuario) => {
 }
 const logar = async (usuario) => {
     const apiInstance = api();
-    return await apiInstance.post('/usuarios/login', usuario, {
+    return await apiInstance.post(`/usuarios/login/${process.env.REACT_APP_BUFFET_ID}`, usuario, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -320,7 +336,7 @@ export  {
     atualizarDecoracao,
     deleteDecoracoes,
     criarDecoracao,
-
+    listarTipoEventosPorBuffet,
     resumoFinanceiro,
     atualizarCalendario,
     lucroPorTipoDeEvento1,
@@ -328,6 +344,7 @@ export  {
     tipoEventoContagem,
     percentualCancelados,
     listarDecoracoesPorEvento, 
+    buscarBuffetPorId,
     criarUsuario, 
     logar, 
     qtdPorMes,

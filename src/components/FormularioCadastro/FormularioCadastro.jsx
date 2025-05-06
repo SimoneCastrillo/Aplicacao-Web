@@ -3,7 +3,7 @@ import styles from './FormularioCadastro.module.css';
 import Step from '../Step/Step';
 import InputMask from 'react-input-mask';
 import { criarUsuario } from '../../api/api';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const FormularioCadastro = () => {
@@ -19,11 +19,11 @@ const FormularioCadastro = () => {
   const [erro, setErro] = useState('');
 
   const validarEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
-  
+
 
   const proximoPasso = () => {
     if (passoAtivo === 1) {
@@ -31,13 +31,13 @@ const FormularioCadastro = () => {
         return setErro('Preencha todos os campos');
       }
       const cleanValueTelefone = telefone.replace(/[()-\s_]/g, '');
-      
+
       if (cleanValueTelefone.length !== 11) {
         return setErro('Telefone inválido.');
       }
-      setErro(''); 
+      setErro('');
     }
-    
+
     if (passoAtivo === 2) {
       if (email === '' || confirmEmail === '' || senha === '' || confirmSenha === '') {
         return setErro('Preencha todos os campos');
@@ -54,25 +54,29 @@ const FormularioCadastro = () => {
       if (senha.length < 6) {
         return setErro('A senha deve ter pelo menos 6 caracteres');
       }
-      setErro(''); 
+      setErro('');
       const telefoneFormatado = telefone.replace(/[()\- ]/g, '');
       const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('email', email);
-        formData.append('senha', senha);  
-        formData.append('telefone', telefoneFormatado);
+      formData.append('nome', nome);
+      formData.append('email', email);
+      formData.append('senha', senha);
+      formData.append('telefone', telefoneFormatado);
       const fetchUsuario = async () => {
         try {
-          const response = await criarUsuario(formData); 
+          const response = await criarUsuario(formData);
           console.log(response.data);
           setPassoAtivo(3);
+          setTimeout(() => {
+            navigate('/login');
+          }, 2000);
         } catch (error) {
           console.error('Erro ao criar o usuário:', error);
+          return;
         }
-      }  
+      }
       fetchUsuario();
     }
-    
+
     setPassoAtivo(passoAtivo + 1);
   };
 
@@ -82,16 +86,9 @@ const FormularioCadastro = () => {
     }
   };
 
-  useEffect(() => {
-    if (passoAtivo === 3) {
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
-    }
-  }, [passoAtivo, navigate]);
 
   return (
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <form className={styles.form}>
         {passoAtivo === 1 && (
           <div className={styles.passo1}>
@@ -99,8 +96,8 @@ const FormularioCadastro = () => {
               <label className={styles.tamanhoLabel}>Qual seu nome?</label>
               <input type="text" value={nome || ''} onChange={(e) => setNome(e.target.value)} />
 
-              <label style={{marginTop: '20px'}} className={styles.tamanhoLabel}>Informe seu celular</label>
-              <InputMask  mask="(99) 99999-9999" value={telefone || ''} onChange={(e) => setTelefone(e.target.value)} />
+              <label style={{ marginTop: '20px' }} className={styles.tamanhoLabel}>Informe seu celular</label>
+              <InputMask mask="(99) 99999-9999" value={telefone || ''} onChange={(e) => setTelefone(e.target.value)} />
             </div>
           </div>
         )}
@@ -138,11 +135,11 @@ const FormularioCadastro = () => {
         {erro && <p className={styles.error}>{erro}</p>}
       </form>
       <div className={styles.containerStepEbutton}>
-       
+
         {passoAtivo !== 3 && (
           <Step passo={passoAtivo} qtdPassos={[1, 2]} />
         )}
-        
+
         <div className={styles.divBotoes}>
           {passoAtivo >= 2 && passoAtivo < 3 && (
             <button onClick={voltarPasso} className={`btn-default-bgTransparent ${styles.btn}`}>Voltar</button>
@@ -152,7 +149,7 @@ const FormularioCadastro = () => {
             <button onClick={proximoPasso} className={`btn-default-bgRosa ${styles.btn}`}>Continuar</button>
           )}
         </div>
-        
+
       </div>
     </div>
   );

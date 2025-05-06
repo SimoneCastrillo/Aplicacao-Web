@@ -29,13 +29,11 @@ const DecoracoesEdicao = () => {
         setIsModalOpen(!isModalOpen);
 
         if (!isEditing) {
-            // Resetar campos ao adicionar
             setIdDecoracao('');
             setNome('');
             setFoto('');
             setTipoEvento('');
         } else if (item) {
-            // Preencher campos ao editar
             setIdDecoracao(item.id);
             setNome(item.nome || '');
             setFoto(item.foto || '');

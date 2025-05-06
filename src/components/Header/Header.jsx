@@ -12,15 +12,15 @@ const Header = () => {
     const [secaoAtiva, setSecaoAtiva] = useState('');
     const [menuAtivo, setMenuAtivo] = useState(false);
     const [logado, setLogado] = useState(false)
-    if(sessionStorage.getItem('token') && !logado){
+    if (sessionStorage.getItem('token') && !logado) {
         setLogado(true)
-      }
-      const [iUserImg, setIUserImg] = useState(false);
-    useEffect(() => {
-        if(sessionStorage.getItem('img') !== 'null' ){
-            setIUserImg(true)
     }
-    },[])
+    const [iUserImg, setIUserImg] = useState(false);
+    useEffect(() => {
+        if (sessionStorage.getItem('img') !== 'null') {
+            setIUserImg(true)
+        }
+    }, [])
 
     const handleOpenMenu = () => {
         setMenuAtivo(!menuAtivo);
@@ -28,9 +28,9 @@ const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'duvidas']; 
+            const secoes = ['bannerId', 'eventos', 'reservas', 'avaliacoes', 'duvidas'];
             let secaoEncontrada = '';
-    
+
             secoes.forEach((secaoId) => {
                 const elemento = document.getElementById(secaoId);
                 if (elemento) {
@@ -40,19 +40,19 @@ const Header = () => {
                     }
                 }
             });
-    
+
             setSecaoAtiva(secaoEncontrada ? `#${secaoEncontrada}` : '');
         };
-    
+
         window.addEventListener('scroll', handleScroll);
-    
+
         handleScroll();
-    
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    
+
 
     useEffect(() => {
         if (location.hash) {
@@ -70,52 +70,45 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-        
+
                 <Link to='/'><img className={styles.imgLogo} src={imgLogo} alt="logo simone castrillo" /></Link>
                 <nav className={styles.desktop}>
                     <ul className={styles.nav_links}>
                         <li key="bannerId">
-                            <Link 
-                                className={obterClasseAtiva('#bannerId')} 
+                            <Link
+                                className={obterClasseAtiva('#bannerId')}
                                 to="#bannerId"
                             >
                                 Home
                             </Link>
                         </li>
                         <li key="eventos">
-                            <Link 
-                                className={obterClasseAtiva('#eventos')} 
+                            <Link
+                                className={obterClasseAtiva('#eventos')}
                                 to="#eventos"
                             >
                                 Eventos
                             </Link>
                         </li>
                         <li key="reservas">
-                            <Link 
-                                className={obterClasseAtiva('#reservas')} 
+                            <Link
+                                className={obterClasseAtiva('#reservas')}
                                 to="#reservas"
                             >
                                 Reservas
                             </Link>
                         </li>
-                        <li key="avaliacoes">
-                            <Link 
-                                className={obterClasseAtiva('#avaliacoes')} 
-                                to="#avaliacoes"
-                            >
-                                Avaliações
-                            </Link>
-                        </li>
+
                         <li key="contato">
-                            <Link 
-                                className={obterClasseAtiva('#duvidas')} 
+                            <Link
+                                className={obterClasseAtiva('#duvidas')}
                                 to="#duvidas"
                             >
                                 Dúvidas
                             </Link>
                         </li>
                         <li key="gastronomia">
-                            <Link  
+                            <Link
                                 to="/gastronomia"
                             >
                                 Gastronomia
@@ -126,97 +119,90 @@ const Header = () => {
                 <div className={`${styles.container_buttons} ${styles.desktop}`} >
                     <Link to="/solicitar-orcamento" className='btn-default-bgRosa'>Solicitar Orçamento</Link>
                     {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
-                    {logado && 
+                    {logado &&
                         (
-                            <Link to='/perfil/meus-dados' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                            {!iUserImg && <img width={'30px'} src={avatar} alt="avatar" />}
-                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
-                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                            <Link to='/perfil/meus-dados' style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                {!iUserImg && <img width={'30px'} src={avatar} alt="avatar" />}
+                                {iUserImg && <img style={{ borderRadius: '100%' }} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                                <p style={{ color: 'white', fontWeight: 'bold' }}>{JSON.parse(sessionStorage.usuario).nome}</p>
                             </Link>
                         )
                     }
                 </div>
                 <div className={styles.mobile}>
-                    <button onClick={handleOpenMenu}><BsList size={35} color='#fff'/></button>
+                    <button onClick={handleOpenMenu}><BsList size={35} color='#fff' /></button>
                     <AnimatePresence>
-                    {menuAtivo && (
-                        <motion.div 
-                            initial={{ x: 300 }}
-                            animate={{ x: 10 }}
-                            exit={{ x: 300 }}
-                            transition={{duration: 0.3}}
-                            className={styles.menu_container}>
-                            <nav className={styles.mobile_nav}>
-                                <ul className={styles.nav_links_mobile}>
-                                    <li key="mobile-bannerId">
-                                        <Link 
-                                            className={obterClasseAtiva('#bannerId')} 
-                                            to="#bannerId"
-                                        >
-                                            Home
-                                        </Link>
-                                    </li>
-                                    <li key="mobile-eventos">
-                                        <Link 
-                                            className={obterClasseAtiva('#eventos')} 
-                                            to="#eventos"
-                                        >
-                                            Eventos
-                                        </Link>
-                                    </li>
-                                    <li key="mobile-reservas">
-                                        <Link 
-                                            className={obterClasseAtiva('#reservas')} 
-                                            to="#reservas"
-                                        >
-                                            Reservas
-                                        </Link>
-                                    </li>
-                                    <li key="mobile-avaliacoes">
-                                        <Link 
-                                            className={obterClasseAtiva('#avaliacoes')} 
-                                            to="#avaliacoes"
-                                        >
-                                            Avaliações
-                                        </Link>
-                                    </li>
-                                    <li key="mobile-duvidas">
-                                        <Link 
-                                            className={obterClasseAtiva('#duvidas')} 
-                                            to="#duvidas"
-                                        >
-                                            Dúvidas
-                                        </Link>
-                                    </li>
-                                    <li key="gastronomia">
-                                        <Link  
-                                            to="/gastronomia"
-                                        >
-                                            Gastronomia
-                                        </Link>
-                                    </li>
-                                    <li key="mobile-solicitar-orcamento" style={{marginTop: '20px'}}>
-                                        <Link 
-                                        className='btn-default-bgRosa'
-                                            to="/solicitar-orcamento"
-                                        >
-                                            Solicitar Orçamento
-                                        </Link>
-                                    </li>
-                                    {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
-                                    {logado && 
-                                        (
-                                            <Link to='/perfil/meus-dados' style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                                            {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
-                                            {iUserImg && <img style={{borderRadius: '100%'}} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
-                                            <p style={{color: 'white', fontWeight: 'bold'}}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                        {menuAtivo && (
+                            <motion.div
+                                initial={{ x: 300 }}
+                                animate={{ x: 10 }}
+                                exit={{ x: 300 }}
+                                transition={{ duration: 0.3 }}
+                                className={styles.menu_container}>
+                                <nav className={styles.mobile_nav}>
+                                    <ul className={styles.nav_links_mobile}>
+                                        <li key="mobile-bannerId">
+                                            <Link
+                                                className={obterClasseAtiva('#bannerId')}
+                                                to="#bannerId"
+                                            >
+                                                Home
                                             </Link>
-                                        )
-                                    }
-                                </ul>
-                            </nav>
-                        </motion.div>
-                    )}
+                                        </li>
+                                        <li key="mobile-eventos">
+                                            <Link
+                                                className={obterClasseAtiva('#eventos')}
+                                                to="#eventos"
+                                            >
+                                                Eventos
+                                            </Link>
+                                        </li>
+                                        <li key="mobile-reservas">
+                                            <Link
+                                                className={obterClasseAtiva('#reservas')}
+                                                to="#reservas"
+                                            >
+                                                Reservas
+                                            </Link>
+                                        </li>
+
+                                        <li key="mobile-duvidas">
+                                            <Link
+                                                className={obterClasseAtiva('#duvidas')}
+                                                to="#duvidas"
+                                            >
+                                                Dúvidas
+                                            </Link>
+                                        </li>
+                                        <li key="gastronomia">
+                                            <Link
+                                                to="/gastronomia"
+                                            >
+                                                Gastronomia
+                                            </Link>
+                                        </li>
+                                        <li key="mobile-solicitar-orcamento" style={{ marginTop: '20px' }}>
+                                            <Link
+                                                className='btn-default-bgRosa'
+                                                to="/solicitar-orcamento"
+                                            >
+                                                Solicitar Orçamento
+                                            </Link>
+                                        </li>
+                                        {!logado && <Link to="/login" className='btn-default-bgTransparent'>Login</Link>}
+                                        {logado &&
+                                            (
+                                                <Link to='/perfil/meus-dados' style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                    {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
+                                                    {iUserImg && <img style={{ borderRadius: '100%' }} width={'30px'} height={'30px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
+                                                    <p style={{ color: 'white', fontWeight: 'bold' }}>{JSON.parse(sessionStorage.usuario).nome}</p>
+                                                </Link>
+                                            )
+                                        }
+                                    </ul>
+                                </nav>
+                            </motion.div>
+                        )}
                     </AnimatePresence>
                 </div>
             </div>
