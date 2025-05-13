@@ -154,16 +154,16 @@ const aceitarOrcamento = async (id) => {
         },
     });
 }
-const editarOrcamento = async (id, orcamento) => {
-    const apiInstance = api();
-    const token = sessionStorage.getItem('token');
+    const editarOrcamento = async (id, orcamento) => {
+        const apiInstance = api();
+        const token = sessionStorage.getItem('token');
 
-    return await apiInstance.put(`/orcamentos/${id}`, orcamento, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        },
-    });
-}
+        return await apiInstance.put(`/orcamentos/${id}`, orcamento, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
 const confirmarDadosOrcamento = async (id, orcamento) => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
@@ -178,7 +178,7 @@ const percentualCancelados = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/percentual-cancelados` , {
+    return await apiInstance.get(`/admin/dashboard/percentual-cancelados/${process.env.REACT_APP_BUFFET_ID}` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -188,7 +188,7 @@ const resumoFinanceiro = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/resumo-financeiro` , {
+    return await apiInstance.get(`/admin/dashboard/resumo-financeiro/${process.env.REACT_APP_BUFFET_ID}` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -272,7 +272,7 @@ const lucroPorTipoDeEvento1 = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/lucro-por-tipo-evento` , {
+    return await apiInstance.get(`/admin/dashboard/lucro-por-tipo-evento/${process.env.REACT_APP_BUFFET_ID}` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -282,7 +282,7 @@ const qtdPorMes = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/quantidade-por-mes` , {
+    return await apiInstance.get(`/admin/dashboard/quantidade-por-mes/${process.env.REACT_APP_BUFFET_ID}` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -292,7 +292,7 @@ const faturamentDespesaMes = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/faturamento-despesa-por-mes` , {
+    return await apiInstance.get(`/admin/dashboard/faturamento-despesa-por-mes/${process.env.REACT_APP_BUFFET_ID}` , {
         headers: {
             'Authorization': `Bearer ${token}`, 
         },
@@ -302,7 +302,8 @@ const tipoEventoContagem = async () => {
     const apiInstance = api();
     const token = sessionStorage.getItem('token');
 
-    return await apiInstance.get(`/admin/dashboard/tipo-evento-contagem` , {
+    return await apiInstance.get(`/admin/dashboard/tipo-evento-contagem/${process.env.REACT_APP_BUFFET_ID}` , {
+        
         headers: {
             'Authorization': `Bearer ${token}`, 
         },

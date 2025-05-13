@@ -33,7 +33,7 @@ const Metricas = () => {
     datasets: [
       {
         label: "Lucro",
-        data: [0, 0, 0, 0, 0, 0], 
+        data: [0, 0, 0, 0, 0, 0],
         backgroundColor: "#a45e9e",
         borderWidth: 1,
       },
@@ -55,13 +55,13 @@ const Metricas = () => {
   const [quantidadeDeOrcamentoPorMes, setQuantidadeDeOrcamentoMes] = useState(
     {
       labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-    datasets: [
-      {
-        label: "Orçamentos",
-        data: [94, 77, 22, 12, 45, 30], 
-        backgroundColor: "#6F002C",
-      },
-    ],
+      datasets: [
+        {
+          label: "Orçamentos",
+          data: [94, 77, 22, 12, 45, 30],
+          backgroundColor: "#6F002C",
+        },
+      ],
     }
   );
   const [faturamentoDespesasMes, setFaturamentoDespesasMes] = useState({
@@ -76,7 +76,7 @@ const Metricas = () => {
       },
       {
         label: "Despesas",
-        data: [0, 0, 0, 0, 0, 0], 
+        data: [0, 0, 0, 0, 0, 0],
         borderColor: "#a45e9e",
         backgroundColor: "rgba(164, 94, 158, 0.2)",
         tension: 0.4,
@@ -91,16 +91,16 @@ const Metricas = () => {
       const response = await percentualCancelados();
       setPercentualCancelado(response.data);
     };
-  
-    const getResumoFinanceiro = async () => {
-      const response = await resumoFinanceiro();
-      setFaturamento(response.data.faturamentoTotal);
-      setGastos(response.data.despesaTotal);
-      setLucro(response.data.lucroTotal);
-    };
-  
+
+    // const getResumoFinanceiro = async () => {
+    //   const response = await resumoFinanceiro();
+    //   setFaturamento(response.data.faturamentoTotal);
+    //   setGastos(response.data.despesaTotal);
+    //   setLucro(response.data.lucroTotal);
+    // };
+
     const getLucroPorTipoDeEvento = async () => {
-      
+
       const response = await lucroPorTipoDeEvento1();
       const tiposEventos = ["Aniversário", "Casamento", "Infantil", "Debutante", "Corporativo", "Outro"];
       const lucroPorEvento = tiposEventos.map((tipo) => {
@@ -122,9 +122,9 @@ const Metricas = () => {
     const getQtdPorMes = async () => {
       const response = await qtdPorMes();
       const mesesLabels = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-      const dataOrcamentos = Array(12).fill(0); 
+      const dataOrcamentos = Array(12).fill(0);
       response.data.forEach((item) => {
-        dataOrcamentos[item.mes - 1] = item.quantidade; 
+        dataOrcamentos[item.mes - 1] = item.quantidade;
       });
       setQuantidadeDeOrcamentoMes({
         labels: mesesLabels,
@@ -140,11 +140,11 @@ const Metricas = () => {
     const getFaturamentoDespesasMes = async () => {
       const response = await faturamentDespesaMes();
       const mesesLabels = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-      const dataFaturamento = Array(12).fill(0); 
-      const dataDespesas = Array(12).fill(0); 
+      const dataFaturamento = Array(12).fill(0);
+      const dataDespesas = Array(12).fill(0);
       response.data.forEach((item) => {
-        dataFaturamento[item.mes - 1] = item.faturamento; 
-        dataDespesas[item.mes - 1] = item.despesa; 
+        dataFaturamento[item.mes - 1] = item.faturamento;
+        dataDespesas[item.mes - 1] = item.despesa;
       });
       setFaturamentoDespesasMes({
         labels: mesesLabels,
@@ -189,12 +189,12 @@ const Metricas = () => {
         console.error("Erro ao buscar quantidade de orçamentos por evento:", error);
       }
     };
-    
+
     getQunatidadeOrcamentoPorEvento();
     getFaturamentoDespesasMes()
     getQtdPorMes();
     getPercentualCancelados();
-    getResumoFinanceiro();
+    // getResumoFinanceiro();
     getLucroPorTipoDeEvento();
   }, []);
 
@@ -217,7 +217,7 @@ const Metricas = () => {
   };
 
 
-  
+
 
   const lineOptions = {
     responsive: true,
@@ -265,14 +265,14 @@ const Metricas = () => {
           </div>
         </div>
         <div className={styles.graficos}>
-        <div className={styles.grafico}>
-          <h2>Número de Orçamentos por Período</h2>
-          <Bar data={quantidadeDeOrcamentoPorMes} className={styles.itemGrafico} options={barOptions} />
-        </div>
-        <div className={styles.grafico}>
-          <h2>Faturamento e Despesas por Mês</h2>
-          <Line data={faturamentoDespesasMes} options={lineOptions} className={styles.itemGrafico} />
-        </div>
+          <div className={styles.grafico}>
+            <h2>Número de Orçamentos por Período</h2>
+            <Bar data={quantidadeDeOrcamentoPorMes} className={styles.itemGrafico} options={barOptions} />
+          </div>
+          <div className={styles.grafico}>
+            <h2>Faturamento e Despesas por Mês</h2>
+            <Line data={faturamentoDespesasMes} options={lineOptions} className={styles.itemGrafico} />
+          </div>
         </div>
       </div>
     </div>
