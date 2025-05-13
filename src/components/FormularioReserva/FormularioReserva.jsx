@@ -4,7 +4,7 @@ import { MdArrowBack, MdArrowForward, MdCheck } from 'react-icons/md';
 import styles from './FormularioReserva.module.css';
 import Step from '../Step/Step';
 import InputReserva from './InputReserva/InputReserva';
-import { criarOrcamento, buscarBuffetPorId } from '../../api/api';
+import { criarOrcamento, buscarBuffetPorId, listarTipoEventosPorBuffet } from '../../api/api';
 import loadingGif from '../../assets/loading-gif.gif';
 const buffetIdEnv = process.env.REACT_APP_BUFFET_ID;
 const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecoracaoEscolhida }) => {
@@ -26,7 +26,7 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
   const [sugestao, setSugestao] = useState('')
 
   const [loading, setLoading] = useState(false);
-
+  const [tiposDeEvento, setTiposDeEvento] = useState([]);
 
   useEffect(() => {
     setDecoracao(onDecoracaoEscolhida.id)
@@ -37,6 +37,15 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
   }, [tipoEvento])
 
   useEffect(() => {
+    const fetchTiposDeEvento = async () => {
+      try {
+        const response = await listarTipoEventosPorBuffet(buffetIdEnv);
+        setTiposDeEvento(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar tipos de evento:", error);
+      }
+    }
+    fetchTiposDeEvento();
     setDiaAtual(getDiaAtual())
 
   }, [])
@@ -78,11 +87,9 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
 
     try {
       const buffets = await buscarBuffetPorId(buffetIdEnv);
-      console.log("buffets", buffets.data);
 
       let enderecoBuffet;
       for (let i = 0; i < buffets.data.length; i++) {
-        console.log("buffets.data[i].buffetId.Id", buffets.data[i].buffetId.id);
         if (buffets.data[i].buffetId.id == parseInt(buffetIdEnv)) {
 
           enderecoBuffet = buffets.data[i];
@@ -98,6 +105,7 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
         qtdConvidados: Number(quantidadePessoas),
         inicio: horarioFormatado,
         sugestao,
+        tipoEventoId : tipoEvento,
         usuarioId: JSON.parse(sessionStorage.usuario).id,
         decoracaoId: decoracao,
         buffetId: parseInt(buffetIdEnv),
@@ -108,7 +116,6 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
 
       const res = await criarOrcamento(orcamento);
       setLoading(false);
-      console.log(res);
 
       document.getElementById('idH1Orcamento').style.display = 'none';
       setPassoAtivo(3);
@@ -164,13 +171,9 @@ const FormularioReserva = ({ onOpenEscolherDecoracao, onTipoEventoModal, onDecor
                     <select value={tipoEvento} onChange={(e) => {
                       setTipoEvento(e.target.value)
                     }}>
-                      <option value="Infantil">Infantil</option>
-                      <option value="Debutante">Debutante</option>
-                      <option value="Casamento">Casamento</option>
-                      <option value="Aniversário">Aniversário</option>
-                      <option value="Coffe Break">Coffe Break</option>
-                      <option value="Alugar espaço">Alugar espaço</option>
-                      <option value="Outros">Outros</option>
+                      {tiposDeEvento.map((tipo) => (
+                        <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
+                      ))}
                     </select>
                   </div>
                 </div>

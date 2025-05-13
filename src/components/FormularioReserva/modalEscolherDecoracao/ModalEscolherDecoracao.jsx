@@ -13,7 +13,6 @@ const ModalEscolherDecoracao = ({ onCloseEscolherDecoracao, tipoEvento, onSetDec
     const fetchDecoracoes = async () => {
       try {
         const response = await listarDecoracoesPorEvento(tipoEvento);
-        console.log(response.data);
         setDecoracoes(response.data);
         setLoading(false);
       } catch (error) {

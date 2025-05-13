@@ -21,7 +21,7 @@ const MeusDados = ({onOpenModalFoto, onImg, onSetImg, onSetNomeUser, onOpenModal
 
                 const response = await buscarUsuario(JSON.parse(sessionStorage.usuario).id);
                 if(response.data.role === 'ADMIN'){
-                    onSetUserRole('admin');
+                    onSetUserRole('ADMIN');
                 }
                 setName(response.data.nome);
                 setEmail(response.data.email);

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DecoracoesEdicao.module.css';
-import { criarDecoracao, listarTodasDecoracoes, atualizarDecoracao, deleteDecoracoes } from '../../api/api';
+import { criarDecoracao, listarTodasDecoracoes, atualizarDecoracao, deleteDecoracoes, listarTipoEventosPorBuffet } from '../../api/api';
 import { toast } from 'react-toastify';
 import loadingGif from '../../assets/loading-gif.gif';
+const buffetIdEnv = process.env.REACT_APP_BUFFET_ID;
+
 const DecoracoesEdicao = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [idDecoracao, setIdDecoracao] = useState('');
@@ -10,7 +12,7 @@ const DecoracoesEdicao = () => {
     const [foto, setFoto] = useState('');
     const [tipoEvento, setTipoEvento] = useState('');
     const [decoracoes, setDecoracoes] = useState([]);
-
+    const [tiposDeEvento, setTiposDeEvento] = useState([]);
     const fetchData = async () => {
         try {
             const response = await listarTodasDecoracoes();
@@ -22,6 +24,15 @@ const DecoracoesEdicao = () => {
     };
 
     useEffect(() => {
+        const fetchTiposDeEvento = async () => {
+            try {
+              const response = await listarTipoEventosPorBuffet(buffetIdEnv);
+              setTiposDeEvento(response.data);
+            } catch (error) {
+              console.error("Erro ao buscar tipos de evento:", error);
+            }
+          }
+          fetchTiposDeEvento();
         fetchData();
     }, []);
 
@@ -163,18 +174,15 @@ const DecoracoesEdicao = () => {
                                 <label className={styles.label}>
                                     Evento:
                                     <select
-                                        className={styles.inputField}
+                                        className={`${styles.inputField} ${styles.selectField}`}
                                         value={tipoEvento}
                                         onChange={(e) => setTipoEvento(e.target.value)}
                                     >
-                                        <option value="">Selecione</option>
-                                        <option value="1">Infantil</option>
-                                        <option value="2">Casamento</option>
-                                        <option value="3">Debutante</option>
-                                        <option value="4">Coffee Break</option>
-                                        <option value="5">Aniversário</option>
-                                        <option value="6">Aluguel_Espaço</option>
-                                        <option value="7">Outros</option>
+                                        {tiposDeEvento.map((tipo) => (
+                                            <option key={tipo.id} value={tipo.id}>
+                                                {tipo.nome}
+                                            </option>
+                                        ))}
                                     </select>
                                 </label>
                             </div>

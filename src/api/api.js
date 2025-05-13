@@ -5,6 +5,7 @@ const api = () => {
         baseURL: process.env.REACT_APP_API_URL
     });
 }
+
 const listarTipoEventosPorBuffet = async () => {
     const apiInstance = api();
   
@@ -235,6 +236,9 @@ const listarTodasDecoracoes = async () => {
     const token = sessionStorage.getItem('token');
 
     return await apiInstance.get(`/decoracoes`, {
+        params: {
+            buffetId: process.env.REACT_APP_BUFFET_ID
+        },
         headers: {
             'Authorization': `Bearer ${token}`,
         },
@@ -330,6 +334,7 @@ const atualizarCalendario = async () => {
     );
 };
 export  { 
+    
     listarTodasAvaliacoes,
     deleteAvaliacoes,
     criarAvaliacao,

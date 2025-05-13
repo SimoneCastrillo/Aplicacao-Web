@@ -24,9 +24,13 @@ const Perfil = () => {
 
   const [nomeUser, setNomeUser] = useState('');
   const { abaPerfil } = useParams();
-  const [userRole, setUserRole] = useState('normal');
+  const [userRole, setUserRole] = useState('USUARIO');
 
-
+  useEffect(()=>{
+    setUserRole(JSON.parse(sessionStorage.getItem('usuario')).role)
+    setImg(sessionStorage.getItem('img') === 'null' ? '' : sessionStorage.getItem('img'))
+    setNomeUser(JSON.parse(sessionStorage.getItem('usuario')).nome)
+  },[])
 
   return (
     <div

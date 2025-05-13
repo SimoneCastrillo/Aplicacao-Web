@@ -7,16 +7,26 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
 
 const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
-    const permissionUser = onUserRole;
+    const [permissionUser, setPermissionUser] = useState('');
+    const [nomeUser, setNameUser] = useState('');
+
+    useEffect(() => {
+        setNameUser(onNomeUser)
+        },[onNomeUser])
+    useEffect(() => {
+        setPermissionUser(onUserRole)
+    },[onUserRole])
+    
     const [iUserImg, setIUserImg] = useState(false);
     useEffect(() => {
-
+        
         if (sessionStorage.getItem('img') !== 'null') {
             setIUserImg(true)
         } else {
             setIUserImg(false)
         }
     }, [])
+
     const navigate = useNavigate();
     return (
         <div className={styles.header}>
@@ -24,7 +34,7 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
                 <Link to="/"><img src={logo} alt='logo png' /></Link>
                 <nav>
                     <ul>
-                        {permissionUser === 'admin' && (
+                        {permissionUser === 'ADMIN' && (
                             <>
                                 <li>
                                     <Link to='/perfil/reservas'
@@ -61,7 +71,7 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
 
                             </>
                         )}
-                        {permissionUser !== 'admin' && (
+                        {permissionUser !== 'ADMIN' && (
                             <li>
                                 <Link to='/perfil/minhas-reservas'
                                     className={componenteAtivo === 'minhas-reservas' ? styles.active : ''}
@@ -87,7 +97,7 @@ const HeaderPerfil = ({ componenteAtivo, onNomeUser, onUserRole }) => {
 
                         {!iUserImg && <img width={'50px'} src={avatar} alt="avatar" />}
                         {iUserImg && <img style={{ borderRadius: '100%' }} width={'50px'} src={`data:image/jpeg;base64,${sessionStorage.img}`} alt="avatar" />}
-                        <p>{onNomeUser}</p>
+                        <p>{nomeUser}</p>
                         <button onClick={() => {
                             sessionStorage.removeItem('token');
                             sessionStorage.removeItem('img');
