@@ -16,6 +16,7 @@ const DecoracoesEdicao = () => {
     const fetchData = async () => {
         try {
             const response = await listarTodasDecoracoes();
+            console.log('decoracoes', response.data)
             setDecoracoes(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error('Erro ao carregar decorações:', error);
@@ -32,8 +33,9 @@ const DecoracoesEdicao = () => {
               console.error("Erro ao buscar tipos de evento:", error);
             }
           }
-          fetchTiposDeEvento();
+        fetchTiposDeEvento();
         fetchData();
+
     }, []);
 
     const toggleModal = (isEditing = false, item = null) => {
@@ -61,7 +63,7 @@ const DecoracoesEdicao = () => {
 
     const novaDecoracao = async (data) => {
         try {
-            await criarDecoracao(data);
+            await criarDecoracao(data, tipoEvento, 1);
             toast.success('Decoração criada com sucesso!', { autoClose: 1000 });
             setIsModalOpen(false);
             fetchData();
@@ -96,6 +98,7 @@ const DecoracoesEdicao = () => {
     };
 
     const handleClickSave = () => {
+        console.log(tipoEvento)
         const data = new FormData();
         data.append('nome', nome);
 
@@ -176,9 +179,13 @@ const DecoracoesEdicao = () => {
                                     <select
                                         className={`${styles.inputField} ${styles.selectField}`}
                                         value={tipoEvento}
-                                        onChange={(e) => setTipoEvento(e.target.value)}
+                                        onChange={(e) => {
+                                            setTipoEvento(e.target.value)
+                                            console.log(e.target.value)
+                                        }}
                                     >
                                         {tiposDeEvento.map((tipo) => (
+                                            
                                             <option key={tipo.id} value={tipo.id}>
                                                 {tipo.nome}
                                             </option>

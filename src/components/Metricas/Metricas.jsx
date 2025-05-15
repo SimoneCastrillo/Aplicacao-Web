@@ -92,12 +92,12 @@ const Metricas = () => {
       setPercentualCancelado(response.data);
     };
 
-    // const getResumoFinanceiro = async () => {
-    //   const response = await resumoFinanceiro();
-    //   setFaturamento(response.data.faturamentoTotal);
-    //   setGastos(response.data.despesaTotal);
-    //   setLucro(response.data.lucroTotal);
-    // };
+     const getResumoFinanceiro = async () => {
+       const response = await resumoFinanceiro();
+       setFaturamento(response.data.faturamentoTotal);
+       setGastos(response.data.despesaTotal);
+       setLucro(response.data.lucroTotal);
+     };
 
     const getLucroPorTipoDeEvento = async () => {
 
@@ -194,7 +194,7 @@ const Metricas = () => {
     getFaturamentoDespesasMes()
     getQtdPorMes();
     getPercentualCancelados();
-    // getResumoFinanceiro();
+    getResumoFinanceiro();
     getLucroPorTipoDeEvento();
   }, []);
 

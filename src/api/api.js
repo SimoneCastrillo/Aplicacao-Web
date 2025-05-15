@@ -206,17 +206,21 @@ const listarTodasAvaliacoes = async () => {
 
 }
 
-const criarDecoracao = async (decoracao) => {
+const criarDecoracao = async (decoracao, tipoEvendoId, buffetId) => {
     const apiInstance = api();
 
     const token = sessionStorage.getItem('token');
 
+    const params = {
+        tipoEvendoId,
+        buffetId
+    }
     const headers = {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`,
     };
 
-    return await apiInstance.post(`/decoracoes`, decoracao, { headers });
+    return await apiInstance.post(`/decoracoes`, decoracao, { params ,headers });
 }
 
 const atualizarDecoracao = async (decoracao, id) => {
