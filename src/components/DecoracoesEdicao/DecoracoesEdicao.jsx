@@ -29,6 +29,8 @@ const DecoracoesEdicao = () => {
             try {
               const response = await listarTipoEventosPorBuffet(buffetIdEnv);
               setTiposDeEvento(response.data);
+              setTipoEvento(response.data[0]?.id || ''); 
+              console.log('tipo de evento' , response.data[0].id)
             } catch (error) {
               console.error("Erro ao buscar tipos de evento:", error);
             }
@@ -96,20 +98,62 @@ const DecoracoesEdicao = () => {
             toast.error('Erro ao remover decoração.', { autoClose: 1000 });
         }
     };
+    function base64ToFileAuto(base64String) {
+    let base64Data = base64String;
+    let mimeType = 'image/jpeg'; // valor padrão
+    let filename = 'imagem.jpg';
+
+    // Caso contenha metadata (data:image/jpeg;base64,...)
+    if (base64String.includes('base64,')) {
+        const [metadata, data] = base64String.split(',');
+        base64Data = data;
+
+        const mimeMatch = metadata.match(/data:(.*);base64/);
+        if (mimeMatch) {
+            mimeType = mimeMatch[1];
+            const extension = mimeType.split('/')[1] || 'jpg';
+            filename = `imagem.${extension}`;
+        }
+    }
+
+    try {
+        const byteString = atob(base64Data);
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new File([ab], filename, { type: mimeType });
+    } catch (error) {
+        throw new Error('Base64 inválido.');
+    }
+}
+
 
     const handleClickSave = () => {
-        console.log(tipoEvento)
         const data = new FormData();
         data.append('nome', nome);
 
         if (foto?.name) {
-            data.append('foto', foto); // Adiciona o arquivo se for um novo
-        } else if (typeof foto === 'string') {
-            data.append('fotoBase64', foto); // Caso seja uma string Base64
+            console.log('tipo evento', tipoEvento)
+            data.append('foto', foto); 
+        }  
+        if (typeof foto === 'string') {
+            try {
+                const base64Foto = base64ToFileAuto(foto);
+                console.log('base64Foto', base64Foto)
+                data.append('foto', base64Foto);
+            } catch (err) {
+                console.error('Erro ao converter base64 para File:', err);
+                toast.error('Erro ao processar imagem base64.', { autoClose: 2000 });
+                return;
+            }
         }
 
         data.append('tipoEventoId', tipoEvento);
-
+        data.append('buffetId', 1);
         if (idDecoracao === '') {
             novaDecoracao(data);
         } else {
@@ -184,6 +228,7 @@ const DecoracoesEdicao = () => {
                                             console.log(e.target.value)
                                         }}
                                     >
+                                        <option value="">Selecione</option>
                                         {tiposDeEvento.map((tipo) => (
                                             
                                             <option key={tipo.id} value={tipo.id}>

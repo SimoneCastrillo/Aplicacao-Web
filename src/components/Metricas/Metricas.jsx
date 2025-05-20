@@ -94,6 +94,7 @@ const Metricas = () => {
 
      const getResumoFinanceiro = async () => {
        const response = await resumoFinanceiro();
+       console.log(response.data)
        setFaturamento(response.data.faturamentoTotal);
        setGastos(response.data.despesaTotal);
        setLucro(response.data.lucroTotal);
@@ -139,6 +140,7 @@ const Metricas = () => {
     };
     const getFaturamentoDespesasMes = async () => {
       const response = await faturamentDespesaMes();
+      console.log(response.data)
       const mesesLabels = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
       const dataFaturamento = Array(12).fill(0);
       const dataDespesas = Array(12).fill(0);
