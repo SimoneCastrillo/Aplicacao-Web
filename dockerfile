@@ -1,15 +1,14 @@
-FROM node:lts-alpine
-
+FROM node:18 AS builder
 WORKDIR /app
-
-COPY ["package.json", "package-lock.json*", "./"]
-
+COPY package*.json ./
 RUN npm install
-
-COPY .env .
-
 COPY . .
 
-EXPOSE 3000
+ARG REACT_APP_BUFFET_ID
+ENV REACT_APP_BUFFET_ID=$REACT_APP_BUFFET_ID
+RUN npm run build
 
-CMD ["npm", "start"]
+
+
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
