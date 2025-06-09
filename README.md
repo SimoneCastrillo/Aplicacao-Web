@@ -12,10 +12,11 @@ Este repositório contém os arquivos e configurações necessários para o dese
 - **README.md**: Documentação do projeto.  
 
 ## 🚀 Tecnologias Utilizadas  
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário dinâmicas.  
 - **JavaScript**: Linguagem principal para desenvolvimento.  
 - **CSS**: Estilização da interface.  
 - **HTML**: Estruturação da aplicação.  
-- **Docker**: Containerização para facilitar deploy e escalabilidade.  
+- **Docker**: Containerização para facilitar deploy e 
 
 ## 🔧 Como Usar  
 1. Clone o repositório:  
